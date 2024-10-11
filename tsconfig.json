@@ -16,6 +16,7 @@
     "declaration": false,
     "experimentalDecorators": true,
     "moduleResolution": "bundler",
+    "types": ["dom-chromium-installation-events", "web-app-manifest"],
     "importHelpers": true,
     "target": "ES2022",
     "module": "ES2022",
