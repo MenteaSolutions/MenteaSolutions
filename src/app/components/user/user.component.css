@@ -1,0 +1,89 @@
+/* Conteneur pour centrer le formulaire verticalement et horizontalement */
+.form-container {
+  display: flex;
+  justify-content: center; /* Centre horizontalement */
+  align-items: center;     /* Centre verticalement */
+  height: 100vh;           /* Prend toute la hauteur de la fenêtre */
+}
+
+/* Formulaire centré avec une largeur légèrement plus grande */
+.user-details-form {
+  width: 100%;
+  max-width: 700px;         /* Largeur maximale du formulaire */
+  padding: 30px;            /* Espacement interne */
+}
+
+/* Avatar centré */
+.avatar-container {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 15px;      /* Espace entre l'avatar et le titre */
+}
+
+/* Avatar de taille adaptée */
+ion-avatar {
+  width: 100px;             /* Largeur de l'avatar */
+  height: 100px;            /* Hauteur de l'avatar */
+  border-radius: 50%;       /* Assure que l'avatar est bien circulaire */
+}
+
+/* Titre centré du formulaire */
+.form-title {
+  text-align: center;
+  font-size: 1.7em;
+  font-weight: bold;
+  margin-bottom: 25px;      /* Plus d'espace sous le titre */
+}
+/* Enlever la bordure des ion-items */
+.no-border {
+  --border-width: 0px;      /* Retirer la bordure inférieure */
+}
+
+/* Label aligné à gauche avec plus de largeur */
+.custom-label {
+  flex: 0 0 35%;           /* Largeur du label */
+  text-align: left;         /* Alignement à gauche */
+  font-weight: bold;
+  font-size: 1.1em;         /* Taille du texte */
+}
+
+/* Espacement et alignement des champs de formulaire */
+.custom-form-item {
+  display: flex;            /* Utilisation de Flexbox pour aligner le label et l'input */
+  align-items: center;      /* Aligner verticalement les labels et inputs */
+  margin-bottom: 20px;      /* Espacement entre les champs */
+}
+
+/* Customisation des inputs */
+ion-input {
+  flex: 1;                  /* L'input prend le reste de l'espace disponible */
+  --padding-start: 15px;     /* Espacement interne à gauche dans l'input */
+  --background: #f9f9f9;     /* Couleur de fond* */
+  --border-radius: 6px;      /* Bords arrondis */
+  --border-color: #ccc;      /* Bordure légère */
+  font-size: 1.1em;          /* Taille du texte */
+  height: 45px;              /* Augmenter la hauteur des inputs */
+}
+/* Styliser le bouton avec une largeur de 70% et l'aligner à droite */
+.input-width-button {
+  width: 62%;                  /* Largeur définie à 70% */
+  --background: transparent;    /* Fond transparent */
+  border-bottom: 2px solid #007bff; /* Bordure inférieure bleue */
+  color: #007bff;               /* Couleur du texte en bleu */
+  font-size: 15px;              /* Taille de la police 15px */
+  font-weight: 400;             /* Texte léger */
+  text-align: center;           /* Centrer le texte à l'intérieur du bouton */
+  padding: 0;                   /* Pas de padding vertical */
+  height: 45px;                 /* Même hauteur que les inputs */
+  line-height: 45px;            /* Centrer verticalement le texte à l'intérieur du bouton */
+  text-transform: capitalize;
+}
+
+/* Conteneur pour aligner le bouton à droite */
+.button-container {
+  display: flex;
+  justify-content: flex-end;    /* Aligner le bouton à droite du conteneur */
+  margin-right: 18px;                    /* Aucune marge supplémentaire */
+  margin-bottom: 15px;
+  padding: 0;                   /* Aucune marge supplémentaire */
+}

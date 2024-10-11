@@ -1,0 +1,1242 @@
+<ion-content>
+  <form [formGroup]="evaluationForm" (ngSubmit)="onSubmit()">
+    <!-- Seksioni 1: Informacion personal -->
+    <div *ngIf="currentStep === 0">
+      <ion-card>
+        <ion-card-header>
+          <!--  Evaluation -->
+          <ion-img src="logo.png" alt="Logo" class="custom-logo"></ion-img>
+          <ion-card-title>ÉVALUATION</ion-card-title>
+          <p class="subtitle">
+            Vous pouvez remplir ce questionnaire de manière complètement anonyme
+          </p>
+        </ion-card-header>
+
+        <ion-card-content>
+          <div class="input-group">
+            <ion-item class="input-item">
+              <ion-label position="stacked" class="custom-label"
+                >Prénom</ion-label
+              >
+              <ion-input
+                class="custom-input"
+                formControlName="prenom"
+                type="text"
+              ></ion-input>
+            </ion-item>
+            <ion-item class="input-item">
+              <ion-label position="stacked" class="custom-label"
+                >Profession</ion-label
+              >
+              <ion-input
+                class="custom-input"
+                formControlName="profession"
+                type="text"
+              ></ion-input>
+            </ion-item>
+          </div>
+        </ion-card-content>
+
+        <ion-card-content>
+          <div class="input-group">
+            <ion-item class="input-item">
+              <ion-label position="stacked" class="custom-label">Nom</ion-label>
+              <ion-input
+                class="custom-input"
+                formControlName="nom"
+                type="text"
+              ></ion-input>
+            </ion-item>
+            <ion-item class="input-item">
+              <ion-label position="stacked" class="custom-label"
+                >Formation suivie</ion-label
+              >
+              <ion-input
+                class="custom-input"
+                formControlName="Formationsuivie"
+                type="text"
+              ></ion-input>
+            </ion-item>
+          </div>
+        </ion-card-content>
+
+        <ion-card-content>
+          <div class="input-group">
+            <ion-item class="input-item">
+              <ion-label position="stacked" class="custom-label"
+                >Téléphone</ion-label
+              >
+              <ion-input
+                class="custom-input"
+                formControlName="telephone"
+                type="tel"
+              ></ion-input>
+            </ion-item>
+            <ion-item class="input-item">
+              <ion-label position="stacked" class="custom-label"
+                >Dates de la formation</ion-label
+              >
+              <ion-input
+                class="custom-input"
+                formControlName="Datesdelaformation"
+                type="date"
+              ></ion-input>
+            </ion-item>
+          </div>
+        </ion-card-content>
+      </ion-card>
+      <div class="button-group">
+        <ion-button
+          fill="clear"
+          class="next-btn"
+          size="small"
+          (click)="nextStep()"
+          >Next</ion-button
+        >
+      </div>
+    </div>
+
+    <!-- Seksioni 2: Formation et projet professionnel -->
+    <div *ngIf="currentStep === 1">
+      <ion-card>
+        <ion-card-header>
+          <ion-card-title>Formation et projet professionnel</ion-card-title>
+        </ion-card-header>
+        <ion-card-content>
+          <ion-item lines="none">
+            <div class="label-container">
+              <ion-label class="custom-label-1">
+                Quelle est votre formation principale ? (scolaire,
+                professionnelle, académique, autre)
+              </ion-label>
+              <ion-input
+                class="custom-input"
+                formControlName="FormationPrincipale"
+                type="text"
+              ></ion-input>
+            </div>
+          </ion-item>
+          <ion-item lines="none">
+            <div class="label-container">
+              <ion-label class="custom-label-1">
+                La formation suivie vous a-t-elle permis d'ouvrir des
+                perspectives ?</ion-label
+              >
+              <div class="checkbox-group">
+                <ion-checkbox
+                  formControlName="LaFormationsuivieOui"
+                  slot="start"
+                  >Oui</ion-checkbox
+                >
+                <ion-checkbox
+                  formControlName="LaFormationsuivieNon"
+                  slot="start"
+                  >Non</ion-checkbox
+                >
+                <ion-checkbox
+                  formControlName="LaFormationsuiviePasencore"
+                  slot="start"
+                  >Pas encore</ion-checkbox
+                >
+              </div>
+            </div>
+          </ion-item>
+
+          <ion-item lines="none">
+            <div class="label-container">
+              <ion-label class="custom-label-1"
+                >Si oui, de quelle sorte ?</ion-label
+              >
+              <ion-input
+                class="custom-input"
+                formControlName="quellesort"
+                type="text"
+              ></ion-input>
+            </div>
+          </ion-item>
+          <ion-item lines="none">
+            <div class="label-container">
+              <ion-label class="custom-label-1">Si non, pourquoi ?</ion-label>
+              <ion-input
+                class="custom-input"
+                formControlName="sinonPourquoi"
+                type="text"
+              ></ion-input>
+            </div>
+          </ion-item>
+          <ion-item lines="none">
+            <div class="label-container">
+              <ion-label class="custom-label-1"
+                >Quelle est votre situation professionnelle actuelle
+                ?</ion-label
+              >
+              <div class="checkbox-group">
+                <ion-checkbox formControlName="RechercheDemplois" slot="start"
+                  >Recherche d'emplois</ion-checkbox
+                >
+                <ion-checkbox formControlName="MandatsFreeLance" slot="start"
+                  >Mandats en free-lance</ion-checkbox
+                >
+                <ion-checkbox formControlName="Atelier" slot="start"
+                  >Atelier, Collectif</ion-checkbox
+                >
+                <ion-checkbox formControlName="Associe" slot="start"
+                  >Associé</ion-checkbox
+                >
+                <ion-checkbox formControlName="Indépendant" slot="start"
+                  >Indépendant</ion-checkbox
+                >
+                <ion-checkbox formControlName="Employe" slot="start"
+                  >Employé</ion-checkbox
+                >
+              </div>
+            </div>
+          </ion-item>
+
+          <ion-item lines="none">
+            <div class="label-container-2label">
+              <div class="input-group">
+                <ion-label class="custom-label-1"
+                  >Nom de la société ou l'atelier (facultatif)</ion-label
+                >
+                <ion-input
+                  class="custom-input"
+                  formControlName="NomSociete"
+                  type="text"
+                ></ion-input>
+              </div>
+              <div class="input-group">
+                <ion-label class="custom-label-1">Votre activité</ion-label>
+                <ion-input
+                  class="custom-input"
+                  formControlName="VotreActivite"
+                  type="text"
+                ></ion-input>
+              </div>
+            </div>
+          </ion-item>
+          <ion-item lines="none">
+            <div class="label-container">
+              <ion-label class="custom-label-1"
+                >Utilisez-vous les connaissances acquises aux ateliers nomades
+                dans le cadre de vos activités professionnelles actuelles
+                ?</ion-label
+              >
+              <div class="checkbox-group">
+                <ion-checkbox formControlName="ouiCheckbox" slot="start"
+                  >Oui</ion-checkbox
+                >
+                <ion-checkbox formControlName="nonCheckbox" slot="start"
+                  >Non</ion-checkbox
+                >
+              </div>
+            </div>
+          </ion-item>
+          <ion-item lines="none">
+            <div class="label-container">
+              <ion-label class="custom-label-1"
+                >Estimez-vous qu'elles peuvent être d'une utilité pour vous a
+                l'avenir ?</ion-label
+              >
+              <div class="checkbox-group">
+                <ion-checkbox formControlName="Aucune" slot="start"
+                  >Aucune</ion-checkbox
+                >
+                <ion-checkbox formControlName="Reduite" slot="start"
+                  >Reduite</ion-checkbox
+                >
+                <ion-checkbox formControlName="Moyenne" slot="start"
+                  >Moyenne</ion-checkbox
+                >
+                <ion-checkbox formControlName="Grande" slot="start"
+                  >Grande</ion-checkbox
+                >
+                <ion-checkbox formControlName="Majeure" slot="start"
+                  >Majeure</ion-checkbox
+                >
+              </div>
+            </div>
+          </ion-item>
+
+          <ion-item lines="none">
+            <div class="label-container">
+              <ion-label class="custom-label-1">Vos projets actuels</ion-label>
+              <ion-input
+                class="custom-input"
+                formControlName="VosProjetsActuels"
+                type="text"
+              ></ion-input>
+            </div>
+          </ion-item>
+        </ion-card-content>
+      </ion-card>
+      <div class="button-group">
+        <ion-button
+          fill="clear"
+          class="previous-btn"
+          size="small"
+          (click)="previousStep()"
+          >Previous</ion-button
+        >
+        <ion-button
+          fill="clear"
+          class="next-btn"
+          size="small"
+          (click)="nextStep()"
+          >Next</ion-button
+        >
+      </div>
+    </div>
+
+    <!-- Seksioni 3: Evaluation de la formation suivie -->
+    <div *ngIf="currentStep === 2">
+      <ion-card>
+        <ion-card-header>
+          <ion-card-title>Évaluation de la formation suivie</ion-card-title>
+        </ion-card-header>
+        <ion-card-content>
+          <ion-item lines="none">
+            <div class="label-container">
+              <ion-label class="custom-label-1"
+                >La formation a-t-elle correspondue à vos attentes ?</ion-label
+              >
+              <div class="checkbox-group">
+                <ion-checkbox formControlName="VosAttentesOui" slot="start"
+                  >Oui</ion-checkbox
+                >
+                <ion-checkbox formControlName="VosAttentesNon" slot="start"
+                  >Non</ion-checkbox
+                >
+              </div>
+            </div>
+          </ion-item>
+          <ion-item lines="none">
+            <div class="label-container">
+              <ion-label class="custom-label-1"
+                >Vos connaissances préalables ont-elles été suffisantes pour
+                aborder le cours ?</ion-label
+              >
+              <div class="checkbox-group">
+                <ion-checkbox formControlName="VosConnaissancesOui" slot="start"
+                  >Oui</ion-checkbox
+                >
+                <ion-checkbox formControlName="VosConnaissancesNon" slot="start"
+                  >Non</ion-checkbox
+                >
+              </div>
+            </div>
+          </ion-item>
+
+          <ion-item lines="none">
+            <div class="label-container">
+              <ion-label class="custom-label-1"
+                >Si vous deviez juger l'enseignement, qu'elle réponse vous
+                semblerait la plus pertinente ?</ion-label
+              >
+              <div class="checkbox-group">
+                <ion-checkbox
+                  formControlName="JugerEnseignementNull"
+                  slot="start"
+                  >Null</ion-checkbox
+                >
+                <ion-checkbox
+                  formControlName="JugerEnseignementBasique"
+                  slot="start"
+                  >Basique</ion-checkbox
+                >
+                <ion-checkbox
+                  formControlName="JugerEnseignementMoyen"
+                  slot="start"
+                  >Moyen</ion-checkbox
+                >
+                <ion-checkbox
+                  formControlName="JugerEnseignementBon"
+                  slot="start"
+                  >Bon</ion-checkbox
+                >
+                <ion-checkbox
+                  formControlName="JugerEnseignementExcellent"
+                  slot="start"
+                  >Excellent</ion-checkbox
+                >
+              </div>
+            </div>
+          </ion-item>
+          <ion-item lines="none">
+            <div class="label-container">
+              <ion-label class="custom-label-1"
+                >Comment évaluez-vous :</ion-label
+              >
+            </div>
+          </ion-item>
+
+          <ion-item>
+            <ion-label class="custom-label-3" position="stacked"
+              >D'une façon globale, le programme de formation</ion-label
+            >
+            <ion-select
+              formControlName="FaconGlobale"
+              class="custom-select"
+              interface="popover"
+              placeholder="Sélectionné une réponse"
+            >
+              <ion-select-option value="mauvais">Mauvais</ion-select-option>
+              <ion-select-option value="basique">Basique</ion-select-option>
+              <ion-select-option value="moyen">Moyen</ion-select-option>
+              <ion-select-option value="bon">Bon</ion-select-option>
+              <ion-select-option value="excellent">Excellent</ion-select-option>
+            </ion-select>
+          </ion-item>
+          <ion-item>
+            <ion-label class="custom-label-3" position="stacked"
+              >Son niveau de connaissances</ion-label
+            >
+            <ion-select
+              formControlName="NiveauConnaissances"
+              class="custom-select"
+              interface="popover"
+              placeholder="Sélectionné une réponse"
+            >
+              <ion-select-option value="mauvais">Mauvais</ion-select-option>
+              <ion-select-option value="basique">Basique</ion-select-option>
+              <ion-select-option value="moyen">Moyen</ion-select-option>
+              <ion-select-option value="bon">Bon</ion-select-option>
+              <ion-select-option value="excellent">Excellent</ion-select-option>
+            </ion-select>
+          </ion-item>
+
+          <ion-item>
+            <ion-label class="custom-label-3" position="stacked"
+              >Sa durée</ion-label
+            >
+            <ion-select
+              formControlName="Durée"
+              class="custom-select"
+              interface="popover"
+              placeholder="Sélectionné une réponse"
+            >
+              <ion-select-option value="mauvais">Mauvais</ion-select-option>
+              <ion-select-option value="basique">Basique</ion-select-option>
+              <ion-select-option value="moyen">Moyen</ion-select-option>
+              <ion-select-option value="bon">Bon</ion-select-option>
+              <ion-select-option value="excellent">Excellent</ion-select-option>
+            </ion-select>
+          </ion-item>
+          <ion-item>
+            <ion-label class="custom-label-3" position="stacked"
+              >La méthode didactique: théorie, travaux pratiques et édition de
+              projets</ion-label
+            >
+            <ion-select
+              formControlName="Methodedidactique"
+              class="custom-select"
+              interface="popover"
+              placeholder="Sélectionné une réponse"
+            >
+              <ion-select-option value="mauvais">Mauvais</ion-select-option>
+              <ion-select-option value="basique">Basique</ion-select-option>
+              <ion-select-option value="moyen">Moyen</ion-select-option>
+              <ion-select-option value="bon">Bon</ion-select-option>
+              <ion-select-option value="excellent">Excellent</ion-select-option>
+            </ion-select>
+          </ion-item>
+          <ion-item>
+            <ion-label class="custom-label-3" position="stacked"
+              >Les compétences professionnelles des formateurs
+            </ion-label>
+            <ion-select
+              formControlName="CompetancesProfessionelles"
+              class="custom-select"
+              interface="popover"
+              placeholder="Sélectionné une réponse"
+            >
+              <ion-select-option value="mauvais">Mauvais</ion-select-option>
+              <ion-select-option value="basique">Basique</ion-select-option>
+              <ion-select-option value="moyen">Moyen</ion-select-option>
+              <ion-select-option value="bon">Bon</ion-select-option>
+              <ion-select-option value="excellent">Excellent</ion-select-option>
+            </ion-select>
+          </ion-item>
+          <ion-item>
+            <ion-label class="custom-label-3" position="stacked"
+              >La clarté didactique des formateurs
+            </ion-label>
+            <ion-select
+              formControlName="ClarteDidactique"
+              class="custom-select"
+              interface="popover"
+              placeholder="Sélectionné une réponse"
+            >
+              <ion-select-option value="mauvais">Mauvais</ion-select-option>
+              <ion-select-option value="basique">Basique</ion-select-option>
+              <ion-select-option value="moyen">Moyen</ion-select-option>
+              <ion-select-option value="bon">Bon</ion-select-option>
+              <ion-select-option value="excellent">Excellent</ion-select-option>
+            </ion-select>
+          </ion-item>
+          <ion-item>
+            <ion-label class="custom-label-3" position="stacked"
+              >Leur disponibilité
+            </ion-label>
+            <ion-select
+              formControlName="Disponibilite"
+              class="custom-select"
+              interface="popover"
+              placeholder="Sélectionné une réponse"
+            >
+              <ion-select-option value="mauvais">Mauvais</ion-select-option>
+              <ion-select-option value="basique">Basique</ion-select-option>
+              <ion-select-option value="moyen">Moyen</ion-select-option>
+              <ion-select-option value="bon">Bon</ion-select-option>
+              <ion-select-option value="excellent">Excellent</ion-select-option>
+            </ion-select>
+          </ion-item>
+          <ion-item>
+            <ion-label class="custom-label-3" position="stacked"
+              >Le support de cours
+            </ion-label>
+            <ion-select
+              formControlName="Support"
+              class="custom-select"
+              interface="popover"
+              placeholder="Sélectionné une réponse"
+            >
+              <ion-select-option value="mauvais">Mauvais</ion-select-option>
+              <ion-select-option value="basique">Basique</ion-select-option>
+              <ion-select-option value="moyen">Moyen</ion-select-option>
+              <ion-select-option value="bon">Bon</ion-select-option>
+              <ion-select-option value="excellent">Excellent</ion-select-option>
+            </ion-select>
+          </ion-item>
+
+          <ion-item>
+            <ion-label class="custom-label-3" position="stacked"
+              >Les équipements informatique
+            </ion-label>
+            <ion-select
+              formControlName="Equipments"
+              class="custom-select"
+              interface="popover"
+              placeholder="Sélectionné une réponse"
+            >
+              <ion-select-option value="mauvais">Mauvais</ion-select-option>
+              <ion-select-option value="basique">Basique</ion-select-option>
+              <ion-select-option value="moyen">Moyen</ion-select-option>
+              <ion-select-option value="bon">Bon</ion-select-option>
+              <ion-select-option value="excellent">Excellent</ion-select-option>
+            </ion-select>
+          </ion-item>
+          <ion-item>
+            <ion-label class="custom-label-3" position="stacked"
+              >Les locaux</ion-label
+            >
+            <ion-select
+              formControlName="locaux"
+              class="custom-select"
+              interface="popover"
+              placeholder="Sélectionné une réponse"
+            >
+              <ion-select-option value="mauvais">Mauvais</ion-select-option>
+              <ion-select-option value="basique">Basique</ion-select-option>
+              <ion-select-option value="moyen">Moyen</ion-select-option>
+              <ion-select-option value="bon">Bon</ion-select-option>
+              <ion-select-option value="excellent">Excellent</ion-select-option>
+            </ion-select>
+          </ion-item>
+
+          <ion-item>
+            <ion-label class="custom-label-3" position="stacked"
+              >L'ambiance et l'environnement</ion-label
+            >
+            <ion-select
+              formControlName="Ambiance"
+              class="custom-select"
+              interface="popover"
+              placeholder="Sélectionné une réponse"
+            >
+              <ion-select-option value="mauvais">Mauvais</ion-select-option>
+              <ion-select-option value="basique">Basique</ion-select-option>
+              <ion-select-option value="moyen">Moyen</ion-select-option>
+              <ion-select-option value="bon">Bon</ion-select-option>
+              <ion-select-option value="excellent">Excellent</ion-select-option>
+            </ion-select>
+          </ion-item>
+          <ion-item lines="none">
+            <div class="label-container">
+              <ion-label class="custom-label-1"
+                >Qu'avez-vous le plus apprécié dans cette formation ?</ion-label
+              >
+              <ion-input
+                formControlName="ApprecieFormation"
+                class="custom-input"
+                type="text"
+              ></ion-input>
+            </div>
+          </ion-item>
+        </ion-card-content>
+      </ion-card>
+      <div class="button-group">
+        <ion-button
+          fill="clear"
+          class="previous-btn"
+          size="small"
+          (click)="previousStep()"
+          >Previous</ion-button
+        >
+        <ion-button
+          fill="clear"
+          class="next-btn"
+          size="small"
+          (click)="nextStep()"
+          >Next</ion-button
+        >
+      </div>
+    </div>
+
+    <!-- Seksioni 4: Les enseignants -->
+    <div *ngIf="currentStep === 3">
+      <ion-card>
+        <ion-card-header>
+          <ion-card-title>Les enseignants</ion-card-title>
+        </ion-card-header>
+        <ion-card-content>
+          <ion-item lines="none">
+            <div class="label-container">
+              <ion-label class="custom-label-1"
+                >Plusieurs enseignants ont participé dans la formation, estimez
+                vous cette pluralité d'enseignants:</ion-label
+              >
+              <div class="checkbox-group">
+                <ion-checkbox formControlName="pasSouhaitable" slot="start"
+                  >Pas souhaitable</ion-checkbox
+                >
+                <ion-checkbox formControlName="sansImportance" slot="start"
+                  >Sans importance</ion-checkbox
+                >
+                <ion-checkbox formControlName="souhaitable" slot="start"
+                  >Souhaitable</ion-checkbox
+                >
+                <ion-checkbox formControlName="avantageux" slot="start"
+                  >Avantageux</ion-checkbox
+                >
+              </div>
+            </div>
+          </ion-item>
+          <ion-item lines="none">
+            <div class="label-container">
+              <ion-label class="custom-label-1"
+                >Pouvez-vous nous donner votre appréciation sur les enseignants
+                qui sont intervenus dans votre formation (y compris le travail
+                de projet)</ion-label
+              >
+            </div>
+          </ion-item>
+
+          <ion-item>
+            <ion-label class="custom-label-3" position="stacked"
+              >Nicolas FAZIO</ion-label
+            >
+            <ion-select
+              formControlName="nicolasFazio"
+              class="custom-select"
+              interface="popover"
+              placeholder="Sélectionné une réponse"
+            >
+              <ion-select-option value="pascompetent"
+                >Pas competent</ion-select-option
+              >
+              <ion-select-option value="peucompetent"
+                >Peu competent</ion-select-option
+              >
+              <ion-select-option value="competent">Competent</ion-select-option>
+              <ion-select-option value="trescompetent"
+                >Très competent</ion-select-option
+              >
+              <ion-select-option value="excellent">Excellent</ion-select-option>
+              <ion-select-option value="paspedagogue"
+                >Pas pedagogue</ion-select-option
+              >
+              <ion-select-option value="Pedagogue">Pedagogue</ion-select-option>
+              <ion-select-option value="bonpedagogue"
+                >Bon Pedagogue</ion-select-option
+              >
+            </ion-select>
+          </ion-item>
+          <ion-item>
+            <ion-label class="custom-label-3" position="stacked"
+              >Camille PASCHE</ion-label
+            >
+            <ion-select
+              formControlName="camillePasche"
+              class="custom-select"
+              interface="popover"
+              placeholder="Sélectionné une réponse"
+            >
+              <ion-select-option value="pascompetent"
+                >Pas competent</ion-select-option
+              >
+              <ion-select-option value="peucompetent"
+                >Peu competent</ion-select-option
+              >
+              <ion-select-option value="competent">Competent</ion-select-option>
+              <ion-select-option value="trescompetent"
+                >Très competent</ion-select-option
+              >
+              <ion-select-option value="excellent">Excellent</ion-select-option>
+              <ion-select-option value="paspedagogue"
+                >Pas pedagogue</ion-select-option
+              >
+              <ion-select-option value="Pedagogue">Pedagogue</ion-select-option>
+              <ion-select-option value="bonpedagogue"
+                >Bon Pedagogue</ion-select-option
+              >
+            </ion-select>
+          </ion-item>
+
+          <ion-item>
+            <ion-label class="custom-label-3" position="stacked"
+              >Ramy EL HANY</ion-label
+            >
+            <ion-select
+              formControlName="ramyElhany"
+              class="custom-select"
+              interface="popover"
+              placeholder="Sélectionné une réponse"
+            >
+              <ion-select-option value="pascompetent"
+                >Pas competent</ion-select-option
+              >
+              <ion-select-option value="peucompetent"
+                >Peu competent</ion-select-option
+              >
+              <ion-select-option value="competent">Competent</ion-select-option>
+              <ion-select-option value="trescompetent"
+                >Très competent</ion-select-option
+              >
+              <ion-select-option value="excellent">Excellent</ion-select-option>
+              <ion-select-option value="paspedagogue"
+                >Pas pedagogue</ion-select-option
+              >
+              <ion-select-option value="Pedagogue">Pedagogue</ion-select-option>
+              <ion-select-option value="bonpedagogue"
+                >Bon Pedagogue</ion-select-option
+              >
+            </ion-select>
+          </ion-item>
+          <ion-item lines="none">
+            <div class="label-container">
+              <ion-label class="custom-label-1"
+                >Aves-vous des commentaires sur des enseignants en particulier
+                ?</ion-label
+              >
+              <ion-input
+                formControlName="commentairesEnseignants"
+                class="custom-input"
+                type="text"
+              ></ion-input>
+            </div>
+          </ion-item>
+
+          <ion-item lines="none">
+            <div class="label-container">
+              <ion-label class="custom-label-1"
+                >Pouvez-vous nous donner votre avis sur la qualité de l'equipe
+                d'enseignants dans son ensemble ?</ion-label
+              >
+              <div class="checkbox-group">
+                <ion-checkbox formControlName="faible" slot="start"
+                  >Faible</ion-checkbox
+                >
+                <ion-checkbox formControlName="moyenne" slot="start"
+                  >Moyenne</ion-checkbox
+                >
+                <ion-checkbox formControlName="bonne" slot="start"
+                  >Bonne</ion-checkbox
+                >
+                <ion-checkbox formControlName="tresBonne" slot="start"
+                  >Très bonne</ion-checkbox
+                >
+              </div>
+            </div>
+          </ion-item>
+          <ion-item lines="none">
+            <div class="label-container">
+              <ion-label class="custom-label-1"
+                >Commentaires sur l'equipe d'enseignants</ion-label
+              >
+              <ion-input
+                formControlName="commentaireEquipe"
+                class="custom-input"
+                type="text"
+              ></ion-input>
+            </div>
+          </ion-item>
+        </ion-card-content>
+      </ion-card>
+      <div class="button-group">
+        <ion-button
+          fill="clear"
+          class="previous-btn"
+          size="small"
+          (click)="previousStep()"
+          >Previous</ion-button
+        >
+        <ion-button
+          fill="clear"
+          class="next-btn"
+          size="small"
+          (click)="nextStep()"
+          >Next</ion-button
+        >
+      </div>
+    </div>
+
+    <!-- Seksioni 5: Le travail de projet -->
+    <div *ngIf="currentStep === 4">
+      <ion-card>
+        <ion-card-header>
+          <ion-card-title>Le travail de projet</ion-card-title>
+        </ion-card-header>
+        <ion-card-content>
+          <ion-item lines="none">
+            <div class="label-container">
+              <ion-label class="custom-label-1"
+                >Le module Travail de projet vous semble-t-il utile dans le
+                cadre de la formation que vous avez suivi ?</ion-label
+              >
+              <div class="checkbox-group">
+                <ion-checkbox
+                  formControlName="moduleTravailpasUtile"
+                  slot="start"
+                  >Pas utile</ion-checkbox
+                >
+                <ion-checkbox
+                  formControlName="moduleTravailpeuUtile"
+                  slot="start"
+                  >Peu utile</ion-checkbox
+                >
+                <ion-checkbox formControlName="moduleTravailUtile" slot="start"
+                  >Utile</ion-checkbox
+                >
+                <ion-checkbox
+                  formControlName="moduleTravailtresUtile"
+                  slot="start"
+                  >Très utile</ion-checkbox
+                >
+              </div>
+            </div>
+          </ion-item>
+          <ion-item lines="none">
+            <div class="label-container-2label">
+              <div class="label-container">
+                <ion-label class="custom-label-1"
+                  >La durée de ce module d'édition vous semble-t-elle suffisante
+                  ?</ion-label
+                >
+                <div class="checkbox-group">
+                  <ion-checkbox formControlName="dureModuleOui" slot="start"
+                    >Oui</ion-checkbox
+                  >
+                  <ion-checkbox formControlName="dureModuleNon" slot="start"
+                    >Non</ion-checkbox
+                  >
+                </div>
+              </div>
+
+              <div class="input-group">
+                <ion-label class="custom-label-1"
+                  >Durée jugée souhaitable</ion-label
+                >
+                <ion-input
+                  formControlName="dureModulesouhaitable"
+                  class="custom-input"
+                  type="text"
+                ></ion-input>
+              </div>
+            </div>
+          </ion-item>
+          <ion-item lines="none">
+            <div class="label-container">
+              <ion-label class="custom-label-1"
+                >Le processus d'élaboration et gestion du projet (dossier de
+                projet) vous semble t-il</ion-label
+              >
+              <div class="checkbox-group">
+                <ion-checkbox
+                  formControlName="dossierProjetpasUtile"
+                  slot="start"
+                  >Pas utile</ion-checkbox
+                >
+                <ion-checkbox
+                  formControlName="dossierProjetpeuUtile"
+                  slot="start"
+                  >Peu utile</ion-checkbox
+                >
+                <ion-checkbox formControlName="dossierProjetUtile" slot="start"
+                  >Utile</ion-checkbox
+                >
+                <ion-checkbox
+                  formControlName="dossierProjettresUtile"
+                  slot="start"
+                  >Très utile</ion-checkbox
+                >
+              </div>
+            </div>
+          </ion-item>
+          <ion-item lines="none">
+            <div class="label-container">
+              <ion-label class="custom-label-1"
+                >Le support fourni est-il</ion-label
+              >
+              <div class="checkbox-group">
+                <ion-checkbox formControlName="supportSuffisante" slot="start"
+                  >Suffisant</ion-checkbox
+                >
+                <ion-checkbox formControlName="supportInsuffisante" slot="start"
+                  >Insuffisant</ion-checkbox
+                >
+              </div>
+            </div>
+          </ion-item>
+
+          <ion-item lines="none">
+            <div class="label-container">
+              <ion-label class="custom-label-1">Le jugez vous</ion-label>
+              <div class="checkbox-group">
+                <ion-checkbox formControlName="jugezInefficace" slot="start"
+                  >Inefficace</ion-checkbox
+                >
+                <ion-checkbox formControlName="jugezpeuefficace" slot="start"
+                  >Peu efficace</ion-checkbox
+                >
+                <ion-checkbox formControlName="jugezEfficace" slot="start"
+                  >Efficace</ion-checkbox
+                >
+                <ion-checkbox formControlName="jugezTresefficace" slot="start"
+                  >Très efficace</ion-checkbox
+                >
+              </div>
+            </div>
+          </ion-item>
+          <ion-item lines="none">
+            <div class="label-container">
+              <ion-label class="custom-label-1">Commentaires</ion-label>
+              <ion-input
+                formControlName="comm"
+                class="custom-input"
+                type="text"
+              ></ion-input>
+            </div>
+          </ion-item>
+        </ion-card-content>
+      </ion-card>
+      <div class="button-group">
+        <ion-button
+          fill="clear"
+          class="previous-btn"
+          size="small"
+          (click)="previousStep()"
+          >Previous</ion-button
+        >
+        <ion-button
+          fill="clear"
+          class="next-btn"
+          size="small"
+          (click)="nextStep()"
+          >Next</ion-button
+        >
+      </div>
+    </div>
+
+    <!-- Seksioni 6: L'encadrement -->
+    <div *ngIf="currentStep === 5">
+      <ion-card>
+        <ion-card-header>
+          <ion-card-title>L'encadrement</ion-card-title>
+        </ion-card-header>
+        <ion-card-content>
+          <ion-item lines="none">
+            <div class="label-container">
+              <ion-label class="custom-label-1"
+                >Quelle appréciation portez-vous sur la direction et
+                lêncadrement des ateliers</ion-label
+              >
+            </div>
+          </ion-item>
+          <ion-item>
+            <ion-label class="custom-label-3" position="stacked"
+              >Pensez-vous que l'encadrement a été assuré par des personnes
+              compétentes ?</ion-label
+            >
+            <ion-select
+              formControlName="compétences6"
+              class="custom-select"
+              interface="popover"
+              placeholder="Sélectionné une réponse"
+            >
+              <ion-select-option value="nesaispas"
+                >Ne sais pas</ion-select-option
+              >
+              <ion-select-option value="non">Non</ion-select-option>
+              <ion-select-option value="pasassez">Pas assez</ion-select-option>
+              <ion-select-option value="oui">Oui</ion-select-option>
+              <ion-select-option value="largement">Largement</ion-select-option>
+            </ion-select>
+          </ion-item>
+
+          <ion-item>
+            <ion-label class="custom-label-3" position="stacked"
+              >Ces personnes ont-elle été suffisanmment disponibles ?</ion-label
+            >
+            <ion-select
+              formControlName="Disponibilite6"
+              class="custom-select"
+              interface="popover"
+              placeholder="Sélectionné une réponse"
+            >
+              <ion-select-option value="nesaispas"
+                >Ne sais pas</ion-select-option
+              >
+              <ion-select-option value="non">Non</ion-select-option>
+              <ion-select-option value="pasassez">Pas assez</ion-select-option>
+              <ion-select-option value="oui">Oui</ion-select-option>
+              <ion-select-option value="largement">Largement</ion-select-option>
+            </ion-select>
+          </ion-item>
+          <ion-item>
+            <ion-label class="custom-label-3" position="stacked"
+              >Ont-elles répondu à vos attentes ?</ion-label
+            >
+            <ion-select
+              formControlName="vosAttente6"
+              class="custom-select"
+              interface="popover"
+              placeholder="Sélectionné une réponse"
+            >
+              <ion-select-option value="nesaispas"
+                >Ne sais pas</ion-select-option
+              >
+              <ion-select-option value="non">Non</ion-select-option>
+              <ion-select-option value="pasassez">Pas assez</ion-select-option>
+              <ion-select-option value="oui">Oui</ion-select-option>
+              <ion-select-option value="largement">Largement</ion-select-option>
+            </ion-select>
+          </ion-item>
+
+          <ion-item lines="none">
+            <div class="label-container">
+              <ion-label class="custom-label-1">Commentaires</ion-label>
+              <ion-input
+                formControlName="comm6"
+                class="custom-input"
+                type="text"
+              ></ion-input>
+            </div>
+          </ion-item>
+        </ion-card-content>
+      </ion-card>
+      <div class="button-group">
+        <ion-button
+          fill="clear"
+          class="previous-btn"
+          size="small"
+          (click)="previousStep()"
+          >Previous</ion-button
+        >
+        <ion-button
+          fill="clear"
+          class="next-btn"
+          size="small"
+          (click)="nextStep()"
+          >Next</ion-button
+        >
+      </div>
+    </div>
+
+    <!--  Le centre de formation -->
+    <div *ngIf="currentStep === 6">
+      <ion-card>
+        <ion-card-header>
+          <ion-card-title>Le centre de formation</ion-card-title>
+        </ion-card-header>
+        <ion-card-content>
+          <ion-item lines="none">
+            <div class="label-container">
+              <ion-label class="custom-label-1"
+                >Avez-vous déjà suivi une autre formation continue dans le
+                domaine ?</ion-label
+              >
+              <ion-input
+                formControlName="autreFormation7"
+                class="custom-input"
+                type="text"
+              ></ion-input>
+            </div>
+          </ion-item>
+          <ion-item lines="none">
+            <div class="label-container">
+              <ion-label class="custom-label-1"
+                >Si oui, laquelle / lesquelles ?</ion-label
+              >
+              <ion-input
+                formControlName="siOui7"
+                class="custom-input"
+                type="text"
+              ></ion-input>
+            </div>
+          </ion-item>
+
+          <ion-item lines="none">
+            <div class="label-container">
+              <ion-label class="custom-label-1"
+                >Institut ou centre de formation</ion-label
+              >
+              <ion-input
+                formControlName="centreDeFormation7"
+                class="custom-input"
+                type="text"
+              ></ion-input>
+            </div>
+          </ion-item>
+          <ion-item lines="none">
+            <div class="label-container">
+              <ion-label class="custom-label-1"
+                >Niveau et durée de la formation</ion-label
+              >
+              <ion-input
+                formControlName="dureeFormation7"
+                class="custom-input"
+                type="text"
+              ></ion-input>
+            </div>
+          </ion-item>
+
+          <ion-item lines="none">
+            <div class="label-container">
+              <ion-label class="custom-label-1"
+                >Ces formations ont-elles correspondu à vos attentes
+                ?</ion-label
+              >
+              <ion-input
+                formControlName="formationVosAttentes7"
+                class="custom-input"
+                type="text"
+              ></ion-input>
+            </div>
+          </ion-item>
+          <ion-item lines="none">
+            <div class="label-container">
+              <ion-label class="custom-label-1"
+                >Pouvez-vous classer nomades par rapport à d'autres centres de
+                formation ?</ion-label
+              >
+              <div class="checkbox-group">
+                <ion-checkbox
+                  formControlName="classerNomadesNesaispas"
+                  slot="start"
+                  >Ne sais pas</ion-checkbox
+                >
+                <ion-checkbox formControlName="classerNomadesPire" slot="start"
+                  >Pire</ion-checkbox
+                >
+                <ion-checkbox formControlName="classerNomadesMoyen" slot="start"
+                  >Moyen</ion-checkbox
+                >
+                <ion-checkbox formControlName="classerNomadesBon" slot="start"
+                  >Bon</ion-checkbox
+                >
+                <ion-checkbox
+                  formControlName="classerNomadesTresbon"
+                  slot="start"
+                  >Très bon</ion-checkbox
+                >
+              </div>
+            </div>
+          </ion-item>
+
+          <ion-item lines="none">
+            <div class="label-container">
+              <ion-label class="custom-label-1">Commentaires</ion-label>
+              <ion-input
+                formControlName="comm7"
+                class="custom-input"
+                type="text"
+              ></ion-input>
+            </div>
+          </ion-item>
+          <ion-item lines="none">
+            <div class="label-container-2label">
+              <div class="input-group">
+                <ion-label class="custom-label-1"
+                  >Seriez-vous intéressé à poursuivre votre formation</ion-label
+                >
+                <ion-input
+                  formControlName="uneAutreFormation7"
+                  class="custom-input"
+                  type="text"
+                ></ion-input>
+              </div>
+              <div class="input-group">
+                <ion-label class="custom-label-1"
+                  >Si oui, dans quel domaine ?</ion-label
+                >
+                <ion-input
+                  formControlName="quelDomaine7"
+                  class="custom-input"
+                  type="text"
+                ></ion-input>
+              </div>
+            </div>
+          </ion-item>
+
+          <ion-item lines="none">
+            <div class="label-container">
+              <ion-label class="custom-label-1"
+                >Quels autres cours seriez-vous intéressé à prendre ?</ion-label
+              >
+              <ion-input
+                formControlName="autreCours7"
+                class="custom-input"
+                type="text"
+              ></ion-input>
+            </div>
+          </ion-item>
+          <ion-item lines="none">
+            <div class="label-container">
+              <ion-label class="custom-label-1">Vos suggestions</ion-label>
+              <ion-input
+                formControlName="vosSuggestions7"
+                class="custom-input"
+                type="text"
+              ></ion-input>
+            </div>
+          </ion-item>
+          <ion-item class="input-item">
+            <ion-label position="stacked" class="custom-label">Date</ion-label>
+            <ion-input
+              formControlName="date7"
+              class="custom-input"
+              type="date"
+            ></ion-input>
+          </ion-item>
+        </ion-card-content>
+      </ion-card>
+
+      <div class="button-group">
+        <ion-button
+          fill="clear"
+          class="previous-btn"
+          size="small"
+          (click)="previousStep()"
+          >Previous</ion-button
+        >
+        <ion-button
+          type="submit"
+          size="small"
+          [disabled]="!evaluationForm.valid"
+          >Submit</ion-button
+        >
+      </div>
+    </div>
+  </form>
+</ion-content>

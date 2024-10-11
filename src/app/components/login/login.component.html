@@ -1,0 +1,35 @@
+<ion-content>
+  <div class="login-container">
+     <!-- Logo ajouté ici -->
+     <div class="logo-container">
+      <img src="logo.png" alt="App Logo" class="logo">
+    </div>
+    <form (ngSubmit)="onLogin()">
+      <ion-item>
+        <ion-input [(ngModel)]="email" name="email" type="email" label="Email" required></ion-input>
+      </ion-item>
+
+      <ion-item>
+        <ion-input type="password" label="Password" [(ngModel)]="password" name="password" required>
+          <ion-input-password-toggle slot="end"></ion-input-password-toggle>
+        </ion-input>
+      </ion-item>
+
+
+      <ion-button expand="block" type="submit" color="primary">Login</ion-button>
+
+      <ion-text *ngIf="errorMessage" color="danger">{{ errorMessage }}</ion-text>
+
+
+    </form>
+
+      <!-- Toast për mesazhin e gabimit -->
+      <ion-toast
+      [message]="toastMessage"
+      [duration]="3000"
+      [color]="'danger'"
+      [isOpen]="isToastOpen"
+      (ionToastDidDismiss)="closeToast()">
+    </ion-toast>
+  </div>
+</ion-content>

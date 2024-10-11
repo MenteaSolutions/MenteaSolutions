@@ -1,0 +1,31 @@
+<nav>
+  <ul>
+    <li><a routerLink="/login" routerLinkActive="active"></a></li>
+    <li *ngIf="isAdmin()">
+      <a routerLink="/createUser" routerLinkActive="active">createUser</a>
+    </li>
+    <li *ngIf="isAdmin()">
+      <a routerLink="/createChat" routerLinkActive="active">Create Chat</a>
+    </li>
+    <li *ngIf="isAdmin()">
+      <a routerLink="/createCalendar" routerLinkActive="active"
+        >Create Calendar</a
+      >
+    </li>
+    <li *ngIf="isAdmin()">
+      <a routerLink="/createZoom" routerLinkActive="active">Create Zoom</a>
+    </li>
+    <li *ngIf="isUser()">
+      <a routerLink="/user" routerLinkActive="active">User Page</a>
+    </li>
+    <li *ngIf="isUser()">
+      <a routerLink="/chat" routerLinkActive="active">Chat</a>
+    </li>
+    <li *ngIf="isUser()">
+      <a routerLink="/zoom" routerLinkActive="active">Zoom</a>
+    </li>
+    <li *ngIf="isUser()">
+      <a routerLink="/calendar" routerLinkActive="active">Calendar</a>
+    </li>
+  </ul>
+</nav>

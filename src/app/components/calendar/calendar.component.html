@@ -1,0 +1,20 @@
+<ion-content class="ion-padding">
+  <h2 class="ion-text-center">Calendrier des Cours</h2>
+
+  <!-- Sélection de Formation -->
+  <form [formGroup]="formacaoForm">
+    <ion-label position="floating">Sélectionnez la Formation :</ion-label>
+    <ion-item>
+      <ion-select formControlName="formacao">
+        <ion-select-option *ngFor="let formacao of formacoes" [value]="formacao.id">
+          {{ formacao.nome }}
+        </ion-select-option>
+      </ion-select>
+    </ion-item>
+  </form>
+
+  <!-- FullCalendar -->
+  <div class="calendar">
+    <full-calendar #calendar [options]="calendarOptions"></full-calendar>
+  </div>
+</ion-content>

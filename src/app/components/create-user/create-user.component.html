@@ -1,0 +1,109 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Créer des Utilisateurs</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <div class="create-user-container">
+    <ion-card>
+      <ion-card-header>
+        <ion-card-title>Créer des Utilisateurs</ion-card-title>
+      </ion-card-header>
+      
+      <ion-card-content>
+        <!-- Sélection de la formation -->
+        <ion-item>
+          <ion-label>Choisir une formation</ion-label>
+          <ion-select [(ngModel)]="selectedRoom" placeholder="Sélectionner une formation" required>
+            <ion-select-option *ngFor="let room of rooms" [value]="room">{{ room }}</ion-select-option>
+          </ion-select>
+        </ion-item>
+
+        <!-- Sélection du nombre d'élèves -->
+        <ion-item>
+          <ion-label>Nombre d'élèves</ion-label>
+          <ion-input type="number" [(ngModel)]="numberOfStudents" (ionChange)="onStudentNumberChange()" min="1" required></ion-input>
+        </ion-item>
+
+        <!-- Sélection du rôle -->
+        <ion-item>
+          <ion-label>Choisir un rôle</ion-label>
+          <ion-select [(ngModel)]="selectedRole" placeholder="Sélectionner un rôle" required>
+            <ion-select-option value="user">User</ion-select-option>
+          </ion-select>
+        </ion-item>
+
+        <!-- Inputs pour les prénoms et noms -->
+        <ion-list>
+          <div *ngFor="let student of studentInfo; let i = index">
+            <ion-item>
+              <ion-label position="stacked">Prénom {{ i + 1 }}</ion-label>
+              <ion-input [(ngModel)]="student.firstName" placeholder="Prénom"></ion-input>
+            </ion-item>
+            
+            <ion-item>
+              <ion-label position="stacked">Nom {{ i + 1 }}</ion-label>
+              <ion-input [(ngModel)]="student.lastName" placeholder="Nom"></ion-input>
+            </ion-item>
+          </div>
+        </ion-list>
+
+        <!-- Bouton pour valider et enregistrer -->
+        <ion-button fill="clear" expand="block" (click)="validateAndSaveStudents()">Valider et Enregistrer</ion-button>
+
+        <!-- Message de retour après la création des utilisateurs -->
+        <ion-item *ngIf="message">
+          <ion-text color="primary">{{ message }}</ion-text>
+        </ion-item>
+      </ion-card-content>
+    </ion-card>
+
+    <!-- Affichage du nombre d'élèves par formation -->
+    <ion-card>
+      <ion-card-header>
+        <ion-card-title>Nombre d'élèves à Nomades en ce moment :</ion-card-title>
+      </ion-card-header>
+      <ion-card-content>
+        <ion-grid>
+          <ion-row>
+            <ion-col><strong>Formation</strong></ion-col>
+            <ion-col><strong>Nombre d'élèves</strong></ion-col>
+          </ion-row>
+          <ion-row *ngFor="let roomCount of roomStudentCounts">
+            <ion-col>{{ roomCount.room }}</ion-col>
+            <ion-col>{{ roomCount.count }}</ion-col>
+          </ion-row>
+        </ion-grid>
+      </ion-card-content>
+    </ion-card>
+
+    <!-- Nouvelle section pour afficher les utilisateurs créés avec leurs emails et mots de passe -->
+    <!-- Affichage des utilisateurs créés -->
+    <ion-card>
+      <ion-card-header>
+        <ion-card-title>Utilisateurs créés :</ion-card-title>
+      </ion-card-header>
+      <ion-card-content>
+        <ion-grid>
+          <ion-row>
+            <ion-col><strong>Prénom</strong></ion-col>
+            <ion-col><strong>Nom</strong></ion-col>
+            <ion-col><strong>Email</strong></ion-col>
+            <ion-col><strong>Mot de passe</strong></ion-col>
+            <ion-col><strong>Formation</strong></ion-col> <!-- Nouvelle colonne pour la formation -->
+          </ion-row>
+          <ion-row *ngFor="let user of createdUsers">
+            <ion-col>{{ user.firstName }}</ion-col>
+            <ion-col>{{ user.lastName }}</ion-col>
+            <ion-col>{{ user.email }}</ion-col>
+            <ion-col>{{ user.password }}</ion-col>
+            <ion-col>{{ user.room }}</ion-col> <!-- Affichage de la formation -->
+          </ion-row>
+        </ion-grid>
+      </ion-card-content>
+    </ion-card>
+    
+
+  </div>
+</ion-content>

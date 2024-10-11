@@ -1,0 +1,16 @@
+.login-container {
+    max-width: 400px;
+    margin: 100px auto 0; 
+    padding: 20px;
+    text-align: center;
+  }
+  
+
+  .logo-container {
+    margin-bottom: 35px; 
+  }
+  
+  .logo {
+    width: 950px; 
+    height: auto;
+  }

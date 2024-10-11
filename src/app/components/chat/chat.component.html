@@ -1,0 +1,46 @@
+<ion-header>
+    <ion-toolbar>
+      <ion-title>Chat</ion-title>
+    </ion-toolbar>
+  </ion-header>
+  
+  <ion-content>
+    <div class="chat-container">
+      <!-- Bannière de bienvenue dynamique centrée -->
+      <h1 class="welcome-title">Bienvenue dans le chat <strong class="room">{{ roomId }}</strong></h1>
+  
+      <ion-grid>
+        <ion-row>
+          <!-- Colonne pour afficher les étudiants de la formation -->
+          <ion-col size-md="3" size="12" class="student-list">
+            <ion-list>
+              <ion-list-header>Étudiants</ion-list-header>
+              <ion-item *ngFor="let student of students$ | async">
+                {{ student.firstName }} {{ student.lastName }}
+              </ion-item>
+            </ion-list>
+          </ion-col>
+      
+          <!-- Colonne principale pour le chat -->
+          <ion-col size-md="9" size="12">
+            <!-- Zone d'affichage des messages -->
+            <ion-list>
+              <ion-item *ngFor="let message of messages$ | async">
+                <ion-label>
+                  <p class="reponse"><strong>{{ message.text }}</strong></p>
+                  <small class="ion-padding">{{ message.firstName }} - {{ message.timestamp | date: "short" }}</small>
+                </ion-label>
+              </ion-item>
+            </ion-list>
+      
+            <!-- Zone de saisie des messages -->
+            <ion-item>
+              <ion-input [(ngModel)]="newMessage" placeholder="Tapez votre message ici..."></ion-input>
+              <ion-button (click)="sendMessage()" expand="block">Envoyer</ion-button>
+            </ion-item>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+      
+    </div>
+  </ion-content>

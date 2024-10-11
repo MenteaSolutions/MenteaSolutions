@@ -1,0 +1,34 @@
+/* Assurer que le contenu est bien visible */
+ion-content {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    height: 100%;
+    overflow-y: auto; /* Permettre le défilement vertical */
+  }
+  
+  /* Section des utilisateurs créés pour mieux afficher la liste */
+  .created-users-section {
+    margin-top: 20px;
+    max-height: 300px; /* Limiter la hauteur de la section */
+    overflow-y: auto;  /* Activer le scroll si la liste dépasse la hauteur */
+  }
+
+  
+  div {
+    text-align: center;
+  }
+
+  ion-card {
+    /* margin-top: 60px; */
+    /* margin: 50px 300px; */
+    width: 60%;
+    margin: 50px auto;
+  }
+
+  @media screen and (max-width: 768px) {
+    ion-card {
+      width: 100%;
+    }
+
+  }

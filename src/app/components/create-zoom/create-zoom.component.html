@@ -1,0 +1,88 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Ajouter un nouveau cours</ion-title>
+  </ion-toolbar>
+</ion-header>
+<ion-content>
+  <ion-card>
+    <ion-card-content>
+      <ion-label position="floating">Sélectionnez une formation</ion-label>
+      <ion-item>
+        <ion-select
+          class="ion-padding"
+          [(ngModel)]="selectedFormacaoToAddLink"
+          name="getFormacoes"
+        >
+          <!-- <ion-select-option value="">Sélectionnez une formation</ion-select-option> -->
+          <ion-select-option
+            *ngFor="let formacao of formacoes"
+            [value]="formacao"
+          >
+            {{ formacao.name }}
+          </ion-select-option>
+        </ion-select>
+      </ion-item>
+      <div>
+        <ion-input
+          label="Entrez le lien"
+          placeholder="Entrez le lien"
+          [(ngModel)]="novoLink"
+        ></ion-input>
+      </div>
+      <div>
+        <ion-input
+          label="Entrez le code d'accès"
+          placeholder="Entrez le code d'accès"
+          [(ngModel)]="codigoAcesso"
+        ></ion-input>
+      </div>
+      <div>
+        <label>Entrez la date</label>
+        <input class="padding" type="date" [(ngModel)]="data">
+      </div>
+      <ion-button (click)="adicionarLink()">Ajouter</ion-button>
+    </ion-card-content>
+  </ion-card>
+  <ion-card>
+    <ion-card-header>
+      <ion-card-title>Enregistrements</ion-card-title>
+    </ion-card-header>
+    <ion-card-content>
+      <ion-label position="floating">Sélectionnez une formation</ion-label>
+      <ion-item>
+        <ion-select
+          [(ngModel)]="selectedFormacaoToShowAulas"
+          (ionChange)="getZooms()"
+        >
+          <!-- <ion-select-option value="">Sélectionnez une formation</ion-select-option> -->
+          <ion-select-option
+            *ngFor="let formacao of formacoes"
+            [value]="formacao"
+          >
+            {{ formacao.name }}
+          </ion-select-option>
+        </ion-select>
+      </ion-item>
+      <div *ngIf="zoomsToShowByFormation.length > 0">
+        <ion-card>
+          <ion-card-header>
+            <ion-card-title>{{
+              selectedFormacaoToShowAulas?.name
+            }}</ion-card-title>
+          </ion-card-header>
+          <ion-card-content>
+            <ion-list>
+              <ion-item *ngFor="let zoom of zoomsToShowByFormation">
+                <ion-label>
+                  {{ zoom.formationStr }} -
+                  <a [href]="zoom.lien">{{ zoom.lien }}</a>
+                  <p>Code d'accès: {{ zoom.code }}</p>
+                </ion-label>
+              </ion-item>
+            </ion-list>
+          </ion-card-content>
+        </ion-card>
+      </div>
+    </ion-card-content>
+  </ion-card>
+</ion-content>

@@ -1,0 +1,27 @@
+.reponse {
+    display: inline-block; /* Adapte la largeur au contenu */
+    padding: 10px 15px; /* Ajoute un espacement à l'intérieur */
+    background-color: #7ED37F;
+    color: whitesmoke;
+    font-size: medium;
+    border-radius: 10px 0px 13px 13px;
+    max-width: 80%; /* Limite la largeur pour les longs messages */
+    word-wrap: break-word; /* Permet de couper les mots longs */
+    margin-bottom: 10px; /* Ajoute un espace entre les messages */
+  }
+  
+  /* Masquer la colonne des étudiants sur les écrans de taille inférieure à 768px */
+@media screen and (max-width: 768px) {
+    .student-list {
+      display: none;
+    }
+  
+  }
+  
+  /* Afficher la colonne des étudiants sur les grands écrans */
+  @media screen and (min-width: 769px) {
+    .student-list {
+      display: block;
+    }
+  }
+  

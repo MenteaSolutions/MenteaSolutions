@@ -1,0 +1,129 @@
+<ion-content class="ion-padding">
+  <h1 class="ion-text-center">Calendrier de Formation</h1>
+  <!-- Formulaire pour ajouter un nouveau cours -->
+  <form [formGroup]="aulaForm" (ngSubmit)="adicionarAula()">
+    <!-- Sélection de la formation -->
+    <ion-label position="floating">Formation :</ion-label>
+    <ion-item>
+      <ion-select
+        id="formacao"
+        placeholder="Sélectionnez une formation"
+        formControlName="formacao"
+        (ionChange)="loadAulas($event.detail.value)"
+      >
+        <ion-select-option
+          *ngFor="let formacao of formacoes"
+          [value]="formacao"
+        >
+          {{ formacao.nome }}
+          <!-- Affiche le nom de la formation -->
+        </ion-select-option>
+      </ion-select>
+    </ion-item>
+
+    <!-- Champ de description -->
+    <!-- <ion-label position="floating">Description :</ion-label>
+    <!- Champ de description -->
+    <!-- <ion-label position="floating">Description :</ion-label>
+    <ion-item>
+      <ion-input id="descricao" formControlName="descricao"></ion-input>
+    </ion-item> -->
+    <!-- Professeur -->
+    <ion-label position="floating">Professeur :</ion-label>
+    <ion-item>
+      <ion-input 
+      placeholder="Nom du professeur"
+       id="professor" formControlName="professor"></ion-input>
+    </ion-item>
+
+    <!-- Data de Início -->
+    <ion-label position="floating">Date Debut :</ion-label>
+    <ion-item>
+      <ion-datetime-button datetime="datetimeStart"></ion-datetime-button>
+    </ion-item>
+    <ion-modal [keepContentsMounted]="true">
+      <ng-template>
+        <!-- Captura apenas a data -->
+        <ion-datetime
+          
+          id="datetimeStart"
+          formControlName="dataInicio"
+          formControlName="horaInicio"
+        ></ion-datetime>
+      </ng-template>
+    </ion-modal>
+
+    <!-- Data de Fim -->
+    <ion-label position="floating">Date fin :</ion-label>
+    <ion-item>
+      <ion-datetime-button datetime="datetimeEnd"></ion-datetime-button>
+    </ion-item>
+    <ion-modal [keepContentsMounted]="true">
+      <ng-template>
+        <!-- Captura apenas a data -->
+        <ion-datetime
+        
+          id="datetimeEnd"
+          formControlName="dataFim"
+          formControlName="horaFim"
+        ></ion-datetime>
+      </ng-template>
+    </ion-modal>
+
+    <!-- Heure de Début -->
+    <!-- <ion-label position="floating">Heure Debut :</ion-label>
+    <! Heure de Début -->
+    <!-- <ion-label position="floating">Heure Debut :</ion-label>
+    <ion-item>
+      <ion-datetime-button datetime="datetime3"></ion-datetime-button>
+    </ion-item>
+    <ion-modal [keepContentsMounted]="true">
+      <ng-template>
+        <ion-datetime id="datetime3" presentation="time"
+      <ion-datetime-button datetime="datetime3"></ion-datetime-button>
+    </ion-item>
+    <ion-modal [keepContentsMounted]="true">
+      <ng-template>
+        <ion-datetime id="datetime3" presentation="time"
+        formControlName="horaInicio"
+        ></ion-datetime>
+      </ng-template>
+    </ion-modal> -->
+
+    <!-- Heure de Fin -->
+    <!-- <ion-label position="floating">Heure fin :</ion-label>
+    <ion-item>
+      <ion-datetime-button datetime="datetime4"></ion-datetime-button>
+    </ion-item>
+    <ion-modal [keepContentsMounted]="true">
+      <ng-template>
+        <ion-datetime id="datetime4" presentation="time" formControlName="horaFim"></ion-datetime>
+      </ng-template>
+    </ion-modal> -->
+
+    <!-- Bouton pour ajouter un cours -->
+    <ion-button
+      color="secondary"
+      fill="solid"
+      expand="block"
+      type="submit"
+      (click)="adicionarAula()"
+    >
+      Ajouter un Planing
+    </ion-button>
+    <ion-button
+      color="secondary"
+      fill="solid"
+      expand="block"
+      type="submit"
+      (click)="send()"
+    >
+      Envoyer
+    </ion-button>
+  </form>
+
+  <!-- FullCalendar -->
+  <div class="calendar">
+    <full-calendar #calendar [options]="calendarOptions"></full-calendar>
+  </div>
+</ion-content>

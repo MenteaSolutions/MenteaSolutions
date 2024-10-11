@@ -1,0 +1,60 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Gestion des Chats</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-grid>
+    <ion-row>
+      <!-- Colonne pour afficher la liste des étudiants -->
+      <ion-col size="3" class="student-list">
+        <ion-list>
+          <ion-list-header>Étudiants</ion-list-header>
+          <ion-item *ngFor="let student of students$ | async">
+            {{ student.firstName }} {{ student.lastName }}
+          </ion-item>
+        </ion-list>
+      </ion-col>
+
+      <!-- Colonne pour afficher le chat -->
+      <ion-col size-md="9" size="12">
+        <!-- Sélecteur de salle de chat et bouton supprimer -->
+        <ion-item lines="none">
+          <ion-label>Choisir une formation :</ion-label>
+          <ion-select [(ngModel)]="selectedRoom" (ionChange)="changeRoom()">
+            <ion-select-option *ngFor="let room of rooms" [value]="room">{{ room }}</ion-select-option>
+          </ion-select>
+          <ion-button fill="clear" color="danger" (click)="deleteRoom()" style="margin-left:auto;">
+            SUPPRIMER
+          </ion-button>
+        </ion-item>
+
+        <!-- Affichage du chat correspondant -->
+        <ion-card *ngIf="messages$ | async as messages">
+          <ion-card-header>
+            <ion-card-title>Chat - {{ selectedRoom }}</ion-card-title>
+          </ion-card-header>
+
+          <ion-card-content>
+            <ion-list>
+              <!-- Liste des messages -->
+              <ion-item *ngFor="let message of messages">
+                <ion-label>
+                  <strong>{{ message.firstName }}</strong>: <p class="reponse"> {{ message.text }} </p>
+                  <p><small>{{ message.timestamp | date:'short' }}</small></p>
+                </ion-label>
+              </ion-item>
+            </ion-list>
+          </ion-card-content>
+        </ion-card>
+
+        <!-- Champ pour envoyer un message -->
+        <ion-item>
+          <ion-input [(ngModel)]="newMessage" placeholder="Tapez votre message ici..."></ion-input>
+          <ion-button (click)="sendMessage()">Envoyer</ion-button>
+        </ion-item>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+</ion-content>
