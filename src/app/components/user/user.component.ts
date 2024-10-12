@@ -1,20 +1,43 @@
-import { Component, OnInit } from '@angular/core';
-import { FirebaseService } from '../../Services/firebase.service'; // Import FirebaseService
-import { Auth } from '@angular/fire/auth'; // Firebase Authentication
-import { ModalController, IonicModule } from '@ionic/angular';
-import { FormsModule } from '@angular/forms';
-import { CommonModule } from '@angular/common';
-import { PasswordChangeModalComponent } from '../../password-change-modal/password-change-modal.component';
+import { Component, OnInit } from "@angular/core";
+import { FirebaseService } from "../../Services/firebase.service"; // Import FirebaseService
+import { Auth } from "@angular/fire/auth"; // Firebase Authentication
+import { ModalController } from "@ionic/angular";
+import { FormsModule } from "@angular/forms";
+import { CommonModule } from "@angular/common";
+import { PasswordChangeModalComponent } from "../../password-change-modal/password-change-modal.component";
+import {
+  IonContent,
+  IonCard,
+  IonCardHeader,
+  IonAvatar,
+  IonCardTitle,
+  IonCardContent,
+  IonItem,
+  IonLabel,
+  IonButton,
+  IonInputPasswordToggle,
+} from "@ionic/angular/standalone";
 
 @Component({
-  selector: 'app-room-users',
+  selector: "app-room-users",
   standalone: true,
-  imports:[FormsModule, CommonModule, IonicModule],
-  templateUrl: './user.component.html',
-  styleUrls: ['./user.component.scss'],
+  imports: [
+    IonButton,
+    IonLabel,
+    IonItem,
+    IonCardContent,
+    IonCardTitle,
+    IonAvatar,
+    IonCardHeader,
+    IonCard,
+    FormsModule,
+    CommonModule,
+    IonInputPasswordToggle,
+    IonContent,
+  ],
+  templateUrl: "./user.component.html",
+  styleUrls: ["./user.component.scss"],
 })
-
-
 export class UserComponent implements OnInit {
   userDetails: any = null; // Pour stocker les détails de l'utilisateur
   isLoading: boolean = true;
@@ -36,16 +59,18 @@ export class UserComponent implements OnInit {
     try {
       const currentUser = this.auth.currentUser;
       if (currentUser && currentUser.email) {
-        this.userDetails = await this.firebaseService.fetchUserDetails(currentUser.email);
+        this.userDetails = await this.firebaseService.fetchUserDetails(
+          currentUser.email
+        );
         if (!this.userDetails) {
-          this.error = 'No user details found.';
+          this.error = "No user details found.";
         }
       } else {
-        this.error = 'No user is logged in.';
+        this.error = "No user is logged in.";
       }
     } catch (error) {
-      this.error = 'Error fetching user details.';
-      console.error('Error fetching user details:', error);
+      this.error = "Error fetching user details.";
+      console.error("Error fetching user details:", error);
     } finally {
       this.isLoading = false;
     }
@@ -54,7 +79,7 @@ export class UserComponent implements OnInit {
   async openPasswordChangeModal() {
     const modal = await this.modalController.create({
       component: PasswordChangeModalComponent,
-      componentProps: { userDetails: this.userDetails } // Transmettre les détails de l'utilisateur au modal
+      componentProps: { userDetails: this.userDetails }, // Transmettre les détails de l'utilisateur au modal
     });
 
     modal.onDidDismiss().then((result) => {

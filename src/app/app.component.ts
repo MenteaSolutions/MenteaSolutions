@@ -10,7 +10,7 @@ import '@khmyznikov/pwa-install';
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [FormsModule, CommonModule, RouterModule, UpdatesNotificationComponent, IonApp, IonMenu, IonHeader, IonToolbar, IonTitle, IonContent,IonList, IonItem, IonButtons, IonButton,  ], // Import RouterModule
+  imports: [FormsModule, CommonModule, RouterModule, UpdatesNotificationComponent, IonApp, IonMenu, IonHeader, IonToolbar, IonTitle, IonContent,IonList, IonItem, IonButtons, IonButton ], // Import RouterModule
   templateUrl: 'app.component.html',
   styleUrls: ['app.component.scss'],
   schemas: [CUSTOM_ELEMENTS_SCHEMA] // Add CUSTOM_ELEMENTS_SCHEMA to handle ion-* elements

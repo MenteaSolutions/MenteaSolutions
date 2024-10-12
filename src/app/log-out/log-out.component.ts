@@ -1,17 +1,15 @@
-import { Component } from '@angular/core';
-import { AuthService } from '../Services/auth.service'; // Assure-toi que le chemin est correct
-import { IonicModule } from '@ionic/angular';
-
+import { Component } from "@angular/core";
+import { AuthService } from "../Services/auth.service";
+import { IonButton, IonButtons } from "@ionic/angular/standalone";
 
 @Component({
-  selector: 'app-log-out', // Nom du sélecteur du composant
+  selector: "app-log-out", // Nom du sélecteur du composant
   standalone: true,
-  imports:[IonicModule],
-  templateUrl: './log-out.component.html',
-  styleUrls: ['./log-out.component.css']
+  imports: [IonButtons, IonButton], // Importe les composants IonButtons et IonButton
+  templateUrl: "./log-out.component.html",
+  styleUrls: ["./log-out.component.css"],
 })
 export class LogOutComponent {
-
   constructor(public authService: AuthService) {}
 
   logout() {

@@ -1,5 +1,5 @@
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
-import { IonicModule } from '@ionic/angular';
+
 
 import { LogOutComponent } from './log-out.component';
 
@@ -10,7 +10,7 @@ describe('LogOutComponent', () => {
   beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
       declarations: [ LogOutComponent ],
-      imports: [IonicModule.forRoot()]
+      imports: [.forRoot()]
     }).compileComponents();
 
     fixture = TestBed.createComponent(LogOutComponent);

@@ -2,24 +2,52 @@ import { Component, OnInit } from "@angular/core";
 
 import { Observable } from "rxjs";
 import { FormsModule } from "@angular/forms"; // Pour ngModel
-import { IonicModule } from "@ionic/angular"; // Pour Ionic
 import { CommonModule } from "@angular/common";
-import { Auth, User } from '@angular/fire/auth'; // Import Firebase Auth
+import { Auth, User } from "@angular/fire/auth"; // Import Firebase Auth
 import { ChatService } from "./chat.service";
+import {
+  IonHeader,
+  IonToolbar,
+  IonTitle,
+  IonContent,
+  IonGrid,
+  IonRow,
+  IonCol,
+  IonList,
+  IonListHeader,
+  IonItem,
+  IonLabel,
+  IonButton,
+} from "@ionic/angular/standalone";
 
 @Component({
   selector: "app-chat",
   standalone: true,
-  imports: [FormsModule, IonicModule, CommonModule],
+  imports: [
+    IonButton,
+    IonLabel,
+    IonItem,
+    IonListHeader,
+    IonList,
+    IonCol,
+    IonRow,
+    IonGrid,
+    IonContent,
+    IonTitle,
+    IonToolbar,
+    IonHeader,
+    FormsModule,
+    CommonModule,
+  ],
   templateUrl: "./chat.component.html",
   styleUrls: ["./chat.component.css"],
 })
 export class ChatComponent implements OnInit {
   newMessage: string = "";
-  roomId: string = ''; // Dynamiser le roomId
+  roomId: string = ""; // Dynamiser le roomId
   messages$: Observable<any[]> = new Observable<any[]>(); // Initialiser les messages
   students$: Observable<any[]> = new Observable<any[]>(); // Initialiser les étudiants
-  currentUserFirstName: string = ''; // Récupérer dynamiquement le prénom de l'utilisateur connecté
+  currentUserFirstName: string = ""; // Récupérer dynamiquement le prénom de l'utilisateur connecté
 
   constructor(private chatService: ChatService, private auth: Auth) {}
 
@@ -33,18 +61,23 @@ export class ChatComponent implements OnInit {
               this.roomId = userInfo.room;
               this.currentUserFirstName = userInfo.firstName;
               console.log("Room ID récupéré:", this.roomId);
-              console.log("Prénom utilisateur récupéré:", this.currentUserFirstName);
+              console.log(
+                "Prénom utilisateur récupéré:",
+                this.currentUserFirstName
+              );
               this.loadChat();
             }
           },
           (error) => {
-            console.error("Erreur lors de la récupération des informations utilisateur :", error);
+            console.error(
+              "Erreur lors de la récupération des informations utilisateur :",
+              error
+            );
           }
         );
       }
     });
   }
-  
 
   loadChat() {
     if (this.roomId) {
@@ -63,7 +96,11 @@ export class ChatComponent implements OnInit {
   sendMessage() {
     if (this.newMessage.trim()) {
       // Ajouter firstName (prénom de l'utilisateur connecté) à l'envoi du message
-      this.chatService.sendMessage(this.roomId, this.newMessage, this.currentUserFirstName);
+      this.chatService.sendMessage(
+        this.roomId,
+        this.newMessage,
+        this.currentUserFirstName
+      );
       this.newMessage = ""; // Réinitialiser le champ après l'envoi
     }
   }

@@ -28,12 +28,11 @@ import {
 } from "@ionic/angular/standalone";
 import { addIcons } from 'ionicons';
 import { copyOutline } from 'ionicons/icons';
-import { IonicModule } from "@ionic/angular";
 
 @Component({
   selector: "app-zoom",
   standalone: true,
-  imports: [FormsModule, CommonModule, IonicModule,],
+  imports: [FormsModule, CommonModule, IonContent, IonButton, IonCard, IonCardHeader, IonCardTitle, IonCardContent, IonList, IonItem, IonLabel, IonSelectOption, IonRow, IonCol, IonGrid, IonToolbar, IonHeader, IonTitle, IonIcon],
   templateUrl: "./zoom.component.html",
   styleUrls: ["./zoom.component.css"],
 })
