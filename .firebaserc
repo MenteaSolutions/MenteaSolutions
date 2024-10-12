@@ -1,5 +1,7 @@
 {
   "projects": {
-    "default": "tstdeploy-9f481"
-  }
+    "default": "zoomnomades-e95cd"
+  },
+  "targets": {},
+  "etags": {}
 }
