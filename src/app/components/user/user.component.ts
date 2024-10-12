@@ -1,7 +1,7 @@
 import { Component, OnInit } from "@angular/core";
 import { FirebaseService } from "../../Services/firebase.service"; // Import FirebaseService
 import { Auth } from "@angular/fire/auth"; // Firebase Authentication
-import { ModalController } from "@ionic/angular";
+import { ModalController } from "@ionic/angular/standalone";
 import { FormsModule } from "@angular/forms";
 import { CommonModule } from "@angular/common";
 import { PasswordChangeModalComponent } from "../../password-change-modal/password-change-modal.component";

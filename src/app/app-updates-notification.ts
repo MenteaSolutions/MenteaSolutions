@@ -3,7 +3,7 @@ import { SwUpdate } from '@angular/service-worker';
 import { merge, Observable, of, Subject } from 'rxjs';
 import { filter, map } from 'rxjs/operators';
 import { ToastOptions } from '@ionic/core';
-import { ToastController } from '@ionic/angular';
+import { ToastController } from '@ionic/angular/standalone';
 import { environment } from '../environments/environment';
 import { CommonModule } from '@angular/common';
 
