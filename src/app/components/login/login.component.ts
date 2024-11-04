@@ -10,12 +10,13 @@ import {
   IonText,
   IonToast,
   IonInputPasswordToggle,
+  IonMenuButton,
 } from "@ionic/angular/standalone";
 
 @Component({
   selector: "app-login",
   standalone: true,
-  imports: [IonToast, IonText, IonButton, IonItem, FormsModule, CommonModule, IonInputPasswordToggle,IonContent],
+  imports: [IonToast, IonText, IonButton, IonItem, FormsModule, CommonModule, IonInputPasswordToggle,IonContent, IonMenuButton],
   templateUrl: "./login.component.html",
   styleUrls: ["./login.component.css"],
 })
