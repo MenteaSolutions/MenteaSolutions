@@ -1,15 +1,22 @@
-import { Component } from '@angular/core';
-import { AuthService } from '../../Services/auth.service';
-import { Router } from '@angular/router';
-import { IonicModule } from '@ionic/angular';
-import { FormsModule } from '@angular/forms';
-import { CommonModule } from '@angular/common';
-import { IonButton, IonContent, IonInputPasswordToggle, IonItem, IonMenuButton, IonText, IonToast } from '@ionic/angular/standalone';
+import { Component } from "@angular/core";
+import { AuthService } from "../../Services/auth.service";
+import { Router } from "@angular/router";
+import { FormsModule } from "@angular/forms";
+import { CommonModule } from "@angular/common";
+import {
+  IonContent,
+  IonItem,
+  IonButton,
+  IonText,
+  IonToast,
+  IonInputPasswordToggle,
+  IonMenuButton,
+} from "@ionic/angular/standalone";
 
 @Component({
   selector: "app-login",
   standalone: true,
-  imports:[FormsModule, CommonModule,IonContent,IonItem,IonInputPasswordToggle,IonButton,IonText, IonToast, IonMenuButton],
+  imports:[FormsModule, CommonModule,IonContent,IonItem,IonInputPasswordToggle,IonButton,IonText, IonToast, IonMenuButton, IonMenuButton],
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.css']
 })
