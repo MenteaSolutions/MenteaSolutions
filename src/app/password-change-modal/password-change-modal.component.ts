@@ -1,5 +1,5 @@
 import { Component, CUSTOM_ELEMENTS_SCHEMA, Input } from "@angular/core";
-import {  ModalController } from "@ionic/angular/standalone";
+import { IonInput, ModalController } from "@ionic/angular/standalone";
 import { FirebaseService } from "../Services/firebase.service";
 import { FormsModule } from "@angular/forms";
 import { CommonModule } from "@angular/common";
@@ -32,6 +32,7 @@ import {
     CommonModule,
     IonHeader,
     IonInputPasswordToggle,
+    IonInput,
   ],
   templateUrl: "./password-change-modal.component.html",
   styleUrls: ["./password-change-modal.component.scss"],

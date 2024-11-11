@@ -11,14 +11,26 @@ import {
   IonToast,
   IonInputPasswordToggle,
   IonMenuButton,
+  IonInput,
 } from "@ionic/angular/standalone";
 
 @Component({
   selector: "app-login",
   standalone: true,
-  imports:[FormsModule, CommonModule,IonContent,IonItem,IonInputPasswordToggle,IonButton,IonText, IonToast, IonMenuButton, IonMenuButton],
-  templateUrl: './login.component.html',
-  styleUrls: ['./login.component.css']
+  imports: [
+    FormsModule,
+    CommonModule,
+    IonContent,
+    IonItem,
+    IonInputPasswordToggle,
+    IonButton,
+    IonText,
+    IonToast,
+    IonMenuButton,
+    IonInput,
+  ],
+  templateUrl: "./login.component.html",
+  styleUrls: ["./login.component.css"],
 })
 export class LoginComponent {
   email: string = "";
@@ -32,6 +44,8 @@ export class LoginComponent {
   async onLogin() {
     try {
       // Appel du service d'authentification pour se connecter
+      console.log("Login with email and password:", this.email, this.password);
+
       await this.authService.login(this.email, this.password);
 
       // Après connexion réussie, rediriger en fonction du rôle

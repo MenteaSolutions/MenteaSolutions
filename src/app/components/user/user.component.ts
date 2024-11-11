@@ -16,6 +16,7 @@ import {
   IonLabel,
   IonButton,
   IonInputPasswordToggle,
+  IonInput,
 } from "@ionic/angular/standalone";
 
 @Component({
@@ -34,6 +35,8 @@ import {
     CommonModule,
     IonInputPasswordToggle,
     IonContent,
+    IonInput,
+    
   ],
   templateUrl: "./user.component.html",
   styleUrls: ["./user.component.scss"],

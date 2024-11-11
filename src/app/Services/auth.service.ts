@@ -1,23 +1,33 @@
-import { Injectable } from '@angular/core';
-import { Auth, signInWithEmailAndPassword, User } from '@angular/fire/auth';
-import { Database, ref, get } from '@angular/fire/database';
-import { Router } from '@angular/router';
+import { Injectable } from "@angular/core";
+import { Auth, signInWithEmailAndPassword, User } from "@angular/fire/auth";
+import { Database, ref, get } from "@angular/fire/database";
+import { Router } from "@angular/router";
 
 @Injectable({
-  providedIn: 'root',
+  providedIn: "root",
 })
 export class AuthService {
-  userRole: 'admin' | 'user' | null = null;
+  userRole: "admin" | "user" | null = null;
 
-  constructor(private auth: Auth, private db: Database, private router: Router) {}
+  constructor(
+    private auth: Auth,
+    private db: Database,
+    private router: Router
+  ) {}
 
   // Méthode pour se connecter avec Firebase Authentication
   async login(email: string, password: string): Promise<void> {
+    console.log(email, password);
+
     try {
-      const userCredential = await signInWithEmailAndPassword(this.auth, email, password);
+      const userCredential = await signInWithEmailAndPassword(
+        this.auth,
+        email,
+        password
+      );
       const user = userCredential.user;
 
-      console.log('Login successful, user:', user);
+      console.log("Login successful, user:", user);
 
       // Appeler la fonction pour chercher le rôle de l'utilisateur
       await this.fetchUserRole(user);
@@ -43,30 +53,29 @@ export class AuthService {
 
         if (adminSnapshot.exists()) {
           const adminData = adminSnapshot.val();
-          console.log('Admin data:', adminData);
+          console.log("Admin data:", adminData);
 
-          if (adminData.role === 'admin') {
-            this.userRole = 'admin';
-            localStorage.setItem('userRole', 'admin');  // Enregistrer le rôle dans localStorage
-            console.log('Admin user found:', adminData);
+          if (adminData.role === "admin") {
+            this.userRole = "admin";
+            localStorage.setItem("userRole", "admin"); // Enregistrer le rôle dans localStorage
+            console.log("Admin user found:", adminData);
             return;
           }
         }
-       // Si l'utilisateur n'est pas dans "admins", chercher dans les rooms par email
-       console.log("Checking in rooms for user:", user.uid);
-       await this.fetchUserRoleInRooms(user);
-
-     } catch (error) {
-       console.error('Error fetching user role:', error);
-       throw error;
-     }
-   }
- }
+        // Si l'utilisateur n'est pas dans "admins", chercher dans les rooms par email
+        console.log("Checking in rooms for user:", user.uid);
+        await this.fetchUserRoleInRooms(user);
+      } catch (error) {
+        console.error("Error fetching user role:", error);
+        throw error;
+      }
+    }
+  }
   // Méthode pour récupérer le rôle de l'utilisateur dans les "rooms"
   async fetchUserRoleInRooms(user: User): Promise<void> {
     try {
       // Référence à la racine des salles
-      const roomsRef = ref(this.db, 'rooms');
+      const roomsRef = ref(this.db, "rooms");
 
       // Récupérer toutes les salles
       const roomsSnapshot = await get(roomsRef);
@@ -84,28 +93,34 @@ export class AuthService {
 
             // Récupérer tous les utilisateurs de cette salle
             const usersInRoom = roomsData[roomName].users;
-             // Parcourir les utilisateurs dans la salle pour vérifier l'email
-             for (const userId in usersInRoom) {
+            // Parcourir les utilisateurs dans la salle pour vérifier l'email
+            for (const userId in usersInRoom) {
               if (usersInRoom.hasOwnProperty(userId)) {
                 const userData = usersInRoom[userId];
 
-                if (userData.email === user.email) {  // Comparer l'email plutôt que l'UID
+                if (userData.email === user.email) {
+                  // Comparer l'email plutôt que l'UID
                   console.log(`User found in room ${roomName}:, userData`);
 
                   // Vérifier si le rôle est présent et valide
-                  if (userData.role === 'user') {
-                    this.userRole = 'user';
-                    localStorage.setItem('userRole', 'user');  // Enregistrer le rôle dans localStorage
+                  if (userData.role === "user") {
+                    this.userRole = "user";
+                    localStorage.setItem("userRole", "user"); // Enregistrer le rôle dans localStorage
                     console.log("User role set to 'user'");
                     return;
-                  } else if (userData.role === 'admin') {
-                    this.userRole = 'admin';
-                    localStorage.setItem('userRole', 'admin');  // Enregistrer le rôle dans localStorage
+                  } else if (userData.role === "admin") {
+                    this.userRole = "admin";
+                    localStorage.setItem("userRole", "admin"); // Enregistrer le rôle dans localStorage
                     console.log("User role set to 'admin'");
                     return;
                   } else {
-                    console.error('Invalid or missing role for user:', userData.role);
-                    throw new Error('Invalid or missing role for user in the database');
+                    console.error(
+                      "Invalid or missing role for user:",
+                      userData.role
+                    );
+                    throw new Error(
+                      "Invalid or missing role for user in the database"
+                    );
                   }
                 }
               }
@@ -115,50 +130,53 @@ export class AuthService {
         }
 
         // Si l'utilisateur n'est trouvé dans aucune salle
-        throw new Error('User not found in any room');
+        throw new Error("User not found in any room");
       } else {
-        throw new Error('No rooms found in database');
+        throw new Error("No rooms found in database");
       }
     } catch (error) {
-      console.error('Error fetching user role from rooms:', error);
+      console.error("Error fetching user role from rooms:", error);
       throw error;
     }
   }
-   // Méthode pour vérifier si l'utilisateur est admin
-   isAdmin(): boolean {
-    const role = localStorage.getItem('userRole');
-    return role === 'admin';
+  // Méthode pour vérifier si l'utilisateur est admin
+  isAdmin(): boolean {
+    const role = localStorage.getItem("userRole");
+    return role === "admin";
   }
 
   // Méthode pour vérifier si l'utilisateur est un utilisateur normal
   isUser(): boolean {
-    const role = localStorage.getItem('userRole');
-    return role === 'user';
+    const role = localStorage.getItem("userRole");
+    return role === "user";
   }
-   // Redirection en fonction du rôle de l'utilisateur
-   redirectUser(): void {
-    const role = localStorage.getItem('userRole');
-    console.log('Role during redirect:', role);
+  // Redirection en fonction du rôle de l'utilisateur
+  redirectUser(): void {
+    const role = localStorage.getItem("userRole");
+    console.log("Role during redirect:", role);
 
     if (this.isAdmin()) {
-      console.log('Redirecting to admin page');
-      this.router.navigate(['/createUser']); // Rediriger vers la page admin
+      console.log("Redirecting to admin page");
+      this.router.navigate(["/createUser"]); // Rediriger vers la page admin
     } else if (this.isUser()) {
-      console.log('Redirecting to user page');
-      this.router.navigate(['/user']); // Rediriger vers la page utilisateur
+      console.log("Redirecting to user page");
+      this.router.navigate(["/user"]); // Rediriger vers la page utilisateur
     } else {
-      console.log('Redirecting to login page');
-      this.router.navigate(['/login']); // Rediriger vers la page de login si le rôle est indéfini
+      console.log("Redirecting to login page");
+      this.router.navigate(["/login"]); // Rediriger vers la page de login si le rôle est indéfini
     }
   }
-   // Méthode pour se déconnecter
-   logout(): void {
-    this.auth.signOut().then(() => {
-      this.userRole = null;
-      localStorage.removeItem('userRole'); // Supprimer le rôle stocké
-      this.router.navigate(['/login']); // Rediriger vers la page de connexion
-    }).catch((error) => {
-      console.error('Erreur lors de la déconnexion :', error);
-    });
+  // Méthode pour se déconnecter
+  logout(): void {
+    this.auth
+      .signOut()
+      .then(() => {
+        this.userRole = null;
+        localStorage.removeItem("userRole"); // Supprimer le rôle stocké
+        this.router.navigate(["/login"]); // Rediriger vers la page de connexion
+      })
+      .catch((error) => {
+        console.error("Erreur lors de la déconnexion :", error);
+      });
   }
 }
