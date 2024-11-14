@@ -92,7 +92,7 @@ export class ChatService {
     const roomRef = ref(this.db, `rooms/${roomId}`);
     remove(roomRef)
       .then(() => {
-        //TODO - Add PopUP and remove console.log
+        //TODO - Add PopUP and remove this console.log
         // console.log(`La salle de chat ${roomId} a été supprimée.`);
       })
       .catch((error) => {
