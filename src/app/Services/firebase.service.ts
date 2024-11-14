@@ -57,15 +57,9 @@ export class FirebaseService {
       try {
         // 1. Mise à jour du mot de passe dans Firebase Authentication
         await updatePassword(currentUser, newPassword);
-        console.log(
-          "Password updated successfully in Firebase Authentication."
-        );
 
         // 2. Mise à jour du mot de passe dans Firebase Realtime Database
         await this.updateUserPassword(userDetails.roomName, userDetails.uid);
-        console.log(
-          "Password updated successfully in Firebase Realtime Database."
-        );
       } catch (error) {
         console.error("Error updating password:", error);
         throw error;
@@ -79,9 +73,6 @@ export class FirebaseService {
     try {
       const userRef = ref(this.db, `rooms/${roomName}/users/${userId}`);
       await update(userRef, { password: null }); // Mise à jour du mot de passe
-      console.log(
-        "Password updated successfully in Firebase Realtime Database."
-      );
     } catch (error) {
       console.error(
         "Error updating password in Firebase Realtime Database:",

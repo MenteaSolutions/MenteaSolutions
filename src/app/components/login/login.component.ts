@@ -44,8 +44,6 @@ export class LoginComponent {
   async onLogin() {
     try {
       // Appel du service d'authentification pour se connecter
-      console.log("Login with email and password:", this.email, this.password);
-
       await this.authService.login(this.email, this.password);
 
       // Après connexion réussie, rediriger en fonction du rôle

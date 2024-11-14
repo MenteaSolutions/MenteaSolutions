@@ -43,7 +43,7 @@ export class CalendarComponent implements OnInit {
   calendarOptions: CalendarOptions | undefined = {
     initialView: "dayGridMonth",
     plugins: [dayGridPlugin, interactionPlugin],
-  }
+  };
   constructor(
     private fb: FormBuilder,
     private calendarService: CalendarService,
@@ -77,25 +77,21 @@ export class CalendarComponent implements OnInit {
         this.aulas = aulas;
         // Recupera as opções do calendário do fireCalendarService
 
-        const {config, events} = await this.fireCalendarService.getCalendarByFormationId(
-          formacaoId
-        );
-        console.log("option aa", config);
-        
+        const { config, events } =
+          await this.fireCalendarService.getCalendarByFormationId(formacaoId);
+
         this.calendarOptions = {
           initialView: "dayGridMonth",
-          plugins: [dayGridPlugin, interactionPlugin],        
+          plugins: [dayGridPlugin, interactionPlugin],
           ...config,
         };
 
-        console.log(this.calendarOptions);
         const calendarApi = this.calendarComponent.getApi();
         setTimeout(() => {
-          events.forEach((event:any) => {
+          events.forEach((event: any) => {
             calendarApi.addEvent(event);
           });
-        },250);       
-
+        }, 250);
       });
   }
 }
