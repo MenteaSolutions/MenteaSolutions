@@ -36,7 +36,9 @@ export class FireCalendarService {
   }
 
   async addCalendar(data: any): Promise<void> {
-    const existingCalendar = await this.getCalendarByFormationId(data.idFormation);
+    const existingCalendar = await this.getCalendarByFormationId(
+      data.idFormation
+    );
     if (existingCalendar) {
       const calendarDoc = doc(this.calendarCollection, existingCalendar.id);
       await setDoc(calendarDoc, data);
@@ -48,13 +50,13 @@ export class FireCalendarService {
 
   async getCalendarByFormationId(formacaoId: string): Promise<any> {
     const querySnapshot = await getDocs(
-      query(this.calendarCollection, where('idFormation', '==', formacaoId))
+      query(this.calendarCollection, where("idFormation", "==", formacaoId))
     );
-    
+
     // Verifica se existe algum documento que corresponda à consulta
     if (!querySnapshot.empty) {
       const doc = querySnapshot.docs[0]; // Pega o primeiro documento correspondente
-      return {id:doc.id, ...doc.data()}; // Retorna o ID do documento
+      return { id: doc.id, ...doc.data() }; // Retorna o ID do documento
     } else {
       return null; // Se nenhum documento for encontrado
     }
@@ -66,7 +68,6 @@ export class FireCalendarService {
       throw new Error("Calendar not found");
     }
 
-    console.log("calendar", calendar);
     return calendar?.config;
   }
 

@@ -54,17 +54,11 @@ export class ChatComponent implements OnInit {
   ngOnInit() {
     this.auth.onAuthStateChanged((user: User | null) => {
       if (user) {
-        console.log("UID de l'utilisateur :", user.uid);
         this.chatService.getUserRoom(user.uid).subscribe(
           (userInfo: any) => {
             if (userInfo) {
               this.roomId = userInfo.room;
               this.currentUserFirstName = userInfo.firstName;
-              console.log("Room ID récupéré:", this.roomId);
-              console.log(
-                "Prénom utilisateur récupéré:",
-                this.currentUserFirstName
-              );
               this.loadChat();
             }
           },

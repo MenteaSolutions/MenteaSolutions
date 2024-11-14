@@ -81,7 +81,6 @@ export class PasswordChangeModalComponent {
         this.newPassword,
         this.userDetails
       );
-      console.log("Password updated successfully");
       this.modalController.dismiss({
         success: true,
         newPassword: this.newPassword,
