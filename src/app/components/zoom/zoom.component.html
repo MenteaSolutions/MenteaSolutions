@@ -9,7 +9,7 @@
 
           <ion-card-content>
             <ion-item>
-              <ion-label>Selecione uma formação</ion-label>
+              <ion-label>Cliquez ici pour sélectionner une formation</ion-label>
               <ion-select [(ngModel)]="selectedFormacaoToShowAulas" (ionChange)="selectFormacao()">
                 <ion-select-option *ngFor="let formation of formations" [value]="formation">
                   {{ formation.name }}
@@ -34,16 +34,16 @@
                 <ion-label>
                   <h2>{{ zoom.formationStr }}</h2>
                   <p>
-                    Código de Acesso: {{ zoom.code }}
-                    <!-- O botão de cópia só será mostrado se o código de acesso estiver definido -->
-                    <ion-button size="small" *ngIf="zoom.code" (click)="copyToClipboard(zoom.code!)">
-                      <ion-icon slot="icon-only" name="copy-outline"></ion-icon>
-                    </ion-button>
+                  Code d'accès : {{ zoom.code }}
+                  <!-- Le bouton de copie ne sera affiché que si le code d'accès est défini -->
+                  <ion-button size="small" *ngIf="zoom.code" (click)="copyToClipboard(zoom.code!)">
+                    <ion-icon slot="icon-only" name="copy-outline"></ion-icon>
+                  </ion-button>
                   </p>
-                  <p>Data: {{ zoom.date }}</p>
+                  <p>Date: {{ zoom.date }}</p>
                 </ion-label>
                 <ion-button fill="outline" (click)="openDialog(zoom.lien)">
-                  Assistir
+                  Regarder
                 </ion-button>
               </ion-item>
             </ion-list>

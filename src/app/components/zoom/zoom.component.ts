@@ -25,14 +25,38 @@ import {
   IonGrid,
   ToastController,
   IonIcon,
+  IonInput,
+  IonSelect,
 } from "@ionic/angular/standalone";
-import { addIcons } from 'ionicons';
-import { copyOutline } from 'ionicons/icons';
+import { addIcons } from "ionicons";
+import { copyOutline } from "ionicons/icons";
 
 @Component({
   selector: "app-zoom",
   standalone: true,
-  imports: [FormsModule, CommonModule, IonContent, IonButton, IonCard, IonCardHeader, IonCardTitle, IonCardContent, IonList, IonItem, IonLabel, IonSelectOption, IonRow, IonCol, IonGrid, IonToolbar, IonHeader, IonTitle, IonIcon],
+  imports: [
+    FormsModule,
+    CommonModule,
+    IonContent,
+    IonButton,
+    IonCard,
+    IonCardHeader,
+    IonCardTitle,
+    IonCardContent,
+    IonList,
+    IonItem,
+    IonLabel,
+    IonSelectOption,
+    IonRow,
+    IonCol,
+    IonGrid,
+    IonToolbar,
+    IonHeader,
+    IonTitle,
+    IonIcon,
+    IonInput,
+    IonSelect,
+  ],
   templateUrl: "./zoom.component.html",
   styleUrls: ["./zoom.component.css"],
 })
@@ -46,25 +70,25 @@ export class ZoomComponent implements OnInit {
   constructor(
     private formacaoService: FormacaoService,
     private dialog: MatDialog,
-    private toastController: ToastController,
-    
+    private toastController: ToastController
   ) {
-    addIcons({ copyOutline: 'copy-outline' });
+    addIcons({ copyOutline });
   }
 
   // Fonction pour copier le texte du code d'accès
   copyToClipboard(code: string) {
-    navigator.clipboard.writeText(code)
+    navigator.clipboard
+      .writeText(code)
       .then(async () => {
         const toast = await this.toastController.create({
-          message: 'Code d\'accès copié!',
+          message: "Code d'accès copié!",
           duration: 2000,
-          color: 'success',
+          color: "success",
         });
         toast.present();
       })
-      .catch(err => {
-        console.error('Erreur lors de la copie du texte: ', err);
+      .catch((err) => {
+        console.error("Erreur lors de la copie du texte: ", err);
       });
   }
 
@@ -79,9 +103,11 @@ export class ZoomComponent implements OnInit {
   selectFormacao() {
     const id = this.selectedFormacaoToShowAulas?.id;
     if (id) {
-      this.formacaoService.getZoomByIdFormation(id).subscribe((zooms: Zoom[]) => {
-        this.zoomsToShowByFormation = zooms;
-      });
+      this.formacaoService
+        .getZoomByIdFormation(id)
+        .subscribe((zooms: Zoom[]) => {
+          this.zoomsToShowByFormation = zooms;
+        });
     }
   }
 
