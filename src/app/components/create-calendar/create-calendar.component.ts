@@ -221,8 +221,6 @@ export class CreateCalendarComponent implements OnInit {
   }
 
   adicionarAula() {
-    console.log(this.aulaForm.value);
-
     const novaAula = this.aulaForm.value;
 
     // Atualizar o validRange do FullCalendar com base nos valores do formulário
@@ -251,18 +249,14 @@ export class CreateCalendarComponent implements OnInit {
 
     const calendarEvents = JSON.parse(JSON.stringify(events));
 
-    const { plugins, select, eventClick, editable, selectable, ...config } = this.calendarOptions;
-    
-    console.log("events", events);
-    console.log("config", config);
-    console.log(this.calendarOptions);
+    const { plugins, select, eventClick, editable, selectable, ...config } =
+      this.calendarOptions;
 
     const data = {
       config,
       idFormation: this.aulaForm.value.formacao.id,
       events: calendarEvents,
     };
-    console.log("data", data);
 
     await this.fireCalendarService.addCalendar(data);
 

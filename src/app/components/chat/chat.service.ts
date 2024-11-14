@@ -48,14 +48,15 @@ export class ChatService {
       onValue(roomsRef, (snapshot) => {
         const rooms = snapshot.val();
         let userInfo = null;
-        
+
         // Parcourir chaque salle
         for (let roomId in rooms) {
           const users = rooms[roomId].users;
           if (users) {
             // Parcourir chaque utilisateur dans la salle
             for (let userKey in users) {
-              if (users[userKey].uid === uid) { // Comparer les UID
+              if (users[userKey].uid === uid) {
+                // Comparer les UID
                 userInfo = users[userKey];
                 userInfo.room = roomId; // Ajouter l'ID de la salle à l'information utilisateur
                 break;
@@ -64,7 +65,7 @@ export class ChatService {
           }
           if (userInfo) break; // Sortir de la boucle si on trouve l'utilisateur
         }
-  
+
         if (userInfo) {
           observer.next(userInfo); // Renvoyer les informations de l'utilisateur
         } else {
@@ -79,27 +80,27 @@ export class ChatService {
   getStudents(roomId: string): void {
     const studentsRef = ref(this.db, `rooms/${roomId}/users`);
     const adminRef = ref(this.db, `admins`);
-  
+
     onValue(studentsRef, (snapshot) => {
       const students = snapshot.val();
       let studentList = students ? Object.values(students) : [];
-  
+
       // Récupérer l'administrateur et l'ajouter dans la liste
       onValue(adminRef, (adminSnapshot) => {
         const admins = adminSnapshot.val();
         if (admins) {
-          const adminList: Admin[] = Object.values(admins).map((admin: any) => ({
-            firstName: admin.firstname,
-            lastName: admin.lastname,
-            email: admin.email,
-            role: admin.role,
-          }));
+          const adminList: Admin[] = Object.values(admins).map(
+            (admin: any) => ({
+              firstName: admin.firstname,
+              lastName: admin.lastname,
+              email: admin.email,
+              role: admin.role,
+            })
+          );
           studentList = [...studentList, ...adminList];
         }
-        console.log("Étudiants récupérés :", studentList); // Vérification dans la console
         this.studentsSubject.next(studentList);
       });
     });
   }
-  
 }

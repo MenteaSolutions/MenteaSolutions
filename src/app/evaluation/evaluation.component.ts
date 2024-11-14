@@ -166,10 +166,9 @@ export class EvaluationComponent implements OnInit {
   saveFormData() {
     if (typeof Storage !== "undefined") {
       const formData = this.evaluationForm.value;
-      console.log("Saving to localStorage:", formData);
       localStorage.setItem("evaluationFormData", JSON.stringify(formData));
     } else {
-      console.log("localStorage is not supported in this browser.");
+      console.error("localStorage is not supported in this browser.");
     }
   }
 
@@ -179,21 +178,19 @@ export class EvaluationComponent implements OnInit {
       if (savedFormData) {
         try {
           const parsedFormData = JSON.parse(savedFormData);
-          console.log("Loading from localStorage:", parsedFormData);
           if (parsedFormData && Object.keys(parsedFormData).length > 0) {
             this.evaluationForm.patchValue(parsedFormData);
-            console.log("Form data patched successfully.");
           } else {
-            console.log("No valid data found in localStorage.");
+            console.error("No valid data found in localStorage.");
           }
         } catch (e) {
-          console.log("Error parsing localStorage data:", e);
+          console.error("Error parsing localStorage data:", e);
         }
       } else {
-        console.log("No data found in localStorage.");
+        console.error("No data found in localStorage.");
       }
     } else {
-      console.log("localStorage is not supported in this browser.");
+      console.error("localStorage is not supported in this browser.");
     }
   }
   nextStep() {
@@ -358,14 +355,13 @@ export class EvaluationComponent implements OnInit {
         )
         .then(
           (response: EmailJSResponseStatus) => {
-            console.log("SUCCESS!", response.status, response.text);
             window.alert("Formulari u dërgua me sukses!");
             this.evaluationForm.reset();
             this.currentStep = 0;
             localStorage.removeItem("evaluationFormData");
           },
           (error: any) => {
-            console.log("FAILED...", error);
+            console.error("FAILED...", error);
             window.alert(
               "Dështoi dërgimi i formularit. Ju lutem provoni përsëri."
             );
