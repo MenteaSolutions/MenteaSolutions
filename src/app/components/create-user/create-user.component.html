@@ -14,7 +14,7 @@
       <ion-card-content>
         <!-- Sélection de la formation -->
         <ion-item>
-          <ion-label>Choisir une formation</ion-label>
+          <!-- <ion-label>Choisir une formation</ion-label> -->
           <ion-select [(ngModel)]="selectedRoom" placeholder="Sélectionner une formation" required>
             <ion-select-option *ngFor="let room of rooms" [value]="room">{{ room }}</ion-select-option>
           </ion-select>
@@ -22,13 +22,13 @@
 
         <!-- Sélection du nombre d'élèves -->
         <ion-item>
-          <ion-label>Nombre d'élèves</ion-label>
-          <ion-input type="number" [(ngModel)]="numberOfStudents" (ionChange)="onStudentNumberChange()" min="1" required></ion-input>
+          <!-- <ion-label>Nombre d'élèves</ion-label> -->
+          <ion-input  type="number" [(ngModel)]="numberOfStudents" (ionChange)="onStudentNumberChange()" min="1" required>Nombre d'élèves</ion-input>
         </ion-item>
 
         <!-- Sélection du rôle -->
         <ion-item>
-          <ion-label>Choisir un rôle</ion-label>
+          <!-- <ion-label>Choisir un rôle</ion-label> -->
           <ion-select [(ngModel)]="selectedRole" placeholder="Sélectionner un rôle" required>
             <ion-select-option value="user">User</ion-select-option>
           </ion-select>

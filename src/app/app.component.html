@@ -15,7 +15,7 @@
         <!-- Afficher uniquement si l'utilisateur est admin -->
         <ng-container *ngIf="authService.isAdmin()">
           <ion-item routerLink="/createUser" routerLinkActive="active" (click)="closeMenu()">Create User</ion-item>
-          <ion-item routerLink="/createChat" routerLinkActive="active" (click)="closeMenu()">Create Chat</ion-item>
+          <ion-item routerLink="/createChat" routerLinkActive="active" (click)="closeMenu()" disabled>Create Chat</ion-item>
           <ion-item routerLink="/createCalendar" routerLinkActive="active" (click)="closeMenu()">Create Calendar</ion-item>
           <ion-item routerLink="/createZoom" routerLinkActive="active" (click)="closeMenu()">Create Zoom</ion-item>
         </ng-container>
@@ -23,7 +23,7 @@
         <!-- Afficher uniquement pour les utilisateurs normaux -->
         <ng-container *ngIf="authService.isUser()">
           <ion-item routerLink="/user" routerLinkActive="active" (click)="closeMenu()">User</ion-item>
-          <ion-item routerLink="/chat" routerLinkActive="active" (click)="closeMenu()">Chat</ion-item>
+          <ion-item routerLink="/chat" routerLinkActive="active" (click)="closeMenu()" disabled>Chat</ion-item>
           <ion-item routerLink="/zoom" routerLinkActive="active" (click)="closeMenu()">Zoom</ion-item>
           <ion-item routerLink="/calendar" routerLinkActive="active" (click)="closeMenu()">Calendar</ion-item>
           <ion-item routerLink="/evaluation" routerLinkActive="active" (click)="closeMenu()">Evaluation</ion-item>
