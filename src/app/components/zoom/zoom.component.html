@@ -32,7 +32,7 @@
             <ion-list>
               <ion-item *ngFor="let zoom of zoomsToShowByFormation">
                 <ion-label>
-                  <h2>{{ zoom.formationStr }}</h2>
+                  <h2>Date: {{ zoom.date }}</h2>
                   <p>
                   Code d'accès : {{ zoom.code }}
                   <!-- Le bouton de copie ne sera affiché que si le code d'accès est défini -->
@@ -40,7 +40,7 @@
                     <ion-icon slot="icon-only" name="copy-outline"></ion-icon>
                   </ion-button>
                   </p>
-                  <p>Date: {{ zoom.date }}</p>
+                  <p>{{ zoom.formationStr }}</p>
                 </ion-label>
                 <ion-button fill="outline" (click)="openDialog(zoom.lien)">
                   Regarder
