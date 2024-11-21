@@ -98,7 +98,7 @@ export class CreateZoomComponent implements OnInit {
           this.data = "";
         });
     } else {
-      alert("Por favor, preencha todos os campos.");
+      alert("Veuillez remplir tous les champs s'il vous plaît.");
     }
   }
 }

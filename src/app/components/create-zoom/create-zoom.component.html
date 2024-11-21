@@ -22,24 +22,28 @@
           </ion-select-option>
         </ion-select>
       </ion-item>
+      <br>
       <div>
         <ion-input
           label="Entrez le lien"
-          placeholder="Entrez le lien"
+          placeholder="Entrez le lien:"
           [(ngModel)]="novoLink"
         ></ion-input>
       </div>
+      <br>
       <div>
         <ion-input
-          label="Entrez le code d'accès"
-          placeholder="Entrez le code d'accès"
+          label="Entrez le code d'accès:"
+          placeholder="Entrez le code d'accès:"
           [(ngModel)]="codigoAcesso"
         ></ion-input>
       </div>
+      <br>
       <div>
-        <label>Entrez la date</label>
+        <label>Entrez la date: </label>
         <input class="padding" type="date" [(ngModel)]="data">
       </div>
+      <br>
       <ion-button (click)="adicionarLink()">Ajouter</ion-button>
     </ion-card-content>
   </ion-card>
@@ -74,7 +78,7 @@
             <ion-list>
               <ion-item *ngFor="let zoom of zoomsToShowByFormation">
                 <ion-label>
-                  {{ zoom.formationStr }} -
+                  Date: {{ zoom.date }} - {{ zoom.formationStr }} -
                   <a [href]="zoom.lien">{{ zoom.lien }}</a>
                   <p>Code d'accès: {{ zoom.code }}</p>
                 </ion-label>
