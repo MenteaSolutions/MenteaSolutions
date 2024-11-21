@@ -99,16 +99,23 @@ export class ZoomComponent implements OnInit {
     });
   }
 
-  // Fonction qui récupère les cours (zooms) d'une formation spécifique
+  // Função que recupera os cursos (zooms) de uma formação específica
   selectFormacao() {
     const id = this.selectedFormacaoToShowAulas?.id;
     if (id) {
       this.formacaoService
         .getZoomByIdFormation(id)
         .subscribe((zooms: Zoom[]) => {
-          this.zoomsToShowByFormation = zooms;
+          this.zoomsToShowByFormation = this.sortZoomsByDate(zooms);
         });
     }
+  }
+
+  // Função para ordenar os zooms pela data
+  sortZoomsByDate(zooms: Zoom[]): Zoom[] {
+    return zooms
+      .filter(zoom => zoom.date !== undefined) // Filtra objetos com data indefinida
+      .sort((a, b) => new Date(b.date!).getTime() - new Date(a.date!).getTime()); // Ordena em ordem decrescente
   }
 
   // Fonction pour ouvrir le dialogue avec la vidéo (iframe)

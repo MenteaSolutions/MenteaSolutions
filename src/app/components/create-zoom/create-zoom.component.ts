@@ -1,6 +1,6 @@
 import { Component, OnInit } from "@angular/core";
 import { CommonModule } from "@angular/common";
-import { FormControl, FormsModule, NgForm } from "@angular/forms";
+import { FormsModule } from "@angular/forms";
 import { FormacaoService } from "./formacao.service";
 import { Zoom } from "../../interfaces/zoom";
 import { Formation } from "../../interfaces/formation";
@@ -75,8 +75,14 @@ export class CreateZoomComponent implements OnInit {
   getZooms() {
     const id = this.selectedFormacaoToShowAulas?.id;
     this.formacaoService.getZoomByIdFormation(id).subscribe((zooms: Zoom[]) => {
-      this.zoomsToShowByFormation = zooms;
+      this.zoomsToShowByFormation = this.sortZoomsByDate(zooms);
     });
+  }
+
+  sortZoomsByDate(zooms: Zoom[]): Zoom[] {
+    return zooms
+      .filter(zoom => zoom.date !== undefined) // Filtra objetos com data indefinida
+      .sort((a, b) => new Date(b.date!).getTime() - new Date(a.date!).getTime()); // Ordena em ordem decrescente
   }
 
   adicionarLink() {
@@ -96,6 +102,7 @@ export class CreateZoomComponent implements OnInit {
           this.novoLink = "";
           this.codigoAcesso = "";
           this.data = "";
+          this.getZooms(); // Atualiza a lista após adicionar um novo link
         });
     } else {
       alert("Veuillez remplir tous les champs s'il vous plaît.");
