@@ -28,8 +28,10 @@ import {
   IonInput,
   IonSelect,
 } from "@ionic/angular/standalone";
+import { Auth, User } from "@angular/fire/auth"; // Import Firebase Auth
 import { addIcons } from "ionicons";
 import { copyOutline } from "ionicons/icons";
+import { ChatService } from "../chat/chat.service";
 
 @Component({
   selector: "app-zoom",
@@ -46,21 +48,16 @@ import { copyOutline } from "ionicons/icons";
     IonList,
     IonItem,
     IonLabel,
-    IonSelectOption,
     IonRow,
     IonCol,
     IonGrid,
-    IonToolbar,
-    IonHeader,
-    IonTitle,
     IonIcon,
-    IonInput,
-    IonSelect,
   ],
   templateUrl: "./zoom.component.html",
   styleUrls: ["./zoom.component.css"],
 })
 export class ZoomComponent implements OnInit {
+  roomId: string = ""; // Dynamiser le roomId
   zooms: Zoom[] = [];
   formations: Formation[] = [];
   selectedFormacaoToShowAulas: Formation | null = null;
@@ -68,6 +65,8 @@ export class ZoomComponent implements OnInit {
   zoomsToShowByFormation: Zoom[] = [];
 
   constructor(
+    private chatService: ChatService,
+    private auth: Auth,
     private formacaoService: FormacaoService,
     private dialog: MatDialog,
     private toastController: ToastController
@@ -97,17 +96,43 @@ export class ZoomComponent implements OnInit {
     this.formacaoService.getFormation().subscribe((formations: Formation[]) => {
       this.formations = formations;
     });
+    this.auth.onAuthStateChanged((user: User | null) => {
+      if (user) {
+        this.chatService.getUserRoom(user.uid).subscribe(
+          (userInfo: any) => {
+            if (userInfo) {
+              this.roomId = userInfo.room;
+              this.selectFormacao();
+            }
+          },
+          (error) => {
+            console.error(
+              "Erreur lors de la récupération des informations utilisateur :",
+              error
+            );
+          }
+        );
+      }
+    });
   }
-
+  
   // Função que recupera os cursos (zooms) de uma formação específica
   selectFormacao() {
-    const id = this.selectedFormacaoToShowAulas?.id;
+    
+    console.log("ID da formação selecionada: ", this.selectedFormacaoToShowAulas?.name);
+    console.log(this.roomId);
+    
+    
+    const id = this.roomId;
     if (id) {
       this.formacaoService
-        .getZoomByIdFormation(id)
-        .subscribe((zooms: Zoom[]) => {
+      .getZoomByIdFormation(id)
+      .subscribe((zooms: Zoom[]) => {
+        if (zooms.length > 0) {
           this.zoomsToShowByFormation = this.sortZoomsByDate(zooms);
-        });
+        }
+        this.selectedFormacaoToShowAulas = {name: this.roomId};
+      });
     }
   }
 

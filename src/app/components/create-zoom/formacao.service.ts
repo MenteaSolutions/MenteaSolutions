@@ -48,7 +48,7 @@ export class FormacaoService {
   }
 
   getZoomByIdFormation(id?: string): Observable<Zoom[]> {
-    const q = query(this.zoomCollection, where("idFormation", "==", id));
+    const q = query(this.zoomCollection, where("formationStr", "==", id));
     return collectionData(q, { idField: "id" }) as Observable<Zoom[]>;
   }
 

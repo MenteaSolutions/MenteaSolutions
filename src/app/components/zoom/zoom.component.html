@@ -3,20 +3,6 @@
     <ion-row>
       <ion-col size="12">
         <ion-card>
-          <ion-card-header>
-            <ion-card-title>Choisissez une formation</ion-card-title>
-          </ion-card-header>
-
-          <ion-card-content>
-            <ion-item>
-              <ion-label>Cliquez ici pour sélectionner une formation</ion-label>
-              <ion-select [(ngModel)]="selectedFormacaoToShowAulas" (ionChange)="selectFormacao()">
-                <ion-select-option *ngFor="let formation of formations" [value]="formation">
-                  {{ formation.name }}
-                </ion-select-option>
-              </ion-select>
-            </ion-item>
-          </ion-card-content>
         </ion-card>
       </ion-col>
     </ion-row>
@@ -25,20 +11,26 @@
       <ion-col size="12">
         <ion-card>
           <ion-card-header>
-            <ion-card-title>Liens pour {{ selectedFormacaoToShowAulas.name }}</ion-card-title>
+            <ion-card-title
+              >Liens pour {{ selectedFormacaoToShowAulas.name }}</ion-card-title
+            >
           </ion-card-header>
-          
-          <ion-card-content>
+
+          <ion-card-content *ngIf="selectedFormacaoToShowAulas.name">
             <ion-list>
               <ion-item *ngFor="let zoom of zoomsToShowByFormation">
                 <ion-label>
                   <h2>Date: {{ zoom.date }}</h2>
                   <p>
-                  Code d'accès : {{ zoom.code }}
-                  <!-- Le bouton de copie ne sera affiché que si le code d'accès est défini -->
-                  <ion-button size="small" *ngIf="zoom.code" (click)="copyToClipboard(zoom.code!)">
-                    <ion-icon slot="icon-only" name="copy-outline"></ion-icon>
-                  </ion-button>
+                    Code d'accès : {{ zoom.code }}
+                    <!-- Le bouton de copie ne sera affiché que si le code d'accès est défini -->
+                    <ion-button
+                      size="small"
+                      *ngIf="zoom.code"
+                      (click)="copyToClipboard(zoom.code!)"
+                    >
+                      <ion-icon slot="icon-only" name="copy-outline"></ion-icon>
+                    </ion-button>
                   </p>
                   <p>{{ zoom.formationStr }}</p>
                 </ion-label>
@@ -47,7 +39,13 @@
                 </ion-button>
               </ion-item>
             </ion-list>
-          </ion-card-content>        </ion-card>
+          </ion-card-content>
+          <ion-card-content *ngIf="zoomsToShowByFormation.length === 0">
+            <ion-card-title>
+              Aucun cours n'est disponible pour cette formation pour le moment
+            </ion-card-title>
+          </ion-card-content>
+        </ion-card>
       </ion-col>
     </ion-row>
   </ion-grid>

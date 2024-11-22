@@ -18,6 +18,8 @@ import {
 } from "@ionic/angular/standalone";
 import { consumerPollProducersForChange } from "@angular/core/primitives/signals";
 import { FireCalendarService } from "../create-calendar/fireCalendar.service";
+import { Auth, User } from "@angular/fire/auth"; // Import Firebase Auth
+import { ChatService } from "../chat/chat.service";
 
 @Component({
   standalone: true,
@@ -36,6 +38,7 @@ import { FireCalendarService } from "../create-calendar/fireCalendar.service";
   styleUrls: ["./calendar.component.css"],
 })
 export class CalendarComponent implements OnInit {
+  roomId: string = ""; // Dynamiser le roomId
   @ViewChild("calendar") calendarComponent!: FullCalendarComponent;
   formacaoForm: FormGroup;
   formacoes: any[] = [];
@@ -45,6 +48,8 @@ export class CalendarComponent implements OnInit {
     plugins: [dayGridPlugin, interactionPlugin],
   };
   constructor(
+    private chatService: ChatService,
+    private auth: Auth,
     private fb: FormBuilder,
     private calendarService: CalendarService,
     private fireCalendarService: FireCalendarService
@@ -59,9 +64,31 @@ export class CalendarComponent implements OnInit {
       this.calendarComponent.getApi().render();
     }, 250);
 
+    this.auth.onAuthStateChanged((user: User | null) => {
+      if (user) {
+        this.chatService.getUserRoom(user.uid).subscribe(
+          (userInfo: any) => {
+            if (userInfo) {
+              this.roomId = userInfo.room;
+              this.loadAulas(this.roomId);
+            }
+          },
+          (error) => {
+            console.error(
+              "Erreur lors de la récupération des informations utilisateur :",
+              error
+            );
+          }
+        );
+      }
+    });
+
+
     this.calendarService
       .getFormacoes()
       .subscribe((formacoes) => (this.formacoes = formacoes));
+      console.log(this.formacoes);
+      
     // Recupera os eventos do localStorage
     const events = JSON.parse(localStorage.getItem("events") || "[]");
 
