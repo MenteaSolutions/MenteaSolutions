@@ -1,15 +1,12 @@
 import { Component, OnInit } from "@angular/core";
 import { CommonModule } from "@angular/common";
-import { ReactiveFormsModule, FormsModule } from "@angular/forms";
+import { FormsModule } from "@angular/forms";
 import { MatDialog } from "@angular/material/dialog";
 import { FormacaoService } from "../create-zoom/formacao.service";
 import { Zoom } from "../../interfaces/zoom";
 import { DialogZoomComponent } from "../dialog-zoom/dialog-zoom.component";
 import { Formation } from "../../interfaces/formation";
 import {
-  IonTitle,
-  IonHeader,
-  IonToolbar,
   IonCard,
   IonCardHeader,
   IonCardTitle,
@@ -19,19 +16,15 @@ import {
   IonLabel,
   IonButton,
   IonContent,
-  IonSelectOption,
   IonRow,
   IonCol,
   IonGrid,
   ToastController,
   IonIcon,
-  IonInput,
-  IonSelect,
 } from "@ionic/angular/standalone";
-import { Auth, User } from "@angular/fire/auth"; // Import Firebase Auth
 import { addIcons } from "ionicons";
 import { copyOutline } from "ionicons/icons";
-import { ChatService } from "../chat/chat.service";
+import { UserService } from "../../Services/user.service";
 
 @Component({
   selector: "app-zoom",
@@ -57,7 +50,7 @@ import { ChatService } from "../chat/chat.service";
   styleUrls: ["./zoom.component.css"],
 })
 export class ZoomComponent implements OnInit {
-  roomId: string = ""; // Dynamiser le roomId
+  formationUserLogged: any;
   zooms: Zoom[] = [];
   formations: Formation[] = [];
   selectedFormacaoToShowAulas: Formation | null = null;
@@ -65,11 +58,10 @@ export class ZoomComponent implements OnInit {
   zoomsToShowByFormation: Zoom[] = [];
 
   constructor(
-    private chatService: ChatService,
-    private auth: Auth,
     private formacaoService: FormacaoService,
     private dialog: MatDialog,
-    private toastController: ToastController
+    private toastController: ToastController,
+    private userService: UserService
   ) {
     addIcons({ copyOutline });
   }
@@ -96,51 +88,41 @@ export class ZoomComponent implements OnInit {
     this.formacaoService.getFormation().subscribe((formations: Formation[]) => {
       this.formations = formations;
     });
-    this.auth.onAuthStateChanged((user: User | null) => {
-      if (user) {
-        this.chatService.getUserRoom(user.uid).subscribe(
-          (userInfo: any) => {
-            if (userInfo) {
-              this.roomId = userInfo.room;
-              this.selectFormacao();
-            }
-          },
-          (error) => {
-            console.error(
-              "Erreur lors de la récupération des informations utilisateur :",
-              error
-            );
-          }
-        );
-      }
-    });
+    this.userService
+      .getUserFormation()
+      .then((formation) => {
+        this.formationUserLogged = formation;
+        this.selectFormacao();
+      })
+      .catch((error) => {
+        console.error("Erro ao obter a formação:", error);
+      });
   }
-  
+
   // Função que recupera os cursos (zooms) de uma formação específica
   selectFormacao() {
-    
-    console.log("ID da formação selecionada: ", this.selectedFormacaoToShowAulas?.name);
-    console.log(this.roomId);
-    
-    
-    const id = this.roomId;
+    const id = this.formationUserLogged.id;
     if (id) {
       this.formacaoService
-      .getZoomByIdFormation(id)
-      .subscribe((zooms: Zoom[]) => {
-        if (zooms.length > 0) {
-          this.zoomsToShowByFormation = this.sortZoomsByDate(zooms);
-        }
-        this.selectedFormacaoToShowAulas = {name: this.roomId};
-      });
+        .getZoomByIdFormation(id)
+        .subscribe((zooms: Zoom[]) => {
+          if (zooms.length > 0) {
+            this.zoomsToShowByFormation = this.sortZoomsByDate(zooms);
+          }
+          this.selectedFormacaoToShowAulas = {
+            name: this.formationUserLogged.name,
+          };
+        });
     }
   }
 
   // Função para ordenar os zooms pela data
   sortZoomsByDate(zooms: Zoom[]): Zoom[] {
     return zooms
-      .filter(zoom => zoom.date !== undefined) // Filtra objetos com data indefinida
-      .sort((a, b) => new Date(b.date!).getTime() - new Date(a.date!).getTime()); // Ordena em ordem decrescente
+      .filter((zoom) => zoom.date !== undefined) // Filtra objetos com data indefinida
+      .sort(
+        (a, b) => new Date(b.date!).getTime() - new Date(a.date!).getTime()
+      ); // Ordena em ordem decrescente
   }
 
   // Fonction pour ouvrir le dialogue avec la vidéo (iframe)

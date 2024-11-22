@@ -22,10 +22,22 @@
         <!-- Sélecteur de salle de chat et bouton supprimer -->
         <ion-item lines="none">
           <ion-label>Choisir une formation :</ion-label>
-          <ion-select [(ngModel)]="selectedRoom" (ionChange)="changeRoom()">
-            <ion-select-option *ngFor="let room of rooms" [value]="room">{{ room }}</ion-select-option>
+          <ion-select
+            name="selectedRoom"
+            ngDefaultControl
+            [(ngModel)]="selectedRoom"
+            (ionChange)="changeRoom($event.detail.value)"
+          >
+            <ion-select-option *ngFor="let room of rooms" [value]="room">{{
+              room
+            }}</ion-select-option>
           </ion-select>
-          <ion-button fill="clear" color="danger" (click)="deleteRoom()" style="margin-left:auto;">
+          <ion-button
+            fill="clear"
+            color="danger"
+            (click)="deleteRoom()"
+            style="margin-left: auto"
+          >
             SUPPRIMER
           </ion-button>
         </ion-item>
@@ -41,8 +53,12 @@
               <!-- Liste des messages -->
               <ion-item *ngFor="let message of messages">
                 <ion-label>
-                  <strong>{{ message.firstName }}</strong>: <p class="reponse"> {{ message.text }} </p>
-                  <p><small>{{ message.timestamp | date:'short' }}</small></p>
+                  <strong>{{ message.firstName }}</strong
+                  >:
+                  <p class="reponse">{{ message.text }}</p>
+                  <p>
+                    <small>{{ message.timestamp | date : "short" }}</small>
+                  </p>
                 </ion-label>
               </ion-item>
             </ion-list>
@@ -51,7 +67,12 @@
 
         <!-- Champ pour envoyer un message -->
         <ion-item>
-          <ion-input [(ngModel)]="newMessage" placeholder="Tapez votre message ici..."></ion-input>
+          <ion-input
+            name="newMessage"
+            ngDefaultControl
+            [(ngModel)]="newMessage"
+            placeholder="Tapez votre message ici..."
+          ></ion-input>
           <ion-button (click)="sendMessage()">Envoyer</ion-button>
         </ion-item>
       </ion-col>

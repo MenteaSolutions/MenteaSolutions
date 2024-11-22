@@ -6,12 +6,10 @@ import {
   setDoc,
   collectionData,
   CollectionReference,
-  getDoc,
-  docData,
   where,
-  query
+  query,
 } from "@angular/fire/firestore";
-import { Observable, from, map } from "rxjs";
+import { Observable, from } from "rxjs";
 import { Zoom } from "../../interfaces/zoom";
 import { Formation } from "../../interfaces/formation";
 
@@ -48,7 +46,12 @@ export class FormacaoService {
   }
 
   getZoomByIdFormation(id?: string): Observable<Zoom[]> {
-    const q = query(this.zoomCollection, where("formationStr", "==", id));
+    const q = query(this.zoomCollection, where("idFormation", "==", id));
+    return collectionData(q, { idField: "id" }) as Observable<Zoom[]>;
+  }
+
+  getFormationByName(name?: string): Observable<Zoom[]> {
+    const q = query(this.formationCollection, where("name", "==", name));
     return collectionData(q, { idField: "id" }) as Observable<Zoom[]>;
   }
 

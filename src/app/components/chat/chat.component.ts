@@ -18,7 +18,11 @@ import {
   IonItem,
   IonLabel,
   IonButton,
+  IonInput,
+  IonCardContent,
+  IonCard,
 } from "@ionic/angular/standalone";
+import { UserService } from "../../Services/user.service";
 
 @Component({
   selector: "app-chat",
@@ -38,6 +42,9 @@ import {
     IonHeader,
     FormsModule,
     CommonModule,
+    IonInput,
+    IonCard,
+    IonCardContent,
   ],
   templateUrl: "./chat.component.html",
   styleUrls: ["./chat.component.css"],
@@ -49,12 +56,16 @@ export class ChatComponent implements OnInit {
   students$: Observable<any[]> = new Observable<any[]>(); // Initialiser les étudiants
   currentUserFirstName: string = ""; // Récupérer dynamiquement le prénom de l'utilisateur connecté
 
-  constructor(private chatService: ChatService, private auth: Auth) {}
+  constructor(
+    private chatService: ChatService,
+    private auth: Auth,
+    private userService: UserService
+  ) {}
 
   ngOnInit() {
     this.auth.onAuthStateChanged((user: User | null) => {
       if (user) {
-        this.chatService.getUserRoom(user.uid).subscribe(
+        this.userService.getUserRoom(user.uid).subscribe(
           (userInfo: any) => {
             if (userInfo) {
               this.roomId = userInfo.room;

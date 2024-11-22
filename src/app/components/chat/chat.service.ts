@@ -42,40 +42,6 @@ export class ChatService {
     });
   }
 
-  getUserRoom(uid: string): Observable<any> {
-    return new Observable((observer) => {
-      const roomsRef = ref(this.db, `rooms`);
-      onValue(roomsRef, (snapshot) => {
-        const rooms = snapshot.val();
-        let userInfo = null;
-
-        // Parcourir chaque salle
-        for (let roomId in rooms) {
-          const users = rooms[roomId].users;
-          if (users) {
-            // Parcourir chaque utilisateur dans la salle
-            for (let userKey in users) {
-              if (users[userKey].uid === uid) {
-                // Comparer les UID
-                userInfo = users[userKey];
-                userInfo.room = roomId; // Ajouter l'ID de la salle à l'information utilisateur
-                break;
-              }
-            }
-          }
-          if (userInfo) break; // Sortir de la boucle si on trouve l'utilisateur
-        }
-
-        if (userInfo) {
-          observer.next(userInfo); // Renvoyer les informations de l'utilisateur
-        } else {
-          console.error("Aucune information utilisateur trouvée.");
-          observer.error("Utilisateur introuvable.");
-        }
-      });
-    });
-  }
-
   // Fonction pour récupérer les étudiants d'une formation spécifique
   getStudents(roomId: string): void {
     const studentsRef = ref(this.db, `rooms/${roomId}/users`);

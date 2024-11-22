@@ -58,7 +58,7 @@ export class FireCalendarService {
       const doc = querySnapshot.docs[0]; // Pega o primeiro documento correspondente
       return { id: doc.id, ...doc.data() }; // Retorna o ID do documento
     } else {
-      return null; // Se nenhum documento for encontrado
+      return { config: null, events: null }; // Se nenhum documento for encontrado
     }
   }
 

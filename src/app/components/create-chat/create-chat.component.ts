@@ -23,7 +23,6 @@ import {
   IonCardTitle,
   IonCardContent,
   IonSelectOption,
-  
 } from "@ionic/angular/standalone";
 
 @Component({
@@ -49,6 +48,7 @@ import {
     FormsModule,
     IonSelectOption,
     CommonModule,
+    IonHeader,
   ],
   templateUrl: "./create-chat.component.html",
   styleUrls: ["./create-chat.component.css"],
@@ -63,7 +63,7 @@ export class CreateChatComponent implements OnInit {
     "Mobile Web Application Developer",
     "Python Software Engineer",
   ]; // Liste des formations
-  selectedRoom: string = this.rooms[0]; // Salle par défaut
+  selectedRoom: any; // Salle par défaut
   messages$: Observable<any[]> = new Observable<any[]>(); // Initialiser les messages
   students$: Observable<any[]> = new Observable<any[]>(); // Initialiser les étudiants
   currentUserFirstName: string = ""; // Récupérer dynamiquement le prénom de l'utilisateur connecté
@@ -84,8 +84,9 @@ export class CreateChatComponent implements OnInit {
     });
   }
 
-  changeRoom() {
+  changeRoom(formacaoId: any) {
     // Charger les messages et étudiants pour la nouvelle salle sélectionnée
+    this.selectedRoom = formacaoId;
     this.loadChat(this.selectedRoom);
   }
 
