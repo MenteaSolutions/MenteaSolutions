@@ -149,7 +149,7 @@ export class CreateUserComponent implements OnInit {
     }
 
     for (let i = 0; i < this.numberOfStudents; i++) {
-      const email = `student${Math.floor(Math.random() * 10000)}@school.com`;
+      const email = `student${Math.floor(Math.random() * 10000)}@nomades.com`;
       const password = generatePassword(8);
       const student = this.studentInfo[i];
 
