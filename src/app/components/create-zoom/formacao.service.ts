@@ -8,6 +8,7 @@ import {
   CollectionReference,
   where,
   query,
+  docData,
 } from "@angular/fire/firestore";
 import { Observable, from } from "rxjs";
 import { Zoom } from "../../interfaces/zoom";
@@ -43,6 +44,11 @@ export class FormacaoService {
     return collectionData(this.formationCollection, {
       idField: "id",
     }) as Observable<Formation[]>;
+  }
+
+  getFormationById(id: string): Observable<Formation | null> {
+    const docRef = doc(this.firestore, `formation/${id}`);
+    return docData(docRef) as Observable<Formation | null>;
   }
 
   getZoomByIdFormation(id?: string): Observable<Zoom[]> {

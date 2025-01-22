@@ -39,7 +39,7 @@ export class FireCalendarService {
     const existingCalendar = await this.getCalendarByFormationId(
       data.idFormation
     );
-    if (existingCalendar) {
+    if (existingCalendar && existingCalendar.config) {
       const calendarDoc = doc(this.calendarCollection, existingCalendar.id);
       await setDoc(calendarDoc, data);
     } else {

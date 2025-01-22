@@ -4,7 +4,7 @@ import {
   FullCalendarComponent,
   FullCalendarModule,
 } from "@fullcalendar/angular";
-import { Calendar, CalendarOptions } from "@fullcalendar/core";
+import { CalendarOptions } from "@fullcalendar/core";
 import dayGridPlugin from "@fullcalendar/daygrid";
 import interactionPlugin from "@fullcalendar/interaction";
 import Swal from "sweetalert2"; // Adicione esta linha
@@ -23,18 +23,8 @@ import {
   IonModal,
 } from "@ionic/angular/standalone";
 import { CommonModule } from "@angular/common";
-import {
-  Firestore,
-  collection,
-  doc,
-  setDoc,
-  collectionData,
-  CollectionReference,
-  getDoc,
-  docData,
-  where,
-  query,
-} from "@angular/fire/firestore";
+import { FormacaoService } from "../create-zoom/formacao.service";
+import { firstValueFrom } from "rxjs";
 @Component({
   selector: "app-create-calendar",
   standalone: true,
@@ -112,7 +102,8 @@ export class CreateCalendarComponent implements OnInit {
   constructor(
     private fb: FormBuilder,
     private calendarService: CalendarService,
-    private fireCalendarService: FireCalendarService
+    private fireCalendarService: FireCalendarService,
+    private formacaoService: FormacaoService
   ) {
     this.aulaForm = this.fb.group({
       titulo: [""],
@@ -129,7 +120,7 @@ export class CreateCalendarComponent implements OnInit {
   ngOnInit() {
     setTimeout(() => {
       this.calendarComponent.getApi().render();
-    }, 250);
+    }, 500);
 
     this.calendarService
       .getFormacoes()
@@ -157,6 +148,36 @@ export class CreateCalendarComponent implements OnInit {
         allDay: true, // Assume que todos os feriados são eventos de dia inteiro
       })),
     ]; // Adiciona os feriados à lista de eventos
+
+    this.initializeCalendar();
+  }
+
+  initializeCalendar() {
+    this.calendarService.getCalendars().subscribe((calendars: any[]) => {
+      if (calendars) {
+        const calendarApi = this.calendarComponent.getApi();
+        calendarApi.removeAllEvents();
+        calendars.forEach((calendarios) => {
+          if (calendarios.events && calendarios.events.length) {
+            calendarios.events.forEach((event: any) => {
+              const title =
+                event.title +
+                (calendarios.idFormation
+                  ? " - (" + calendarios.idFormation + ")"
+                  : "");
+              const color = calendarios.color;
+              calendarApi.addEvent({
+                title: title,
+                start: event.start,
+                end: event.end,
+                allDay: event.allDay,
+                color: color,
+              });
+            });
+          }
+        });
+      }
+    });
   }
 
   // Método de criação de eventos
@@ -215,9 +236,32 @@ export class CreateCalendarComponent implements OnInit {
       cancelButtonText: "Non, retour",
     }).then((result) => {
       if (result.value) {
-        info.event.remove();
+        console.log(result);
+        console.log(info);
+        this.calendarService
+          .removeEventByTitle(
+            this.getFormationByTitle(info.event._def.title),
+            this.removeFormationFromTitle(info.event._def.title)
+          )
+          .then((data) => {
+            this.initializeCalendar();
+          });
       }
     });
+  }
+
+  getFormationByTitle(title: string): string {
+    const regex = /\(([^)]+)\)/;
+    const match = title.match(regex);
+
+    if (match) {
+      return match[1];
+    }
+    return "";
+  }
+
+  removeFormationFromTitle(title: string): string {
+    return title.replace(/ - \(.*\)/, "");
   }
 
   adicionarAula() {
@@ -252,10 +296,14 @@ export class CreateCalendarComponent implements OnInit {
     const { plugins, select, eventClick, editable, selectable, ...config } =
       this.calendarOptions;
 
+    const color = await this.getColorFormation(this.aulaForm.value.formacao.id);
+
     const data = {
       config,
       idFormation: this.aulaForm.value.formacao.id,
       events: calendarEvents,
+      nameFormation: this.aulaForm.value.formacao.nome,
+      color: color,
     };
 
     await this.fireCalendarService.addCalendar(data);
@@ -277,5 +325,15 @@ export class CreateCalendarComponent implements OnInit {
     storedEvents.forEach((event: any) => {
       calendarApi.addEvent(event);
     });
+  }
+
+  async getColorFormation(id: string): Promise<any> {
+    const formation = await firstValueFrom(
+      this.formacaoService.getFormationById(id)
+    );
+    if (formation) {
+      return formation.color;
+    }
+    return null;
   }
 }
