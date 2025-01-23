@@ -91,6 +91,9 @@ export class CalendarComponent implements OnInit {
               initialView: "dayGridMonth",
               plugins: [dayGridPlugin, interactionPlugin],
               ...config,
+              editable: false,
+              eventResizableFromStart: false,
+              eventDurationEditable: false,
             };
 
             const calendarApi = this.calendarComponent.getApi();

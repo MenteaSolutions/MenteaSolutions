@@ -31,9 +31,11 @@
     <!-- Professeur -->
     <ion-label position="floating">Professeur :</ion-label>
     <ion-item>
-      <ion-input 
-      placeholder="Nom du professeur"
-       id="professor" formControlName="professor"></ion-input>
+      <ion-input
+        placeholder="Nom du professeur"
+        id="professor"
+        formControlName="professor"
+      ></ion-input>
     </ion-item>
 
     <!-- Data de Início -->
@@ -45,7 +47,6 @@
       <ng-template>
         <!-- Captura apenas a data -->
         <ion-datetime
-          
           id="datetimeStart"
           formControlName="dataInicio"
           formControlName="horaInicio"
@@ -62,7 +63,6 @@
       <ng-template>
         <!-- Captura apenas a data -->
         <ion-datetime
-        
           id="datetimeEnd"
           formControlName="dataFim"
           formControlName="horaFim"
@@ -108,6 +108,7 @@
       expand="block"
       type="submit"
       (click)="adicionarAula()"
+      [disabled]="validFields()"
     >
       Ajouter un Planing
     </ion-button>
@@ -117,6 +118,7 @@
       expand="block"
       type="submit"
       (click)="send()"
+      [disabled]="sendButtonDisabled"
     >
       Envoyer
     </ion-button>

@@ -56,9 +56,9 @@ export class FormacaoService {
     return collectionData(q, { idField: "id" }) as Observable<Zoom[]>;
   }
 
-  getFormationByName(name?: string): Observable<Zoom[]> {
+  getFormationByName(name?: string): Observable<Formation[]> {
     const q = query(this.formationCollection, where("name", "==", name));
-    return collectionData(q, { idField: "id" }) as Observable<Zoom[]>;
+    return collectionData(q, { idField: "id" }) as Observable<Formation[]>;
   }
 
   // Método para adicionar os links, codigos de acesso e data da aula à coleção 'zoom' ligada ao ID da formação

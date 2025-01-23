@@ -65,10 +65,9 @@ export class CreateCalendarComponent implements OnInit {
     locale: "fr",
     timeZone: "UTC",
     eventResizableFromStart: true,
-    editable: true, // Permitir que outros eventos sejam editáveis
-    eventDurationEditable: true,
-    droppable: true,
-
+    editable: false, // Permitir que outros eventos sejam editáveis
+    eventDurationEditable: false,
+    droppable: false,
     // Adicionando eventos de feriados
     events: [], // Inicialmente vazio, será preenchido no ngOnInit
 
@@ -79,6 +78,7 @@ export class CreateCalendarComponent implements OnInit {
     eventClick: this.onEventClick.bind(this),
   };
 
+  sendButtonDisabled: boolean = true;
   formacoes: any[] = [];
 
   // Lista de feriados na Suíça para 2024
@@ -182,37 +182,39 @@ export class CreateCalendarComponent implements OnInit {
 
   // Método de criação de eventos
   onSelect(info: any) {
-    Swal.fire({
-      title: "Créer un nouvel événement?",
-      html: `
-        <div style="margin-bottom: 10px;">Nom de l'événement :</div>
-        <input type="text" id="event_name" class="form-control" />
-      `,
-      showCancelButton: true,
-      confirmButtonText: "Oui, créez-le!",
-      heightAuto: false,
-      cancelButtonText: "Non, retour",
-      width: "400px", // Ajuste o tamanho da largura conforme necessário
-      padding: "1em", // Ajuste o padding para evitar áreas em branco
-      customClass: {
-        popup: "my-swal-popup", // Classe CSS para estilizar o popup, se necessário
-      },
-    }).then((result) => {
-      if (result.value) {
-        const title = (
-          document.getElementById("event_name") as HTMLInputElement
-        ).value;
-        if (title) {
-          const calendarApi = this.calendarComponent.getApi();
-          calendarApi.addEvent({
-            title: title,
-            start: info.startStr,
-            end: info.endStr,
-            allDay: info.allDay,
-          });
+    if (!this.validFields() && !this.sendButtonDisabled) {
+      Swal.fire({
+        title: "Créer un nouvel événement?",
+        html: `
+          <div style="margin-bottom: 10px;">Nom de l'événement :</div>
+          <input type="text" id="event_name" class="form-control" />
+        `,
+        showCancelButton: true,
+        confirmButtonText: "Oui, créez-le!",
+        heightAuto: false,
+        cancelButtonText: "Non, retour",
+        width: "400px", // Ajuste o tamanho da largura conforme necessário
+        padding: "1em", // Ajuste o padding para evitar áreas em branco
+        customClass: {
+          popup: "my-swal-popup", // Classe CSS para estilizar o popup, se necessário
+        },
+      }).then((result) => {
+        if (result.value) {
+          const title = (
+            document.getElementById("event_name") as HTMLInputElement
+          ).value;
+          if (title) {
+            const calendarApi = this.calendarComponent.getApi();
+            calendarApi.addEvent({
+              title: title,
+              start: info.startStr,
+              end: info.endStr,
+              allDay: info.allDay,
+            });
+          }
         }
-      }
-    });
+      });
+    }
   }
 
   // Método de exclusão de eventos
@@ -277,6 +279,10 @@ export class CreateCalendarComponent implements OnInit {
     // Atualizar o calendário para aplicar as mudanças
     calendarApi.setOption("validRange", this.calendarOptions.validRange);
     calendarApi.render();
+    this.sendButtonDisabled = false;
+    this.calendarOptions.editable = true;
+    this.calendarOptions.eventDurationEditable = true;
+    this.calendarOptions.droppable = true;
   }
 
   loadAulas(formacaoId: any) {
@@ -290,33 +296,41 @@ export class CreateCalendarComponent implements OnInit {
   async send() {
     const calendarApi = this.calendarComponent.getApi();
     const events = calendarApi.getEvents();
+    if (events && events.length > 0) {
+      const calendarEvents = JSON.parse(JSON.stringify(events));
 
-    const calendarEvents = JSON.parse(JSON.stringify(events));
+      const { plugins, select, eventClick, editable, selectable, ...config } =
+        this.calendarOptions;
 
-    const { plugins, select, eventClick, editable, selectable, ...config } =
-      this.calendarOptions;
+      const color = await this.getColorFormation(
+        this.aulaForm.value.formacao.id
+      );
 
-    const color = await this.getColorFormation(this.aulaForm.value.formacao.id);
+      const data = {
+        config,
+        idFormation: this.aulaForm.value.formacao.id,
+        events: calendarEvents,
+        nameFormation: this.aulaForm.value.formacao.nome,
+        color: color,
+      };
 
-    const data = {
-      config,
-      idFormation: this.aulaForm.value.formacao.id,
-      events: calendarEvents,
-      nameFormation: this.aulaForm.value.formacao.nome,
-      color: color,
-    };
+      await this.fireCalendarService.addCalendar(data);
 
-    await this.fireCalendarService.addCalendar(data);
+      this.calendarOptions.events = [];
+      this.initializeCalendar();
+      this.sendButtonDisabled = true;
 
-    calendarApi.removeAllEvents();
-
-    // Salvar eventos no Firebase
-    // for (const event of evento2) {
-    //   await this.fireCalendarService.addEvent(event);
-    // }
-
-    // Atualizar o calendário
-    this.calendarOptions.events = [];
+      this.aulaForm.patchValue({
+        formacao: null,
+        professor: null,
+        horaInicio: null,
+        horaFim: null,
+      });
+      this.calendarOptions.editable = false;
+      this.calendarOptions.eventDurationEditable = false;
+      this.calendarOptions.droppable = false;
+      calendarApi.setOption("validRange", undefined);
+    }
   }
 
   loadEventsFromLocalStorage() {
@@ -335,5 +349,17 @@ export class CreateCalendarComponent implements OnInit {
       return formation.color;
     }
     return null;
+  }
+
+  validFields(): boolean {
+    if (
+      !this.aulaForm.value.formacao ||
+      !this.aulaForm.value.professor ||
+      !this.aulaForm.value.horaInicio ||
+      !this.aulaForm.value.horaFim
+    ) {
+      return true;
+    }
+    return false;
   }
 }
