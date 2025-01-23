@@ -9,6 +9,28 @@
     word-wrap: break-word; /* Permet de couper les mots longs */
     margin-bottom: 10px; /* Ajoute un espace entre les messages */
   }
+
+.chat-column {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+}
+
+.chat-container {
+  flex: 1;
+  overflow-y: auto;
+  padding-bottom: 60px; /* Ajuste conforme necessário */
+}
+
+.message-input {
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+  background: white;
+  z-index: 1000;
+  padding: 10px;
+  box-shadow: 0 -2px 5px rgba(0, 0, 0, 0.1);
+}
   
   /* Masquer la colonne des étudiants sur les écrans de taille inférieure à 768px */
 @media screen and (max-width: 768px) {
