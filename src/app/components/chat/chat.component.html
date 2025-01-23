@@ -3,14 +3,12 @@
     <ion-title>Chat</ion-title>
   </ion-toolbar>
 </ion-header>
-
 <ion-content>
   <div class="chat-container">
     <!-- Bannière de bienvenue dynamique centrée -->
     <h1 class="welcome-title">
       Bienvenue dans le chat <strong class="room">{{ roomId }}</strong>
     </h1>
-
     <ion-grid>
       <ion-row>
         <!-- Colonne pour afficher les étudiants de la formation -->
@@ -22,30 +20,30 @@
             </ion-item>
           </ion-list>
         </ion-col>
-
         <!-- Colonne principale pour le chat -->
-        <ion-col size-md="9" size="12">
+        <ion-col size-md="9" size="12" class="chat-column">
           <!-- Zone d'affichage des messages -->
-          <ion-card *ngIf="messages$ | async as messages">
-            <ion-card-content>
-              <ion-list>
-                <!-- Liste des messages -->
-                <ion-item *ngFor="let message of messages">
-                  <ion-label>
-                    <strong>{{ message.firstName }}</strong
-                    >:
-                    <p class="reponse">{{ message.text }}</p>
-                    <p>
-                      <small>{{ message.timestamp | date : "short" }}</small>
-                    </p>
-                  </ion-label>
-                </ion-item>
-              </ion-list>
-            </ion-card-content>
-          </ion-card>
-
+          <div class="messages-container">
+            <ion-card *ngIf="messages$ | async as messages">
+              <ion-card-content>
+                <ion-list>
+                  <!-- Liste des messages -->
+                  <ion-item *ngFor="let message of messages">
+                    <ion-label>
+                      <strong>{{ message.firstName }}</strong
+                      >:
+                      <p class="reponse">{{ message.text }}</p>
+                      <p>
+                        <small>{{ message.timestamp | date : "short" }}</small>
+                      </p>
+                    </ion-label>
+                  </ion-item>
+                </ion-list>
+              </ion-card-content>
+            </ion-card>
+          </div>
           <!-- Zone de saisie des messages -->
-          <ion-item>
+          <ion-item class="message-input">
             <ion-input
               [(ngModel)]="newMessage"
               placeholder="Tapez votre message ici..."

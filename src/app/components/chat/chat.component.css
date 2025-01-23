@@ -22,6 +22,15 @@
 .room {
   color: #cb1f1f;
 }
+.message-input {
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+  background: white;
+  z-index: 1000;
+  padding: 10px;
+  box-shadow: 0 -2px 5px rgba(0, 0, 0, 0.1);
+}
 
 /* Masquer la colonne des étudiants sur les écrans de taille inférieure à 768px */
 @media screen and (max-width: 768px) {
