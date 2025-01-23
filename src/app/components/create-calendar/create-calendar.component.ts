@@ -56,6 +56,7 @@ export class CreateCalendarComponent implements OnInit {
       start: "2024-10-01",
       end: "2024-10-20",
     },
+    weekends: false,
     plugins: [dayGridPlugin, interactionPlugin],
     selectable: true,
     unselectAuto: true,
