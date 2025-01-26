@@ -42,12 +42,22 @@
 
         <!-- Afficher uniquement pour les utilisateurs normaux -->
         <ng-container *ngIf="authService.isUser()">
+
+
+          <ion-item
+          routerLink="/accueil"
+          routerLinkActive="active"
+          (click)="closeMenu()"
+          >Acceuil</ion-item>
+
+
           <ion-item
             routerLink="/user"
             routerLinkActive="active"
             (click)="closeMenu()"
             >User</ion-item
           >
+
           <ion-item
             routerLink="/chat"
             routerLinkActive="active"

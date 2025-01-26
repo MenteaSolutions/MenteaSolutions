@@ -12,6 +12,7 @@ import { CalendarComponent } from './components/calendar/calendar.component';
 import { EvaluationComponent } from './evaluation/evaluation.component';
 import { AdminGuard } from './Guards/admin.guard';
 import { UserGuard } from './Guards/user.guard';
+import { AccueilComponent } from './components/accueil/accueil.component';
 
 export const routes: Routes = [
   { path: '', redirectTo: 'login', pathMatch: 'full' },
@@ -25,6 +26,7 @@ export const routes: Routes = [
   { path: 'zoom', component: ZoomComponent, canActivate: [UserGuard] },
   { path: 'calendar', component: CalendarComponent, canActivate: [UserGuard] },
   { path: 'evaluation', component: EvaluationComponent, canActivate: [UserGuard] },
+  { path: "accueil", component: AccueilComponent, canActivate: [UserGuard] },
 
 ];
 

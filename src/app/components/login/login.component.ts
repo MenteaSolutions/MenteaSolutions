@@ -50,7 +50,7 @@ export class LoginComponent {
       if (this.authService.isAdmin()) {
         this.router.navigate(["/createUser"]);
       } else if (this.authService.isUser()) {
-        this.router.navigate(["/user"]);
+        this.router.navigate(["/accueil"]);
       } else {
         this.errorMessage = "Unknown role. Please contact support.";
       }

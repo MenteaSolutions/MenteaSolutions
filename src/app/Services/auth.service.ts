@@ -138,11 +138,11 @@ export class AuthService {
     if (this.isAdmin()) {
       this.router.navigate(["/createUser"]); // Rediriger vers la page admin
     } else if (this.isUser()) {
-      this.router.navigate(["/user"]); // Rediriger vers la page utilisateur
+      this.router.navigate(["/accueil"]); // Rediriger vers la page utilisateur
     } else {
       this.router.navigate(["/login"]); // Rediriger vers la page de login si le rôle est indéfini
     }
-  }
+  } 
   // Méthode pour se déconnecter
   logout(): void {
     this.auth
