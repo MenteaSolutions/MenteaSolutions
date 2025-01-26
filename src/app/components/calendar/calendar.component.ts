@@ -43,6 +43,7 @@ export class CalendarComponent implements OnInit {
   aulas: any[] = [];
   calendarOptions: CalendarOptions | undefined = {
     initialView: "dayGridMonth",
+    weekends: false,
     plugins: [dayGridPlugin, interactionPlugin],
   };
 
