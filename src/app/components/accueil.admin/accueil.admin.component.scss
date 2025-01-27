@@ -26,7 +26,7 @@
     width: 100%;      /* S'adapte à la largeur de l'écran si nécessaire */
     height: auto;     /* Conserve le ratio de l'image */
     display: block;   /* Centre l'image horizontalement */
-    
+    border-radius: 10px;
   }
 
   .responsive-card{
@@ -36,7 +36,7 @@
   }
   
   /* Styles pour les petits écrans */
-@media screen and (max-width: 768px) {
+@media screen and (max-width: 450px) {
   .responsive-card {
     width: 90%; /* Étend la largeur pour occuper plus d'espace */
     margin: 20px auto; /* Réduit les marges */

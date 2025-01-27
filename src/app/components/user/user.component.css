@@ -87,3 +87,7 @@ ion-input {
   margin-bottom: 15px;
   padding: 0;                   /* Aucune marge supplémentaire */
 }
+
+ion-content {
+  --background: #eff5fc; /* Bleu pastel */
+}

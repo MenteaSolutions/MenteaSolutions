@@ -9,7 +9,7 @@
 
 .reponse {
   display: inline-block; /* Adapte la largeur au contenu */
-  padding: 10px 15px; /* Ajoute un espacement à l'intérieur */
+  padding: 5px 15px; /* Ajoute un espacement à l'intérieur */
   background-color: #7ed37f;
   color: whitesmoke;
   font-size: medium;
@@ -57,9 +57,44 @@
 }
 
 /* Ajout d'espacement entre les messages */
-ion-item {
+/* ion-item {
   margin-bottom: 10px;
+} */
+
+
+
+.messages-wrapper {
+  display: flex;
+  flex-direction: column;
+  height: 500px; /* Prend toute la hauteur disponible */
 }
+
+.messages-container {
+  flex: 1;
+  overflow-y: auto; /* Permet le scroll uniquement dans cette zone */
+  padding: 10px;
+  margin: 0;
+}
+
+.message-input {
+  background: white;
+  padding: 10px;
+  box-shadow: 0 -2px 5px rgba(0, 0, 0, 0.1); /* Ajoute une ombre pour la séparation */
+}
+
+
+ion-content {
+  --background: #eff5fc; /* Bleu pastel */
+}
+
+
+
+
+
+
+
+
+
 
 
 

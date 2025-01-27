@@ -14,29 +14,35 @@
 
         <!-- Afficher uniquement si l'utilisateur est admin -->
         <ng-container *ngIf="authService.isAdmin()">
+          
+          <ion-item
+            routerLink="/accueil.admin"
+            routerLinkActive="active"
+            (click)="closeMenu()"
+            >Accueil</ion-item>
           <ion-item
             routerLink="/createUser"
             routerLinkActive="active"
             (click)="closeMenu()"
-            >Create User</ion-item
+            >Nouvelle classe</ion-item
           >
           <ion-item
             routerLink="/createChat"
             routerLinkActive="active"
             (click)="closeMenu()"
-            >Create Chat</ion-item
+            >Salle de chat</ion-item
           >
           <ion-item
             routerLink="/createCalendar"
             routerLinkActive="active"
             (click)="closeMenu()"
-            >Create Calendar</ion-item
+            >Calendrier élèves</ion-item
           >
           <ion-item
             routerLink="/createZoom"
             routerLinkActive="active"
             (click)="closeMenu()"
-            >Create Zoom</ion-item
+            >Lien zoom</ion-item
           >
         </ng-container>
 
@@ -48,7 +54,7 @@
           routerLink="/accueil"
           routerLinkActive="active"
           (click)="closeMenu()"
-          >Acceuil</ion-item>
+          >Accueil</ion-item>
 
 
           <ion-item
@@ -74,7 +80,7 @@
             routerLink="/calendar"
             routerLinkActive="active"
             (click)="closeMenu()"
-            >Calendar</ion-item
+            >Calendrier</ion-item
           >
           <ion-item
             routerLink="/evaluation"

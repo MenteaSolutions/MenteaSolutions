@@ -84,6 +84,10 @@ export class CreateChatComponent implements OnInit {
     });
   }
 
+  ngAfterViewChecked() {
+    this.scrollToBottom(); // Appeler le scroll automatique après chaque mise à jour de la vue
+  }
+
   changeRoom(formacaoId: any) {
     // Charger les messages et étudiants pour la nouvelle salle sélectionnée
     this.selectedRoom = formacaoId;
@@ -95,9 +99,20 @@ export class CreateChatComponent implements OnInit {
     this.chatService.getMessages(roomId);
     this.messages$ = this.chatService.messages$;
 
+    this.messages$.subscribe(() => {
+      this.scrollToLastMessage(); // Scroll directement vers le dernier message
+    });
+
     // Charger les étudiants de la formation sélectionnée
     this.chatService.getStudents(roomId);
     this.students$ = this.chatService.students$;
+  }
+
+  scrollToLastMessage() {
+    const lastMessage = document.getElementById('last-message');
+    if (lastMessage) {
+      lastMessage.scrollIntoView({ behavior: 'smooth', block: 'end' });
+    }
   }
 
   sendMessage() {
@@ -110,6 +125,14 @@ export class CreateChatComponent implements OnInit {
       this.newMessage = ""; // Réinitialiser le champ après l'envoi
     }
   }
+
+    // Méthode pour scroller vers le bas
+    scrollToBottom() {
+      const messagesContainer = document.querySelector(".messages-container");
+      if (messagesContainer) {
+        messagesContainer.scrollTop = messagesContainer.scrollHeight;
+      }
+    }
 
   deleteRoom() {
     if (this.selectedRoom) {

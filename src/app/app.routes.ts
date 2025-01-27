@@ -13,10 +13,12 @@ import { EvaluationComponent } from './evaluation/evaluation.component';
 import { AdminGuard } from './Guards/admin.guard';
 import { UserGuard } from './Guards/user.guard';
 import { AccueilComponent } from './components/accueil/accueil.component';
+import { AccueilAdminComponent } from './components/accueil.admin/accueil.admin.component';
 
 export const routes: Routes = [
   { path: '', redirectTo: 'login', pathMatch: 'full' },
   { path: 'login', component: LoginComponent },
+  { path: "accueil.admin", component: AccueilAdminComponent, canActivate: [AdminGuard] },
   { path: 'createUser', component: CreateUserComponent, canActivate: [AdminGuard] },
   { path: 'createChat', component: CreateChatComponent, canActivate: [AdminGuard] },
   { path: 'createCalendar', component: CreateCalendarComponent, canActivate: [AdminGuard] },
@@ -27,6 +29,8 @@ export const routes: Routes = [
   { path: 'calendar', component: CalendarComponent, canActivate: [UserGuard] },
   { path: 'evaluation', component: EvaluationComponent, canActivate: [UserGuard] },
   { path: "accueil", component: AccueilComponent, canActivate: [UserGuard] },
+  
+ 
 
 ];
 

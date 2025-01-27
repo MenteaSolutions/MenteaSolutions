@@ -26,6 +26,10 @@ ion-content {
     margin: 50px auto;
   }
 
+  ion-content {
+    --background: #eff5fc; /* Bleu pastel */
+  }
+
   @media screen and (max-width: 768px) {
     ion-card {
       width: 100%;
