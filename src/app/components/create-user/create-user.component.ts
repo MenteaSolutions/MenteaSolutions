@@ -152,7 +152,7 @@ export class CreateUserComponent implements OnInit {
       const student = this.studentInfo[i];
   
       // Générer l'email basé sur le nom et le prénom
-      const email = `${student.firstName.toLowerCase()}.${student.lastName.toLowerCase()}@nomades.com`;
+      const email = `${student.firstName.toLowerCase()}.${student.lastName.toLowerCase()}@nomades.ch`;
       const password = generatePassword(8);
 
       createUserWithEmailAndPassword(this.auth, email, password)
