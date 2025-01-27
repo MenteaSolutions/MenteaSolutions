@@ -48,7 +48,7 @@ export class LoginComponent {
 
       // Après connexion réussie, rediriger en fonction du rôle
       if (this.authService.isAdmin()) {
-        this.router.navigate(["/createUser"]);
+        this.router.navigate(["/accueil.admin"]);
       } else if (this.authService.isUser()) {
         this.router.navigate(["/accueil"]);
       } else {
