@@ -1,3 +1,9 @@
 ion-content {
     --background: #eff5fc; /* Bleu pastel */
   }
+  @media screen and (max-width:375px) {
+
+    .fc {
+      font-size: 0.6rem;
+    }
+  }
