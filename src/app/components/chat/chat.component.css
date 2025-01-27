@@ -9,7 +9,7 @@
 
 .reponse {
   display: inline-block; /* Adapte la largeur au contenu */
-  padding: 10px 15px; /* Ajoute un espacement à l'intérieur */
+  padding: 5px 15px; /* Ajoute un espacement à l'intérieur */
   background-color: #7ed37f;
   color: whitesmoke;
   font-size: medium;
@@ -23,7 +23,7 @@
   color: #cb1f1f;
 }
 .message-input {
-  position: fixed;
+  /* position: fixed; */
   bottom: 0;
   width: 100%;
   background: white;
@@ -31,6 +31,73 @@
   padding: 10px;
   box-shadow: 0 -2px 5px rgba(0, 0, 0, 0.1);
 }
+
+/* Messages envoyés par l'utilisateur (à droite, vert) */
+.sent-message {
+  justify-content: flex-end; /* Aligne le message à droite */
+  text-align: right; /* Texte aligné à droite */
+}
+
+.sent-message .reponse {
+  background-color: #7ed37f; /* Vert */
+  border-radius: 10px 10px 0 10px; /* Arrondi spécifique */
+  color: white; /* Couleur du texte */
+}
+
+/* Messages reçus par l'utilisateur (à gauche, bleu) */
+.received-message {
+  justify-content: flex-start; /* Aligne le message à gauche */
+  text-align: left; /* Texte aligné à gauche */
+}
+
+.received-message .reponse {
+  background-color: #4e91ff; /* Bleu */
+  border-radius: 10px 10px 10px 0; /* Arrondi spécifique */
+  color: white; /* Couleur du texte */
+}
+
+/* Ajout d'espacement entre les messages */
+/* ion-item {
+  margin-bottom: 10px;
+} */
+
+
+
+.messages-wrapper {
+  display: flex;
+  flex-direction: column;
+  height: 500px; /* Prend toute la hauteur disponible */
+}
+
+.messages-container {
+  flex: 1;
+  overflow-y: auto; /* Permet le scroll uniquement dans cette zone */
+  padding: 10px;
+  margin: 0;
+}
+
+.message-input {
+  background: white;
+  padding: 10px;
+  box-shadow: 0 -2px 5px rgba(0, 0, 0, 0.1); /* Ajoute une ombre pour la séparation */
+}
+
+
+ion-content {
+  --background: #eff5fc; /* Bleu pastel */
+}
+
+
+
+
+
+
+
+
+
+
+
+
 
 /* Masquer la colonne des étudiants sur les écrans de taille inférieure à 768px */
 @media screen and (max-width: 768px) {

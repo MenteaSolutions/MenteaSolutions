@@ -1,0 +1,44 @@
+<!-- <ion-header>
+  <ion-toolbar>
+    <ion-title>Ma Page</ion-title>
+  </ion-toolbar>
+</ion-header> -->
+
+<ion-content>
+  <!-- Titre principal -->
+  <ion-card class="responsive-card">
+    <ion-card-header>
+      <h1 class="welcome-title">Bienvenue sur votre plateforme <strong class="room">Nomades</strong>.</h1>
+    </ion-card-header>
+  </ion-card>
+
+  <!-- Image en dessous du titre -->
+   
+  <ion-img 
+  class="responsive-img" 
+  src="/images/DSC05057.jpg" 
+  style="margin: 40px auto;">
+  </ion-img>
+
+
+
+  <!-- Liste de cartes avec des liens -->
+  <ion-grid>
+    <ion-row>
+      <ion-col size="6" size-md="3" *ngFor="let card of cards"> <!-- Ajuste la taille selon tes besoins -->
+        <ion-card>
+          <ion-card-header>
+            <ion-card-title style="text-align: center;">{{ card.title }}</ion-card-title>
+          </ion-card-header>
+          <ion-card-content>
+            <p>{{ card.description }}</p>
+            <ion-button expand="block" shape="round" color="secondary" [routerLink]="card.link">{{ card.buttonText}}</ion-button>
+          </ion-card-content>
+        </ion-card>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+  
+</ion-content>
+
+

@@ -147,11 +147,13 @@ export class CreateUserComponent implements OnInit {
       this.message = "Veuillez remplir tous les champs";
       return;
     }
-
+  
     for (let i = 0; i < this.numberOfStudents; i++) {
-      const email = `student${Math.floor(Math.random() * 10000)}@nomades.com`;
-      const password = generatePassword(8);
       const student = this.studentInfo[i];
+  
+      // Générer l'email basé sur le nom et le prénom
+      const email = `${student.firstName.toLowerCase()}.${student.lastName.toLowerCase()}@nomades.com`;
+      const password = generatePassword(8);
 
       createUserWithEmailAndPassword(this.auth, email, password)
         .then((userCredential) => {
@@ -189,9 +191,9 @@ export class CreateUserComponent implements OnInit {
         });
     }
     Swal.fire({
-      position: "top-end",
+      position: "center",
       icon: "success",
-      title: "Your work has been saved",
+      title: "Votre travail a été enregistré.",
       showConfirmButton: false,
       heightAuto: false,
       timer: 1500,

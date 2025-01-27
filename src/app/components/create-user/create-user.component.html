@@ -1,6 +1,6 @@
 <ion-header>
   <ion-toolbar>
-    <ion-title>Créer des Utilisateurs</ion-title>
+    <ion-title style="text-align: center;">Nouvelle classe et gestion des élèves</ion-title>
   </ion-toolbar>
 </ion-header>
 
@@ -8,7 +8,7 @@
   <div class="create-user-container">
     <ion-card>
       <ion-card-header>
-        <ion-card-title>Créer des Utilisateurs</ion-card-title>
+        <ion-card-title>Créer des élèves et les assigner à une formation</ion-card-title>
       </ion-card-header>
       
       <ion-card-content>
@@ -50,7 +50,7 @@
         </ion-list>
 
         <!-- Bouton pour valider et enregistrer -->
-        <ion-button fill="clear" expand="block" (click)="validateAndSaveStudents()">Valider et Enregistrer</ion-button>
+        <ion-button shape="round" fill="clear" expand="block" (click)="validateAndSaveStudents()">Valider et Enregistrer</ion-button>
 
         <!-- Message de retour après la création des utilisateurs -->
         <ion-item *ngIf="message">
@@ -80,6 +80,7 @@
 
     <!-- Nouvelle section pour afficher les utilisateurs créés avec leurs emails et mots de passe -->
     <!-- Affichage des utilisateurs créés -->
+     <div class="created-users-card">
     <ion-card>
       <ion-card-header>
         <ion-card-title>Utilisateurs créés :</ion-card-title>
@@ -103,6 +104,7 @@
         </ion-grid>
       </ion-card-content>
     </ion-card>
+  </div>
     
 
   </div>

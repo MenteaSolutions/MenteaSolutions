@@ -1,6 +1,6 @@
 <ion-header>
   <ion-toolbar>
-    <ion-title>Gestion des Chats</ion-title>
+    <ion-title style="text-align: center;">Gestion des Chats</ion-title>
   </ion-toolbar>
 </ion-header>
 <ion-content>
@@ -17,10 +17,12 @@
       </ion-col>
       <!-- Colonne pour afficher le chat -->
       <ion-col size-md="9" size="12" class="chat-column">
+        <!-- <div class="messages-wrapper"> -->
+          
         <!-- Sélecteur de salle de chat et bouton supprimer -->
         <ion-item lines="none">
           <ion-label>Choisir une formation :</ion-label>
-          <ion-select
+          <ion-select 
             name="selectedRoom"
             ngDefaultControl
             [(ngModel)]="selectedRoom"
@@ -41,6 +43,8 @@
         </ion-item>
         <!-- Conteneur de chat -->
         <div class="chat-container">
+          <div class="messages-wrapper">
+          <div class="messages-container">
           <!-- Affichage du chat correspondant -->
           <ion-card *ngIf="messages$ | async as messages">
             <ion-card-header>
@@ -49,19 +53,24 @@
             <ion-card-content>
               <ion-list>
                 <!-- Liste des messages -->
-                <ion-item *ngFor="let message of messages">
-                  <ion-label>
-                    <strong>{{ message.firstName }}</strong
-                    >:
-                    <p class="reponse">{{ message.text }}</p>
-                    <p>
-                      <small>{{ message.timestamp | date : "short" }}</small>
-                    </p>
-                  </ion-label>
-                </ion-item>
+                <ion-item
+                *ngFor="let message of messages; let i = index"
+                [class.sent-message]="message.firstName === currentUserFirstName"
+                [class.received-message]="message.firstName !== currentUserFirstName"
+                [attr.id]="i === messages.length - 1 ? 'last-message' : null"
+              >
+                <ion-label>
+                  <strong>{{ message.firstName }}</strong>:
+                  <p class="reponse">{{ message.text }}</p>
+                  <p>
+                    <small>{{ message.timestamp | date : 'short' }}</small>
+                  </p>
+                </ion-label>
+              </ion-item>
               </ion-list>
             </ion-card-content>
           </ion-card>
+        </div>
         </div>
         <!-- Champ pour envoyer un message -->
         <ion-item class="message-input">
@@ -73,6 +82,7 @@
           ></ion-input>
           <ion-button (click)="sendMessage()">Envoyer</ion-button>
         </ion-item>
+      </div>
       </ion-col>
     </ion-row>
   </ion-grid>

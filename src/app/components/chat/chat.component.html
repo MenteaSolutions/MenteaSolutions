@@ -1,40 +1,42 @@
-<ion-header>
-  <ion-toolbar>
-    <ion-title>Chat</ion-title>
-  </ion-toolbar>
-</ion-header>
+
 <ion-content>
-  <div class="chat-container">
-    <!-- Bannière de bienvenue dynamique centrée -->
-    <h1 class="welcome-title">
-      Bienvenue dans le chat <strong class="room">{{ roomId }}</strong>
-    </h1>
-    <ion-grid>
-      <ion-row>
-        <!-- Colonne pour afficher les étudiants de la formation -->
-        <ion-col size-md="3" size="12" class="student-list">
-          <ion-list>
-            <ion-list-header>Étudiants</ion-list-header>
-            <ion-item *ngFor="let student of students$ | async">
-              {{ student.firstName }} {{ student.lastName }}
-            </ion-item>
-          </ion-list>
-        </ion-col>
-        <!-- Colonne principale pour le chat -->
-        <ion-col size-md="9" size="12" class="chat-column">
+<div class="chat-container">
+  <!-- Bannière de bienvenue dynamique centrée -->
+  <h1 class="welcome-title">
+    Bienvenue dans le chat <strong class="room">{{ roomId }}</strong>
+  </h1>
+  <ion-grid>
+    <ion-row>
+      <!-- Colonne pour afficher les étudiants de la formation -->
+      <ion-col size-md="3" size="12" class="student-list">
+        <ion-list>
+          <ion-list-header>Étudiants</ion-list-header>
+          <ion-item *ngFor="let student of students$ | async">
+            {{ student.firstName }} {{ student.lastName }}
+          </ion-item>
+        </ion-list>
+      </ion-col>
+      
+      <!-- Colonne principale pour le chat -->
+      <ion-col size-md="9" size="12" class="chat-column">
+        <!-- Conteneur général pour les messages et la zone de saisie -->
+        <div class="messages-wrapper">
           <!-- Zone d'affichage des messages -->
           <div class="messages-container">
             <ion-card *ngIf="messages$ | async as messages">
               <ion-card-content>
                 <ion-list>
-                  <!-- Liste des messages -->
-                  <ion-item *ngFor="let message of messages">
+                  <ion-item
+                    *ngFor="let message of messages; let i = index"
+                    [class.sent-message]="message.firstName === currentUserFirstName"
+                    [class.received-message]="message.firstName !== currentUserFirstName"
+                    [attr.id]="i === messages.length - 1 ? 'last-message' : null"
+                  >
                     <ion-label>
-                      <strong>{{ message.firstName }}</strong
-                      >:
+                      <strong>{{ message.firstName }}</strong>:
                       <p class="reponse">{{ message.text }}</p>
                       <p>
-                        <small>{{ message.timestamp | date : "short" }}</small>
+                        <small>{{ message.timestamp | date : 'short' }}</small>
                       </p>
                     </ion-label>
                   </ion-item>
@@ -42,18 +44,20 @@
               </ion-card-content>
             </ion-card>
           </div>
+          
           <!-- Zone de saisie des messages -->
-          <ion-item class="message-input">
-            <ion-input
-              [(ngModel)]="newMessage"
-              placeholder="Tapez votre message ici..."
-            ></ion-input>
-            <ion-button (click)="sendMessage()" expand="block"
-              >Envoyer</ion-button
-            >
-          </ion-item>
-        </ion-col>
-      </ion-row>
-    </ion-grid>
-  </div>
+          <div class="message-input">
+            <ion-item>
+              <ion-input
+                [(ngModel)]="newMessage"
+                placeholder="Tapez votre message ici..."
+              ></ion-input>
+              <ion-button (click)="sendMessage()" expand="block">Envoyer</ion-button>
+            </ion-item>
+          </div>
+        </div>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+</div>
 </ion-content>

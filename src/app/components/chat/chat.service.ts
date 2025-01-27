@@ -9,6 +9,7 @@ interface Admin {
   role: string;
 }
 
+
 @Injectable({
   providedIn: "root",
 })
@@ -21,16 +22,36 @@ export class ChatService {
 
   constructor(private db: Database) {}
 
+
+
+
+
+
+
+
+
   // Fonction pour envoyer un message dans une salle spécifique
-  sendMessage(roomId: string, message: string, firstName: string): void {
-    const messagesRef = ref(this.db, `rooms/${roomId}/messages`);
-    const newMessageRef = push(messagesRef);
-    set(newMessageRef, {
-      text: message,
+  sendMessage(roomId: string, message: string, firstName: string, isAudio: boolean = false) {
+    const timestamp = new Date().toISOString();
+  
+    const messageData = {
       firstName: firstName,
-      timestamp: Date.now(),
+      text: isAudio ? null : message, // Si c'est un message vocal, pas de texte
+      audio: isAudio ? message : null, // Si c'est un texte, pas d'audio
+      timestamp: timestamp,
+    };
+  
+    const messageRef = push(ref(this.db, `rooms/${roomId}/messages`));
+    set(messageRef, messageData).catch((error) => {
+      console.error("Erreur lors de l'envoi du message :", error);
     });
   }
+
+
+  
+  
+  
+  
 
   // Fonction pour récupérer les messages d'une salle en temps réel
   getMessages(roomId: string): void {
