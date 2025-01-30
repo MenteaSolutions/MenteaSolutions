@@ -47,5 +47,22 @@
       "purpose": "any"
     }
   ],
+  "screenshots": [
+    {
+      "src": "/scren-home.png",
+      "sizes": "640x480",
+      "type": "image/png"
+    },
+    {
+      "src": "/scren-calendrier.png",
+      "sizes": "640x480",
+      "type": "image/png"
+    },
+    {
+      "src": "/scren-chat.png",
+      "sizes": "640x480",
+      "type": "image/png"
+    }
+  ],
   "prefer_related_applications": false
 }

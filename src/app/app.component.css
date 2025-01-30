@@ -15,4 +15,17 @@
   .menu:hover {
     background-color: red;
   }
+  .custom-pwa-install button {
+    background-color: #007bff; /* Cor de fundo personalizada */
+    color: white; /* Cor do texto personalizada */
+    font-size: 16px; /* Tamanho da fonte personalizado */
+    padding: 10px 20px; /* Espaçamento interno personalizado */
+    border: none; /* Remover borda */
+    border-radius: 5px; /* Bordas arredondadas */
+    cursor: pointer; /* Cursor de ponteiro */
+  }
+  
+  .custom-pwa-install button::before {
+    content: "Cliquez ici pour installer"; /* Texto personalizado */
+  }
   
