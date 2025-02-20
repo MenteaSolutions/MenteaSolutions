@@ -11,6 +11,7 @@ import { getDatabase } from "@angular/fire/database";
 import { environment } from "../environments/environment";
 import { provideIonicAngular } from '@ionic/angular/standalone';
 import { getFirestore, provideFirestore } from "@angular/fire/firestore";
+import { provideStorage, getStorage } from "@angular/fire/storage";
 import { provideServiceWorker } from '@angular/service-worker';
 
 export const appConfig: ApplicationConfig = {
@@ -29,5 +30,6 @@ export const appConfig: ApplicationConfig = {
             enabled: !isDevMode(),
             registrationStrategy: 'registerWhenStable:30000'
           }),
+    provideStorage(() => getStorage()),
   ],
 };

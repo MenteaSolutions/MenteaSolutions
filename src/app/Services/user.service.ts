@@ -1,7 +1,8 @@
-import { Injectable, OnInit } from "@angular/core";
+import { Injectable } from "@angular/core";
 import { Auth, User } from "@angular/fire/auth";
-import { Database } from "@angular/fire/database";
-import { onValue, ref } from "firebase/database";
+import { Database, ref, set } from "@angular/fire/database";
+import { getStorage, ref as storageRef, uploadString, getDownloadURL } from "@angular/fire/storage";
+import { onValue } from "firebase/database";
 import { Observable } from "rxjs";
 import { FormacaoService } from "../components/create-zoom/formacao.service";
 
@@ -10,16 +11,35 @@ import { FormacaoService } from "../components/create-zoom/formacao.service";
 })
 export class UserService {
   formationId: string = "";
-
   constructor(
     private auth: Auth,
     private db: Database,
     private formacaoService: FormacaoService
   ) {}
 
+  async uploadProfilePicture(userId: string, imageUrl: string): Promise<string> {
+    const storage = getStorage();
+    const userImageRef = storageRef(storage, `users/${userId}/profilePicture.jpg`);
+    await uploadString(userImageRef, imageUrl, 'data_url');
+    const downloadURL = await getDownloadURL(userImageRef);
+    const userRef = ref(this.db, `users/${userId}/profilePicture`);
+    await set(userRef, downloadURL);
+    return downloadURL;
+  }
+  
+  async getProfilePicture(userId: string): Promise<string | null> {
+    try {
+      const storage = getStorage();
+      const userImageRef = storageRef(storage, `users/${userId}/profilePicture.jpg`);
+      return await getDownloadURL(userImageRef);
+    } catch (error) {
+      console.error("Error fetching profile picture:", error);
+      return null;
+    }
+  }
+
   getUserFormation(): Promise<any> {
     return new Promise((resolve, reject) => {
-      // Certifique-se de retornar a Promise
       this.auth.onAuthStateChanged((user: User | null) => {
         if (user) {
           this.getUserRoom(user.uid).subscribe(
@@ -55,25 +75,22 @@ export class UserService {
         const rooms = snapshot.val();
         let userInfo = null;
 
-        // Parcourir chaque salle
         for (let roomId in rooms) {
           const users = rooms[roomId].users;
           if (users) {
-            // Parcourir chaque utilisateur dans la salle
             for (let userKey in users) {
               if (users[userKey].uid === uid) {
-                // Comparer les UID
                 userInfo = users[userKey];
-                userInfo.room = roomId; // Ajouter l'ID de la salle à l'information utilisateur
+                userInfo.room = roomId;
                 break;
               }
             }
           }
-          if (userInfo) break; // Sortir de la boucle si on trouve l'utilisateur
+          if (userInfo) break;
         }
 
         if (userInfo) {
-          observer.next(userInfo); // Renvoyer les informations de l'utilisateur
+          observer.next(userInfo);
         } else {
           console.error("Aucune information utilisateur trouvée.");
           observer.error("Utilisateur introuvable.");

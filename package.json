@@ -7,7 +7,7 @@
     "build": "ng build",
     "watch": "ng build --watch --configuration development",
     "test": "ng test",
-    "deploy":"ng build && firebase deploy"
+    "deploy": "ng build && firebase deploy"
   },
   "private": true,
   "dependencies": {
@@ -23,7 +23,9 @@
     "@angular/platform-browser-dynamic": "^18.2.0",
     "@angular/router": "^18.2.0",
     "@angular/service-worker": "^18.2.0",
+    "@capacitor/camera": "^7.0.0",
     "@emailjs/browser": "^4.4.1",
+    "@firebase/storage": "^0.13.6",
     "@fullcalendar/angular": "^6.1.15",
     "@fullcalendar/bootstrap5": "^6.1.15",
     "@fullcalendar/core": "^6.1.15",

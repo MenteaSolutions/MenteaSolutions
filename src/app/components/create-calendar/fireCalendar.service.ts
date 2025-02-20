@@ -47,7 +47,7 @@ export class FireCalendarService {
       await setDoc(calendarDoc, data);
     }
   }
-
+// aqui ele recupera o calendario pela formaçao
   async getCalendarByFormationId(formacaoId: string): Promise<any> {
     const querySnapshot = await getDocs(
       query(this.calendarCollection, where("idFormation", "==", formacaoId))
@@ -62,6 +62,7 @@ export class FireCalendarService {
     }
   }
 
+  // aqui ele deve carregar os eventos de click quando a formaçao for selecionada
   async getCalendarOptions(formacaoId: string): Promise<any> {
     let calendar = await this.getCalendarByFormationId(formacaoId);
     if (!calendar) {
@@ -71,6 +72,7 @@ export class FireCalendarService {
     return calendar?.config;
   }
 
+  // AQUI MODIFICAR O METODO PARA PODER SALVAR OUTROS EVENTOS
   async addEvent(event: any): Promise<void> {
     const eventDoc = doc(this.eventsCollection, Date.now().toString());
     await setDoc(eventDoc, event);

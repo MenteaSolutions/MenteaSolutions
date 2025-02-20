@@ -1,61 +1,88 @@
 <ion-content>
-    <!-- Formulaire avec détails utilisateur -->
-    <div class="form-container">
-      <form *ngIf="!isLoading && userDetails" class="user-details-form">
-        <ion-card>
-          <ion-card-header class="card-header-with-avatar">
-            <!-- Avatar au-dessus du titre -->
-            <div class="avatar-container">
-              <ion-avatar>
-                <img alt="Silhouette of a person's head" src="https://ionicframework.com/docs/img/demos/avatar.svg" />
-              </ion-avatar>
-            </div>
-  
-            <!-- Titre centré du formulaire -->
-            <ion-card-title class="form-title">
-              Bienvenue {{ userDetails.firstName }}
-            </ion-card-title>
-          </ion-card-header>
-  
-          <ion-card-content>
-            <!-- Nom Field -->
-            <ion-item class="custom-form-item no-border">
-              <ion-label class="custom-label"><strong>Nom</strong></ion-label>
-              <ion-input type="text" [(ngModel)]="userDetails.lastName" name="lastName" readonly></ion-input>
-            </ion-item>
-  
-            <!-- Prénom Field -->
-            <ion-item class="custom-form-item no-border">
-              <ion-label class="custom-label"><strong>Prénom</strong></ion-label>
-              <ion-input type="text" [(ngModel)]="userDetails.firstName" name="firstName" readonly></ion-input>
-            </ion-item>
-              <!-- Email Field -->
-          <ion-item class="custom-form-item no-border">
-            <ion-label class="custom-label"><strong>Email</strong></ion-label>
-            <ion-input type="text" [(ngModel)]="userDetails.email" name="email" readonly></ion-input>
-          </ion-item>
-
-
-             <!-- Password Field -->
-          <ion-item class="custom-form-item">
-            <ion-label class="custom-label"><strong>Mot de passe</strong></ion-label>
-            <ion-input type="password" [(ngModel)]="userDetails.password" name="password" >
-          <ion-input-password-toggle slot="end"></ion-input-password-toggle>
-        </ion-input>
-  </ion-item>
-
-
-<!-- Conteneur pour le bouton avec alignement à droite -->
-<div class="button-container">
-  <ion-button class="input-width-button" (click)="openPasswordChangeModal()">Changer mot de passe</ion-button>
-</div>
- <!-- Formation Field -->
- <ion-item class="custom-form-item no-border">
-    <ion-label class="custom-label"></ion-label>
-    <ion-input type="text" [(ngModel)]="userDetails.roomName" name="roomName" readonly></ion-input>
-  </ion-item>
-</ion-card-content>
-</ion-card>
-</form>
-</div>
+  <div class="form-container">
+    <ion-content>
+      <div class="form-container">
+        <form *ngIf="!isLoading && userDetails" class="user-details-form">
+          <ion-card>
+            <ion-card-header class="card-header-with-avatar">
+              <div class="avatar-container">
+                <ion-avatar>
+                  <img
+                    [src]="
+                      userDetails?.profilePicture || 'assets/default-avatar.png'
+                    "
+                    alt="Profile Picture"
+                  />
+                </ion-avatar>
+              </div>
+              <ion-button
+                color="secondary"
+                shape="round"
+                (click)="changeProfilePicture()"
+                class="change-photo"
+                >Change Picture</ion-button
+              >
+              <ion-card-title class="form-title">
+                Bienvenue {{ userDetails.firstName }}
+              </ion-card-title>
+            </ion-card-header>
+            <ion-card-content>
+              <ion-item class="custom-form-item no-border">
+                <ion-label class="custom-label"><strong>Nom</strong></ion-label>
+                <ion-input
+                  type="text"
+                  [(ngModel)]="userDetails.lastName"
+                  name="lastName"
+                  readonly
+                ></ion-input>
+              </ion-item>
+              <ion-item class="custom-form-item no-border">
+                <ion-label class="custom-label"
+                  ><strong>Prénom</strong></ion-label
+                >
+                <ion-input
+                  type="text"
+                  [(ngModel)]="userDetails.firstName"
+                  name="firstName"
+                  readonly
+                ></ion-input>
+              </ion-item>
+              <ion-item class="custom-form-item no-border">
+                <ion-label class="custom-label"
+                  ><strong>Email</strong></ion-label
+                >
+                <ion-input
+                  type="text"
+                  [(ngModel)]="userDetails.email"
+                  name="email"
+                  readonly
+                ></ion-input>
+              </ion-item>
+              <ion-item class="custom-form-item">
+                <ion-label class="custom-label"
+                  ><strong>Mot de passe</strong></ion-label
+                >
+                <ion-input
+                  type="password"
+                  [(ngModel)]="userDetails.password"
+                  name="password"
+                >
+                  <ion-input-password-toggle
+                    slot="end"
+                  ></ion-input-password-toggle>
+                </ion-input>
+              </ion-item>
+              <div class="button-container">
+                <ion-button
+                  class="input-width-button"
+                  (click)="openPasswordChangeModal()"
+                  >Changer mot de passe</ion-button
+                >
+              </div>
+            </ion-card-content>
+          </ion-card>
+        </form>
+      </div>
+    </ion-content>
+  </div>
 </ion-content>

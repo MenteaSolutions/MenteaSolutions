@@ -91,3 +91,14 @@ ion-input {
 ion-content {
   --background: #eff5fc; /* Bleu pastel */
 }
+.change-photo {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 40%;
+  margin-top: 15px;
+  margin-left: 30%;
+  font-size: 1.1em;
+  color: #000000;
+  cursor: pointer;
+}
