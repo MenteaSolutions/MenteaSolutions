@@ -5,7 +5,79 @@
     font-size: 2.5rem; /* Réduire un peu la taille sur mobile */
     margin: 20px; /* Réduire la marge sur mobile */
     font-weight: 300;
+    animation: fadeIn 1.5s ease-in-out;
   }
+
+
+/* Animation d'apparition */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(-30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+
+
+.card {
+  background: white;
+  border-radius: 12px;
+  padding: 20px;
+  text-align: center;
+  box-shadow: 0px 3px 8px rgba(0, 0, 0, 0.1);
+  transition: all 0.3s ease-in-out;
+  margin: 10px;
+}
+
+.card:hover {
+  transform: translateY(-15px);
+  box-shadow: 0px 6px 12px rgba(0, 0, 0, 0.15);
+}
+
+
+
+
+/* --- Animation de montée pour les cartes --- */
+@keyframes slideUp {
+  from {
+    opacity: 0;
+    transform: translateY(400px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.card {
+  animation: slideUp 1.5s ease-in-out;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
   .room {
     color: #cb1f1f;
@@ -19,15 +91,60 @@
     box-shadow: 0 15px 6px rgba(0, 0, 0, 0.1);
     background: white; /* Garde un fond blanc pur pour les cartes */
     border-radius: 10px;
-  }
+  } 
 
-  .responsive-img {
-    max-width: 500px; /* Taille maximale sur les grands écrans */
-    width: 100%;      /* S'adapte à la largeur de l'écran si nécessaire */
-    height: auto;     /* Conserve le ratio de l'image */
-    display: block;   /* Centre l'image horizontalement */
-    border-radius: 10px;
+  // .responsive-img {
+  //   max-width: 500px; /* Taille maximale sur les grands écrans */
+  //      /* S'adapte à la largeur de l'écran si nécessaire */
+  //   height: auto;     /* Conserve le ratio de l'image */
+  //   display: block;   /* Centre l'image horizontalement */
+  //   border-radius: 10px;
+  // }
+
+ 
+
+  .background-image {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100vh;
+    background: url("/images/DSC05057.jpg") center/cover no-repeat;
+    filter: blur(1px);
+    opacity: 0.6;
+    z-index: -1;
   }
+  
+  
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
   .responsive-card{
     margin-bottom: 50px;
@@ -38,15 +155,33 @@
   /* Styles pour les petits écrans */
 @media screen and (max-width: 450px) {
   .responsive-card {
-    width: 90%; /* Étend la largeur pour occuper plus d'espace */
-    margin: 20px auto; /* Réduit les marges */
+    width: 50%; /* Étend la largeur pour occuper plus d'espace */
+    margin: 0px auto; /* Réduit les marges */
   }
 
   .welcome-title {
     font-size: 1.5rem; /* Réduit la taille du texte */
     text-align: center; /* Aligne le texte au centre */
-    line-height: 1.5; /* Ajuste l'espacement des lignes */
+    line-height: 1.5rem; /* Ajuste l'espacement des lignes */
+    margin-top: 55px;
+    margin-bottom: 0px;
   }
+
+  .desc { 
+    display: none;
+  }
+
+  .title {
+    font-size: 1rem; /* Réduit la taille du texte */
+    font-weight: 400;
+  }
+
+  .btn {
+    font-size: 0.8rem; /* Réduit la taille du texte */
+    padding: 15px 0px; /* Réduit la taille du bouton */
+  }
+
+
 }
   
   
