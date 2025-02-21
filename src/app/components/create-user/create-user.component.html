@@ -72,11 +72,25 @@
           </ion-row>
           <ion-row *ngFor="let roomCount of roomStudentCounts">
             <ion-col>{{ roomCount.room }}</ion-col>
-            <ion-col>{{ roomCount.count }}</ion-col>
+            <ion-col>
+              <span class="badge" 
+                    [ngClass]="{
+                      'badge-low': roomCount.count < 5, 
+                      'badge-medium': roomCount.count >= 5 && roomCount.count <= 9, 
+                      'badge-high': roomCount.count >= 10
+                    }">
+                {{ roomCount.count }}
+              </span>
+            </ion-col>
           </ion-row>
         </ion-grid>
       </ion-card-content>
     </ion-card>
+    
+
+
+
+  </div>
 
     <!-- Nouvelle section pour afficher les utilisateurs créés avec leurs emails et mots de passe -->
     <!-- Affichage des utilisateurs créés -->
@@ -99,7 +113,7 @@
             <ion-col>{{ user.lastName }}</ion-col>
             <ion-col>{{ user.email }}</ion-col>
             <ion-col>{{ user.password }}</ion-col>
-            <ion-col>{{ user.room }}</ion-col> <!-- Affichage de la formation -->
+            <ion-col>{{ user.room }}</ion-col> <ion-button shape="round" fill="clear" color="danger" (click)="deleteStudent(user)">X</ion-button>
           </ion-row>
         </ion-grid>
       </ion-card-content>
@@ -107,5 +121,5 @@
   </div>
     
 
-  </div>
+  <div class="background-image"></div>
 </ion-content>

@@ -2,29 +2,31 @@
     display: inline-block; /* Adapte la largeur au contenu */
     padding: 5px 15px; /* Ajoute un espacement à l'intérieur */
     background-color: #7ED37F;
-    color: whitesmoke;
+    color: white;
     font-size: medium;
     border-radius: 10px 0px 13px 13px;
     max-width: 80%; /* Limite la largeur pour les longs messages */
     word-wrap: break-word; /* Permet de couper les mots longs */
     margin-bottom: 10px; /* Ajoute un espace entre les messages */
+    font-weight: 300;
   }
 
 .chat-column {
   display: flex;
   flex-direction: column;
-  height: 100vh;
+  /* height: 100vh; */
 }
 
 .chat-container {
   flex: 1;
   overflow-y: auto;
-  padding-bottom: 60px; /* Ajuste conforme necessário */
-}
+   /* Ajuste conforme necessário */
+} 
 
 .message-input {
   /* position: fixed; */
-  bottom: 0;
+  /* bottom: 0; */
+  /* margin-bottom: 10px; */
   width: 100%;
   background: white;
   z-index: 1000;
@@ -32,10 +34,12 @@
   box-shadow: 0 -2px 5px rgba(0, 0, 0, 0.1);
 }
 
-.messages-wrapper {
+.messages-wrapper { 
+  margin-top: 10px;
   display: flex;
   flex-direction: column;
-  height: 500px; /* Prend toute la hauteur disponible */
+  height: 70vh; /* Prend toute la hauteur disponible */
+  /* overflow-y: hidden; */
 }
 
 .messages-container {
@@ -70,6 +74,77 @@
 }
 
 
+/* .no-scroll {
+  overflow: hidden !important;
+  height: 100vh !important;
+} */
+
+
+/* .background-image {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100vh;
+  background: url("/images/DSC05057.jpg") center/cover no-repeat;
+  filter: blur(1px);
+  opacity: 0.6;
+  z-index: -1;
+} */
+
+
+ion-content {
+  --background: url('/assets/images/ton-image.jpg') no-repeat center center / cover !important;
+}
+
+
+
+
+
+
+.chat-footer {
+   /* Prend toute la largeur du parent */
+  max-width: 73%; /* Ajuste la largeur en fonction de la boîte de chat */
+  margin: 0 auto; /* Centre si nécessaire */
+  background: rgba(255, 255, 255, 0);
+  padding: 10px;
+  position: fixed;
+  bottom: 0;
+  left: 62%;
+  transform: translateX(-50%); /* Centre horizontalement */
+  box-shadow: 0 -2px 5px rgba(0, 0, 0, 0.1);
+} 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -83,6 +158,10 @@ ion-content {
     .student-list {
       display: none;
     }
+    .chat-footer {
+      max-width: 100%;
+      left: 50%;
+    }
   
   }
   
@@ -91,5 +170,9 @@ ion-content {
     .student-list {
       display: block;
     }
+    .chat-container{
+      padding-bottom: 0;
+    }
+
   }
   

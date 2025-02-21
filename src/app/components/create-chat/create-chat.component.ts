@@ -22,13 +22,12 @@ import {
   IonCardHeader,
   IonCardTitle,
   IonCardContent,
-  IonSelectOption,
-} from "@ionic/angular/standalone";
+  IonSelectOption, IonFooter } from "@ionic/angular/standalone";
 
 @Component({
   selector: "app-create-chat",
   standalone: true,
-  imports: [
+  imports: [IonFooter, 
     IonCardContent,
     IonCardTitle,
     IonCardHeader,
@@ -49,7 +48,8 @@ import {
     IonSelectOption,
     CommonModule,
     IonHeader,
-  ],
+    IonFooter,
+  ], 
   templateUrl: "./create-chat.component.html",
   styleUrls: ["./create-chat.component.css"],
 })
@@ -133,6 +133,33 @@ export class CreateChatComponent implements OnInit {
         messagesContainer.scrollTop = messagesContainer.scrollHeight;
       }
     }
+
+
+
+
+    // ionViewWillEnter() {
+    //   document.body.classList.add('no-scroll');
+    // }
+  
+    // ionViewWillLeave() {
+    //   document.body.classList.remove('no-scroll');
+    // }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
   deleteRoom() {
     if (this.selectedRoom) {

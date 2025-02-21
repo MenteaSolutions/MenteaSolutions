@@ -1,5 +1,5 @@
 
-<ion-content>
+<ion-content scroll-y="false">
 <div class="chat-container">
   <!-- Bannière de bienvenue dynamique centrée -->
   <h1 class="welcome-title">
@@ -46,18 +46,24 @@
           </div>
           
           <!-- Zone de saisie des messages -->
-          <div class="message-input">
-            <ion-item>
-              <ion-input
-                [(ngModel)]="newMessage"
-                placeholder="Tapez votre message ici..."
-              ></ion-input>
-              <ion-button (click)="sendMessage()" expand="block">Envoyer</ion-button>
-            </ion-item>
-          </div>
+          <!-- <div class="message-input">
+            
+          </div> -->
         </div>
       </ion-col>
     </ion-row>
   </ion-grid>
 </div>
+<div class="background-image"></div>
 </ion-content>
+<ion-footer class="chat-footer"> 
+  <ion-item class="message-input">
+    <ion-input
+      name="newMessage"
+      ngDefaultControl
+      [(ngModel)]="newMessage"
+      placeholder="Tapez votre message ici..."
+    ></ion-input>
+    <ion-button (click)="sendMessage()">Envoyer</ion-button>
+  </ion-item>
+</ion-footer>

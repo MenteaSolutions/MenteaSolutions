@@ -1,4 +1,5 @@
 <ion-content class="ion-padding">
+
   <h1 class="ion-text-center">Calendrier de Formation</h1>
   <!-- Formulaire pour ajouter un nouveau cours -->
   <form [formGroup]="aulaForm" (ngSubmit)="adicionarAula()">
@@ -128,4 +129,5 @@
   <div class="calendar">
     <full-calendar #calendar [options]="calendarOptions"></full-calendar>
   </div>
+  
 </ion-content>

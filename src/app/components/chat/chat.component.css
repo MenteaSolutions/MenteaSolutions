@@ -3,8 +3,9 @@
     Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
   text-align: center;
   font-size: 2.5rem; /* Réduire un peu la taille sur mobile */
-  margin: 20px; /* Réduire la marge sur mobile */
+   /* Réduire la marge sur mobile */
   font-weight: 300;
+  margin-top: 60px;
 }
 
 .reponse {
@@ -17,6 +18,7 @@
   max-width: 80%; /* Limite la largeur pour les longs messages */
   word-wrap: break-word; /* Permet de couper les mots longs */
   margin-bottom: 10px; /* Ajoute un espace entre les messages */
+  font-weight: 300;
 }
 
 .room {
@@ -62,6 +64,23 @@
 } */
 
 
+.chat-footer {
+  /* Prend toute la largeur du parent */
+ max-width: 73%; /* Ajuste la largeur en fonction de la boîte de chat */
+ margin: 0 auto; /* Centre si nécessaire */
+ background: rgba(255, 255, 255, 0);
+ padding: 10px;
+ position: fixed;
+ bottom: 0;
+ left: 62%;
+ transform: translateX(-50%); /* Centre horizontalement */
+ box-shadow: 0 -2px 5px rgba(0, 0, 0, 0.1);
+} 
+
+ion-content {
+  --background: url('/assets/images/ton-image.jpg') no-repeat center center / cover !important;
+}
+
 
 .messages-wrapper {
   display: flex;
@@ -74,7 +93,7 @@
   overflow-y: auto; /* Permet le scroll uniquement dans cette zone */
   padding: 10px;
   margin: 0;
-}
+} 
 
 .message-input {
   background: white;
@@ -103,6 +122,11 @@ ion-content {
 @media screen and (max-width: 768px) {
   .student-list {
     display: none;
+  }
+
+  .chat-footer {
+    max-width: 100%;
+    left: 50%;
   }
 
   ion-content {

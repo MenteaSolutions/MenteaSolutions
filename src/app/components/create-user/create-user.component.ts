@@ -24,13 +24,16 @@ import {
   IonText,
   IonButton,
   IonInput,
-  IonSelect,
-} from "@ionic/angular/standalone";
+  IonSelect, IonIcon } from "@ionic/angular/standalone";
+import { remove } from "@angular/fire/database";
+import { getAuth, deleteUser } from "firebase/auth";
+
+
 
 @Component({
   selector: "app-create-user",
   standalone: true,
-  imports: [
+  imports: [IonIcon, 
     IonHeader,
     IonToolbar,
     IonTitle,
@@ -71,8 +74,9 @@ export class CreateUserComponent implements OnInit {
   selectedRole: string = "user";
   message: string = "";
   studentInfo: Array<{ firstName: string; lastName: string }> = [];
-  roomStudentCounts: Array<{ room: string; count: number }> = [];
+  roomStudentCounts: Array<{ room: string; count: number  }> = [];
   createdUsers: Array<{
+    firebaseKey: any;
     firstName: string;
     lastName: string;
     email: string;
@@ -86,6 +90,7 @@ export class CreateUserComponent implements OnInit {
     this.loadRoomStudentCounts();
     this.loadCreatedUsers(); // Charger les utilisateurs créés au démarrage
   }
+
 
   // Charger le nombre d'étudiants par formation
   loadRoomStudentCounts() {
@@ -108,27 +113,59 @@ export class CreateUserComponent implements OnInit {
     });
   }
 
+
+
+
+
+
+
+
+
+
+
+
   // Charger les utilisateurs directement depuis "rooms/{formation}/users"
   loadCreatedUsers() {
-    this.createdUsers = [];
+    this.createdUsers = []; // Réinitialisation propre ici
     this.rooms.forEach((room) => {
       const usersRef = ref(this.db, `rooms/${room}/users`);
       onValue(usersRef, (snapshot) => {
         const users = snapshot.val();
         if (users) {
-          Object.values(users).forEach((user: any) => {
-            this.createdUsers.push({
-              firstName: user.firstName,
-              lastName: user.lastName,
-              email: user.email,
-              password: user.password,
-              room: room, // Ajout de la formation ici
-            });
+          Object.keys(users).forEach((firebaseKey) => {
+            const user = users[firebaseKey];
+  
+            // Vérifier si l'utilisateur est déjà dans la liste pour éviter les doublons
+            const exists = this.createdUsers.some(u => u.firebaseKey === firebaseKey);
+            if (!exists) {
+              this.createdUsers.push({
+                firebaseKey: firebaseKey, // 🔥 Stocker la clé Firebase pour suppression
+                firstName: user.firstName,
+                lastName: user.lastName,
+                email: user.email,
+                password: user.password,
+                room: room, // Assigner la formation
+              });
+            }
           });
         }
-      });
+      }, { onlyOnce: true }); // 🔥 Évite que la fonction soit appelée en boucle
     });
   }
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
 
   // Mettre à jour le tableau des étudiants lorsque le nombre d'étudiants change
   onStudentNumberChange() {
@@ -173,6 +210,7 @@ export class CreateUserComponent implements OnInit {
           }).then(() => {
             // Ajouter l'utilisateur au tableau local pour l'afficher dans l'UI
             this.createdUsers.push({
+              firebaseKey: userRef.key, // 🔥 Stocker la clé Firebase pour suppression
               firstName: student.firstName,
               lastName: student.lastName,
               email: email,
@@ -199,4 +237,59 @@ export class CreateUserComponent implements OnInit {
       timer: 1500,
     });
   }
+
+
+   deleteStudent(user: any) {
+    if (!user.room || !user.firebaseKey) {
+      console.error("Room ou clé Firebase manquante, impossible de supprimer l'élève.");
+      return;
+    }
+  
+    Swal.fire({
+      title: "Êtes-vous sûr ?",
+      text: `Voulez-vous vraiment supprimer ${user.firstName} ${user.lastName} ?`,
+      icon: "warning",
+      showCancelButton: true,
+      heightAuto: false,
+      confirmButtonColor: "#d33",
+      cancelButtonColor: "#3085d6",
+      confirmButtonText: "Oui, supprimer",
+      cancelButtonText: "Annuler"
+    }).then((result) => {
+      if (result.isConfirmed) {
+        // Référence à l'utilisateur spécifique dans la base de données
+        const userRef = ref(this.db, `rooms/${user.room}/users/${user.firebaseKey}`);
+  
+        // Supprimer l'utilisateur de la base de données
+        remove(userRef)
+          .then(() => {
+            console.log(`Élève ${user.firstName} ${user.lastName} supprimé avec succès.`);
+  
+            // Mise à jour locale pour refléter la suppression
+            this.createdUsers = this.createdUsers.filter(u => u.firebaseKey !== user.firebaseKey);
+  
+            // Affichage du message de succès
+            Swal.fire({
+              title: "Supprimé !",
+              text: `${user.firstName} ${user.lastName} a été supprimé avec succès.`,
+              icon: "success",
+              timer: 1500,
+              showConfirmButton: false,
+              heightAuto: false
+            });
+          })
+          .catch(error => {
+            console.error("Erreur lors de la suppression de l'élève :", error);
+            Swal.fire({
+              title: "Erreur",
+              text: "Une erreur est survenue lors de la suppression.",
+              icon: "error"
+            });
+          });
+      }
+    });
+  }
+  
+  
+  
 }

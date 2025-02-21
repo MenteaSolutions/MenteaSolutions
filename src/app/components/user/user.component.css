@@ -4,6 +4,7 @@
   justify-content: center; /* Centre horizontalement */
   align-items: center;     /* Centre verticalement */
   height: 100vh;           /* Prend toute la hauteur de la fenêtre */
+  
 }
 
 /* Formulaire centré avec une largeur légèrement plus grande */
@@ -88,6 +89,6 @@ ion-input {
   padding: 0;                   /* Aucune marge supplémentaire */
 }
 
-ion-content {
-  --background: #eff5fc; /* Bleu pastel */
-}
+/* ion-content {
+  margin-top: 100px;
+} */

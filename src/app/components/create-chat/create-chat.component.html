@@ -1,9 +1,8 @@
-<ion-header>
+
+<ion-content scroll-y="false">
   <ion-toolbar>
     <ion-title style="text-align: center;">Gestion des Chats</ion-title>
   </ion-toolbar>
-</ion-header>
-<ion-content>
   <ion-grid>
     <ion-row>
       <!-- Colonne pour afficher la liste des étudiants -->
@@ -14,7 +13,7 @@
             {{ student.firstName }} {{ student.lastName }}
           </ion-item>
         </ion-list>
-      </ion-col>
+      </ion-col> 
       <!-- Colonne pour afficher le chat -->
       <ion-col size-md="9" size="12" class="chat-column">
         <!-- <div class="messages-wrapper"> -->
@@ -73,17 +72,21 @@
         </div>
         </div>
         <!-- Champ pour envoyer un message -->
-        <ion-item class="message-input">
-          <ion-input
-            name="newMessage"
-            ngDefaultControl
-            [(ngModel)]="newMessage"
-            placeholder="Tapez votre message ici..."
-          ></ion-input>
-          <ion-button (click)="sendMessage()">Envoyer</ion-button>
-        </ion-item>
+        
       </div>
       </ion-col>
     </ion-row>
   </ion-grid>
+  <div class="background-image"></div>
 </ion-content>
+<ion-footer class="chat-footer"> 
+  <ion-item class="message-input">
+    <ion-input
+      name="newMessage"
+      ngDefaultControl
+      [(ngModel)]="newMessage"
+      placeholder="Tapez votre message ici..."
+    ></ion-input>
+    <ion-button (click)="sendMessage()">Envoyer</ion-button>
+  </ion-item>
+</ion-footer> 

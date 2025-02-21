@@ -20,13 +20,13 @@ import {
   IonButton,
   IonInput,
   IonCardContent,
-  IonCard, IonIcon } from "@ionic/angular/standalone";
+  IonCard, IonIcon, IonFooter } from "@ionic/angular/standalone";
 import { UserService } from "../../Services/user.service";
 
 @Component({
   selector: "app-chat",
   standalone: true,
-  imports: [IonIcon, 
+  imports: [IonFooter, IonIcon, 
     IonButton,
     IonLabel,
     IonItem,

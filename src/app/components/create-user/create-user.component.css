@@ -14,6 +14,133 @@ ion-content {
     overflow-y: auto;  /* Activer le scroll si la liste dépasse la hauteur */
   }
 
+
+
+  /* .create-user-container{
+    display: flex;
+    margin: 15px;
+  } */
+
+
+  ion-row:nth-child(even) {
+    background-color: #f9f9f9;
+  }
+
+
+
+  ion-card {
+    background: #ffffff;
+    border-radius: 10px;
+    padding: 15px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  }
+  
+
+
+  ion-grid {
+    opacity: 0;
+    transform: translateY(50px);
+    animation: fadeInUp 0.5s ease-in-out forwards;
+  }
+  
+  @keyframes fadeInUp {
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+
+
+  .badge {
+    display: inline-block;
+    padding: 5px 12px;
+    font-size: 0.9rem;
+    font-weight: 400;
+    color: white;
+    border-radius: 20px;
+    min-width: 30px;
+    text-align: center;
+  }
+  
+  /* Peu d'élèves (vert) */
+  .badge-low {
+    background-color: #40c45f;
+  }
+  
+  /* Nombre d'élèves moyen (jaune) */
+  .badge-medium {
+    background-color: #ffc107;
+    color: black;
+  }
+  
+  /* Beaucoup d'élèves (rouge) */
+  .badge-high {
+    background-color: #dc3545;
+  }
+  
+
+
+
+  ion-row {
+    border-bottom: 1px solid #dee2e6;
+  }
+  
+  ion-row:hover {
+    background-color: #dfdfdf;
+  }
+
+  
+
+
+
+  .background-image {
+    position: fixed; /* S'assure que l'image couvre toute la fenêtre */
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100vh;
+    background-image: url('/images/DSC05057.jpg'); /* Met l’image */
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed; /* Garde l’image fixe quand on scrolle */
+    z-index: -1; /* Met l’image en arrière-plan */
+}
+
+
+
+
+ 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
   
   div {
     text-align: center;
