@@ -1,6 +1,8 @@
 
 <ion-content scroll-y="false">
+  
 <div class="chat-container">
+  
   <!-- Bannière de bienvenue dynamique centrée -->
   <h1 class="welcome-title">
     Bienvenue dans le chat <strong class="room">{{ roomId }}</strong>
@@ -55,7 +57,9 @@
   </ion-grid>
 </div>
 <div class="background-image"></div>
+
 </ion-content>
+
 <ion-footer class="chat-footer"> 
   <ion-item class="message-input">
     <ion-input
@@ -66,4 +70,5 @@
     ></ion-input>
     <ion-button (click)="sendMessage()">Envoyer</ion-button>
   </ion-item>
+
 </ion-footer>

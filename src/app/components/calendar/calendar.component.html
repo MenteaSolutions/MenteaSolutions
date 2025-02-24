@@ -1,4 +1,5 @@
 <ion-content class="ion-padding">
+  <div class="app-container">
   <h2 class="ion-text-center">
     Calendrier des Cours pour {{ formationUserLogged?.name }}
   </h2>
@@ -7,5 +8,5 @@
   <div class="calendar">
     <full-calendar #calendar [options]="calendarOptions"></full-calendar>
   </div>
-
+  </div>
 </ion-content>

@@ -1,4 +1,5 @@
 <ion-content>
+  <div class="app-container">
   <form [formGroup]="evaluationForm" (ngSubmit)="onSubmit()">
     <!-- Seksioni 1: Informacion personal -->
     <div *ngIf="currentStep === 0">
@@ -1239,4 +1240,5 @@
       </div>
     </div>
   </form>
+  </div>
 </ion-content>
