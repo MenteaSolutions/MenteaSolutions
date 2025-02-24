@@ -64,6 +64,46 @@
 } */
 
 
+
+
+ion-content {
+  --background: url('/assets/images/ton-image.jpg') no-repeat center center / cover !important;
+}
+
+
+
+
+.message-input {
+  background: white;
+  padding: 10px;
+  box-shadow: 0 -2px 5px rgba(0, 0, 0, 0.1); /* Ajoute une ombre pour la séparation */
+}
+
+
+ion-content {
+  --background: #eff5fc; /* Bleu pastel */
+}
+
+
+
+
+
+
+.messages-wrapper {
+  display: flex;
+  flex-direction: column;
+  height: calc(90vh - 160px); /* Ajuste la hauteur pour remplir la page */
+  overflow: hidden;
+}
+
+.messages-container {
+  flex-grow: 1; /* Permet d'occuper tout l'espace disponible */
+  overflow-y: auto; /* Active le scroll uniquement si nécessaire */
+  padding: 10px;
+  margin-bottom: 10px; /* Ajoute un espace pour éviter d'écraser la barre de saisie */
+}
+
+/* Ajustement de la hauteur du ion-footer */
 .chat-footer {
   /* Prend toute la largeur du parent */
  max-width: 73%; /* Ajuste la largeur en fonction de la boîte de chat */
@@ -77,34 +117,13 @@
  box-shadow: 0 -2px 5px rgba(0, 0, 0, 0.1);
 } 
 
-ion-content {
-  --background: url('/assets/images/ton-image.jpg') no-repeat center center / cover !important;
-}
 
 
-.messages-wrapper {
-  display: flex;
-  flex-direction: column;
-  height: 500px; /* Prend toute la hauteur disponible */
-}
-
-.messages-container {
-  flex: 1;
-  overflow-y: auto; /* Permet le scroll uniquement dans cette zone */
-  padding: 10px;
-  margin: 0;
-} 
-
-.message-input {
-  background: white;
-  padding: 10px;
-  box-shadow: 0 -2px 5px rgba(0, 0, 0, 0.1); /* Ajoute une ombre pour la séparation */
-}
 
 
-ion-content {
-  --background: #eff5fc; /* Bleu pastel */
-}
+
+
+
 
 
 

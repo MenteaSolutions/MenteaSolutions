@@ -16,3 +16,17 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
     z-index: -1;
   }
 
+  /* Conteneur global pour toutes les pages */
+  .app-container {
+    max-width: 1400px; /* Définis une largeur maximale pour éviter l'étirement sur grand écran */
+    margin: 0 auto; /* Centre l'application */
+    width: 100%; /* S'assure que c'est responsive */
+    padding: 20px; /* Ajoute un peu d'espace autour */
+  }
+  
+  /* Assure que tout le contenu reste bien centré */
+  .page-content {
+    width: 100%;
+    max-width: 1400px;
+    margin: 0 auto;
+  }
