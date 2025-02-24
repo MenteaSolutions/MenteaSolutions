@@ -10,6 +10,9 @@ ion-content {
     font-weight: 300;
     margin-top: 60px;
   }
+  .room {
+    color: #cb1f1f;
+  }
   @media screen and (max-width:375px) {
 
     .fc {
