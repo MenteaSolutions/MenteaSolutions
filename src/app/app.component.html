@@ -14,12 +14,12 @@
 
         <!-- Afficher uniquement si l'utilisateur est admin -->
         <ng-container *ngIf="authService.isAdmin()">
-          
           <ion-item
             routerLink="/accueil.admin"
             routerLinkActive="active"
             (click)="closeMenu()"
-            >Accueil</ion-item>
+            >Accueil</ion-item
+          >
           <ion-item
             routerLink="/createUser"
             routerLinkActive="active"
@@ -48,16 +48,16 @@
 
         <!-- Afficher uniquement pour les utilisateurs normaux -->
         <ng-container *ngIf="authService.isUser()">
-
+          <ion-item
+            class="custom-hover"
+            routerLink="/accueil"
+            routerLinkActive="active"
+            (click)="closeMenu()"
+            >Accueil</ion-item
+          >
 
           <ion-item
-          routerLink="/accueil"
-          routerLinkActive="active"
-          (click)="closeMenu()"
-          >Accueil</ion-item>
-
-
-          <ion-item
+            class="custom-hover"
             routerLink="/user"
             routerLinkActive="active"
             (click)="closeMenu()"
@@ -65,18 +65,21 @@
           >
 
           <ion-item
+            class="custom-hover"
             routerLink="/chat"
             routerLinkActive="active"
             (click)="closeMenu()"
             >Chat</ion-item
           >
           <ion-item
+            class="custom-hover"
             routerLink="/zoom"
             routerLinkActive="active"
             (click)="closeMenu()"
             >Zoom</ion-item
           >
           <ion-item
+            class="custom-hover"
             routerLink="/calendar"
             routerLinkActive="active"
             (click)="closeMenu()"
@@ -86,7 +89,9 @@
             routerLink="/evaluation"
             routerLinkActive="active"
             (click)="closeMenu()"
-            >Evaluation</ion-item
+            class="evaluation"
+            disabled="true"
+            >Evaluation - à venir</ion-item
           >
         </ng-container>
         <!-- Lien de déconnexion (visible pour tous les utilisateurs) -->
@@ -98,7 +103,7 @@
   </ion-menu>
 
   <!-- Contenu principal de l'application -->
-  <div class="ion-page" >
+  <div class="ion-page">
     <ion-header>
       <ion-toolbar>
         <ion-buttons slot="start">
@@ -110,7 +115,9 @@
     <div class="app-container">
     <ion-router-outlet id="main-content"></ion-router-outlet>
     <!-- Zone où le contenu sera chargé -->
+ Fred
   </div>
+ main
   </div>
 </ion-app>
 <app-updates-notification></app-updates-notification>

@@ -29,7 +29,19 @@
     content: "Cliquez ici pour installer"; /* Texto personalizado */
   }
 
+ Fred
 
 
 
   
+
+  .evaluation{
+    color: #cb1f1f;
+    font-weight: bolder;
+  }
+
+  ::ng-deep ion-item:hover {
+    background-color: black; /* Cor de fundo ao passar o mouse */
+    cursor: pointer; /* Cursor de ponteiro ao passar o mouse */
+  }
+ main
